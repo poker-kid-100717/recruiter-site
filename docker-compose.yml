@@ -1,18 +1,31 @@
 services:
   api:
-    build: ./backend
-    ports:
-      - "5088:8080"
+    build:
+      context: ./backend
     environment:
       ASPNETCORE_URLS: http://+:8080
+      ASPNETCORE_ENVIRONMENT: Production
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
   frontend:
-    image: node:22-alpine
-    working_dir: /app
-    volumes:
-      - ./frontend:/app
-    command: sh -c "npm install && npm start -- --host 0.0.0.0"
+    build:
+      context: ./frontend
     ports:
-      - "8080:4200"
+      - "8080:80"
     depends_on:
       - api
+    restart: unless-stopped
+
+  # Optional direct API port for local debugging only.
+  # Uncomment when you want Swagger/OpenAPI access without going through nginx.
+  # api-debug:
+  #   extends: api
+  #   ports:
+  #     - "5088:8080"
