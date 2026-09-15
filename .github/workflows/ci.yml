@@ -17,8 +17,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: frontend/package-lock.json
       - run: npm install
       - run: npm run build
 
@@ -35,8 +33,9 @@ jobs:
       - run: dotnet restore
       - run: dotnet build --configuration Release --no-restore
 
-  docker:
+  containers:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t portfolio-api ./backend
+      - run: docker compose config
+      - run: docker compose build
