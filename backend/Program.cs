@@ -41,9 +41,9 @@ app.MapGet("/api/architecture", () => Results.Ok(new
 
 app.MapGet("/api/work", () => Results.Ok(new[]
 {
-    new { name = "Freight DNA + Logistics Application Suite", type = "Professional case study", publicSource = false },
-    new { name = "WorkLens", type = "Public full-stack platform", publicSource = true, repository = "https://github.com/poker-kid-100717/WorkLens" },
-    new { name = "Architecture + Integration Repositories", type = "Public engineering evidence", publicSource = true, repository = "https://github.com/poker-kid-100717?tab=repositories" }
+    new { name = "Freight DNA + Logistics Application Suite", type = "Professional case study", publicSource = false, repository = (string?)null },
+    new { name = "WorkLens", type = "Public full-stack platform", publicSource = true, repository = (string?)"https://github.com/poker-kid-100717/WorkLens" },
+    new { name = "Architecture + Integration Repositories", type = "Public engineering evidence", publicSource = true, repository = (string?)"https://github.com/poker-kid-100717?tab=repositories" }
 }));
 
 app.Run();
