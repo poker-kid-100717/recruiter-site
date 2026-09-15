@@ -19,7 +19,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
         <a href="#stack">Stack</a>
         <a href="#endorsements">Endorsements</a>
       </nav>
-      <a class="nav-cta" href="/resume.pdf" target="_blank" rel="noreferrer">Résumé ↗</a>
+      <a class="nav-cta" href="/resume.html" target="_blank" rel="noreferrer">Résumé ↗</a>
     </header>
 
     <main id="main-content">
@@ -30,7 +30,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
           <p class="hero-text">10+ years across software and technology, with 8+ years delivering enterprise applications across logistics, manufacturing, fintech, healthcare, government, SaaS, and legal technology. My core stack is modern .NET, Angular/React, SQL Server, distributed integrations, CI/CD, and cloud/on-premises delivery.</p>
           <div class="actions">
             <a class="primary" href="#work">Explore case studies</a>
-            <a class="secondary" href="/resume.pdf" target="_blank" rel="noreferrer">View résumé</a>
+            <a class="secondary" href="/resume.html" target="_blank" rel="noreferrer">View résumé</a>
             <a class="text-link" href="https://github.com/poker-kid-100717" target="_blank" rel="noreferrer">GitHub ↗</a>
           </div>
           <div class="proof-grid" aria-label="Engineering profile highlights">
@@ -195,7 +195,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
         </div>
         <div class="cta-panel">
           <a class="primary" href="mailto:joshuad100717@outlook.com">joshuad100717@outlook.com</a>
-          <a class="secondary" href="/resume.pdf" target="_blank" rel="noreferrer">Download résumé</a>
+          <a class="secondary" href="/resume.html" target="_blank" rel="noreferrer">View / print résumé</a>
           <a class="text-link" href="https://github.com/poker-kid-100717" target="_blank" rel="noreferrer">GitHub profile ↗</a>
           <p>Albuquerque, New Mexico · Open to remote opportunities</p>
         </div>
