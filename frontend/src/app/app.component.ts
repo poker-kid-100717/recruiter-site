@@ -19,7 +19,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
         <a href="#stack">Stack</a>
         <a href="#endorsements">Endorsements</a>
       </nav>
-      <a class="nav-cta" href="/resume.html" target="_blank" rel="noreferrer">Résumé ↗</a>
+      <a class="nav-cta" href="/resume.html" target="_blank" rel="noreferrer">Resume ↗</a>
     </header>
 
     <main id="main-content">
@@ -30,12 +30,12 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
           <p class="hero-text">10+ years across software and technology, with 8+ years delivering enterprise applications across logistics, manufacturing, fintech, healthcare, government, SaaS, and legal technology. My core stack is modern .NET, Angular/React, SQL Server, distributed integrations, CI/CD, and cloud/on-premises delivery.</p>
           <div class="actions">
             <a class="primary" href="#work">Explore case studies</a>
-            <a class="secondary" href="/resume.html" target="_blank" rel="noreferrer">View résumé</a>
+            <a class="secondary" href="/resume.html" target="_blank" rel="noreferrer">View resume</a>
             <a class="text-link" href="https://github.com/poker-kid-100717" target="_blank" rel="noreferrer">GitHub ↗</a>
           </div>
           <div class="proof-grid" aria-label="Engineering profile highlights">
             <div><strong>10+ yrs</strong><span>Software + technology</span></div>
-            <div><strong>3 apps</strong><span>Enterprise suite delivered</span></div>
+            <div><strong>Multiple</strong><span>Enterprise systems delivered</span></div>
             <div><strong>Cloud + on-prem</strong><span>Architecture + migration</span></div>
             <div><strong>Lead scope</strong><span>Mentoring + delivery ownership</span></div>
           </div>
@@ -130,7 +130,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
             </div>
           </article>
         </div>
-        <p class="timeline-note">Earlier technology experience includes U.S. Bank, Markettech (iOS/Swift), and Litera. Full chronology is available in the résumé.</p>
+        <p class="timeline-note">Earlier technology experience includes U.S. Bank, Markettech (iOS/Swift), and Litera. Full chronology is available in the resume.</p>
       </section>
 
       <section id="stack" class="section stack-section">
@@ -147,7 +147,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
 
       <section class="section shell">
         <div class="section-heading">
-          <div><p class="kicker">Public code</p><h2>Evidence behind the résumé.</h2></div>
+          <div><p class="kicker">Public code</p><h2>Evidence behind the resume.</h2></div>
           <p>Not every professional system can be public. These repositories provide inspectable evidence across architecture, cloud, integration, and full-stack work.</p>
         </div>
         <div class="repo-grid">
@@ -195,7 +195,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
         </div>
         <div class="cta-panel">
           <a class="primary" href="mailto:joshuad100717@outlook.com">joshuad100717@outlook.com</a>
-          <a class="secondary" href="/resume.html" target="_blank" rel="noreferrer">View / print résumé</a>
+          <a class="secondary" href="/resume.html" target="_blank" rel="noreferrer">View / print resume</a>
           <a class="text-link" href="https://github.com/poker-kid-100717" target="_blank" rel="noreferrer">GitHub profile ↗</a>
           <p>Albuquerque, New Mexico · Open to remote opportunities</p>
         </div>
