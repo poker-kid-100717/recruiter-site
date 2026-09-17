@@ -29,9 +29,9 @@ export const projects: Project[] = [
   {
     title: 'Freight DNA + Logistics Application Suite',
     eyebrow: 'Enterprise architecture / delivery',
-    summary: 'Professional case study covering a business-logic-heavy CRM, LTL planning workflows, and yard operations tooling. The work demonstrates end-to-end architecture ownership under changing infrastructure and business constraints.',
+    summary: 'Professional case study covering a business-logic-heavy CRM, LTL planning workflows, and yard operations tooling. These three applications are a recent example within a broader career delivering and modernizing enterprise systems across multiple industries.',
     outcomes: [
-      'Architected and delivered three enterprise applications with multiple iterations from discovery through UAT readiness.',
+      'Architected and delivered a three-application logistics suite with multiple iterations from discovery through UAT readiness.',
       'Built Angular + ASP.NET Core + SQL Server workflows with Entra ID authentication, external transportation APIs, complex operational grids, and business-rule-heavy user experiences.',
       'Designed an Azure-hosted architecture and later reworked the platform for containerized/on-premises deployment when infrastructure requirements changed.',
       'Established a small delivery function around the products, mentoring contributors and translating C-level and operations requests into architecture, data models, APIs, workflows, and release decisions.'
@@ -47,9 +47,9 @@ export const projects: Project[] = [
       'Clean Architecture backend with explicit Core, Infrastructure, and API boundaries.',
       'Live provider aggregation, background refresh, configurable search profiles, resume matching, analytics, and application pipeline workflows.',
       'Docker Compose stack with SQL Server, ASP.NET Core, Angular/nginx, EF migrations, health-aware startup, and GitHub Actions CI.',
-      'Integrates RemoteOK, Remotive, Greenhouse, Dice MCP, browser-extension workflows, and OpenAI-assisted matching.'
+      'Integrates RemoteOK, Remotive, Greenhouse, Dice MCP, browser-extension workflows, Microsoft Graph/Outlook, and OpenAI-assisted matching.'
     ],
-    tech: ['ASP.NET Core 10', 'Angular 18', 'SQL Server', 'EF Core', 'Docker', 'GitHub Actions', 'OpenAI', 'MCP'],
+    tech: ['ASP.NET Core 10', 'Angular 20', 'SQL Server', 'EF Core', 'Docker', 'GitHub Actions', 'OpenAI', 'Microsoft Graph', 'MCP'],
     href: 'https://github.com/poker-kid-100717/WorkLens'
   },
   {
@@ -74,7 +74,7 @@ export const experience: Experience[] = [
     dates: 'May 2026 - Sep 2026',
     summary: 'Owned application architecture and delivery for logistics operations across brokerage and asset-side workflows.',
     highlights: [
-      'Delivered Freight DNA CRM, LTL planning, and Yard operations applications with multiple enterprise iterations.',
+      'Delivered Freight DNA CRM, LTL planning, and Yard operations as a recent three-application enterprise suite within a broader career of enterprise software delivery.',
       'Owned cloud and on-premises architecture, integrations, authentication, database design, deployment, and UAT readiness.',
       'Built a small delivery team and provided daily technical direction, mentoring, review, and delivery coordination.'
     ],
@@ -83,7 +83,7 @@ export const experience: Experience[] = [
   {
     company: 'Kenworth Truck Co.',
     title: 'Software Engineer',
-    dates: 'Jan 2025 - May 2026',
+    dates: 'May 2025 - May 2026',
     summary: 'Enterprise application development focused on maintainable .NET architecture, operational workflows, SQL performance, and integration reliability.',
     highlights: [
       'Designed ASP.NET Core services with Clean Architecture, DI, repositories, and explicit service boundaries.',
@@ -95,7 +95,7 @@ export const experience: Experience[] = [
   {
     company: 'Global Holdings',
     title: 'Software Engineer',
-    dates: 'Jun 2024 - Jan 2025',
+    dates: 'Jun 2024 - May 2025',
     summary: 'Backend architecture, SQL performance, asynchronous processing, and production resiliency for distributed applications.',
     highlights: [
       'Built reusable ASP.NET Core API/service patterns with clean dependency boundaries.',
@@ -211,7 +211,7 @@ export const stackGroups = [
 ];
 
 export const publicRepos = [
-  { name: 'WorkLens', description: 'Full-stack job intelligence + application tracking platform', tech: '.NET 10 · Angular · SQL Server · Docker', href: 'https://github.com/poker-kid-100717/WorkLens' },
+  { name: 'WorkLens', description: 'Full-stack job intelligence + application tracking platform', tech: '.NET 10 · Angular 20 · SQL Server · Docker', href: 'https://github.com/poker-kid-100717/WorkLens' },
   { name: 'CleanArchitectureTemplate', description: 'Reference work around clean boundaries and maintainable .NET structure', tech: '.NET · Clean Architecture', href: 'https://github.com/poker-kid-100717/CleanArchitectureTemplate' },
   { name: 'AngularAppAzure', description: 'Angular + .NET solution structured around Azure-oriented delivery', tech: 'Angular · .NET · Azure', href: 'https://github.com/poker-kid-100717/AngularAppAzure' },
   { name: 'DotnetCoreS3APIBucketUtility', description: 'AWS S3 integration utility built with .NET', tech: '.NET · AWS S3 · API', href: 'https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility' },
