@@ -149,6 +149,37 @@ export const experience: Experience[] = [
       'Designed REST contracts, validation, standardized responses, and cross-layer integrations.'
     ],
     tech: ['ASP.NET Core', 'Angular', 'React', 'Node.js', 'REST']
+  },
+  {
+    company: 'U.S. Bank',
+    title: 'Technical Support Specialist',
+    dates: 'May 2018 - May 2019',
+    summary: 'Enterprise production support for hospitality payment environments and business-critical systems.',
+    highlights: [
+      'Supported payment environments serving major hospitality clients including Wyndham, Hilton, and Marriott.',
+      'Built production troubleshooting experience across integrations, systems behavior, incident diagnosis, and user-impacting defects.'
+    ],
+    tech: ['Production Support', 'Payments', 'Troubleshooting', 'Enterprise Systems']
+  },
+  {
+    company: 'Markettech',
+    title: 'iOS Developer (Contract)',
+    dates: 'Sep 2017 - Feb 2018',
+    summary: 'Contract iOS development for operational performance reporting.',
+    highlights: [
+      'Built a Swift/Xcode application for call-center performance metrics and operational reporting.'
+    ],
+    tech: ['Swift', 'Xcode', 'iOS']
+  },
+  {
+    company: 'Litera',
+    title: 'Technical Support Specialist',
+    dates: 'Jan 2016 - Aug 2017',
+    summary: 'Legal-technology support and deep software troubleshooting for client environments.',
+    highlights: [
+      'Investigated complex software issues and implemented targeted DLL-related patches and client-environment fixes.'
+    ],
+    tech: ['Legal Tech', 'Production Support', 'Troubleshooting']
   }
 ];
 
