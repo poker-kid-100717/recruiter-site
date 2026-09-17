@@ -1,6 +1,16 @@
-# Joshua Davis — Senior Software Engineer Portfolio
+# Joshua Davis - Senior Software Engineer Portfolio
 
-A production-oriented engineering portfolio designed for Senior / Lead / Architect-track individual-contributor opportunities. The repository intentionally demonstrates the same kinds of technology and delivery concerns used in real application work instead of being only a static résumé page.
+A production-oriented engineering portfolio designed for Senior / Lead / Architect-track individual-contributor opportunities. The repository intentionally demonstrates the same kinds of technology and delivery concerns used in real application work instead of being only a static resume page.
+
+## Live portfolio
+
+Public URL:
+
+```text
+https://doubling-albatross-retainer.ngrok-free.dev
+```
+
+The public endpoint is an ngrok route to the locally hosted Docker Compose stack. The site is reachable while the local containers and ngrok tunnel are running.
 
 ## What this repository demonstrates
 
@@ -10,11 +20,9 @@ A production-oriented engineering portfolio designed for Senior / Lead / Archite
 - **Docker Compose** for a repeatable full-stack runtime
 - **GitHub Actions CI** for frontend, backend, and container builds
 - **Responsive and accessible UI** with reduced-motion support and semantic navigation
-- **Print-ready résumé** at `/resume.html`
+- **Print-ready resume** at `/resume.html`
 - Architecture diagrams, career timeline, public-code evidence, project case studies, and professional endorsements
-- A cloud/on-premises delivery story that mirrors Joshua's actual engineering background
-
-> Hosting is intentionally **not enabled yet**. The stack is prepared to run locally on port `8080`; when an ngrok URL is supplied, the final public URL metadata and exposure step can be added without restructuring the application.
+- A cloud/on-premises delivery story that mirrors Joshua's engineering background
 
 ## Architecture
 
@@ -29,7 +37,7 @@ nginx gateway :8080
   +---- /, assets, /resume.html -> Angular production build
 ```
 
-The public container only exposes port `8080`. The API remains internal to the Compose network and is reached through nginx, which keeps browser requests same-origin and avoids a separate public API URL.
+The host exposes only port `8080`. The API remains internal to the Compose network and is reached through nginx, keeping browser requests same-origin and avoiding a second public API endpoint.
 
 ## Fastest local start
 
@@ -73,13 +81,32 @@ Useful checks:
 
 ```text
 http://localhost:8080/              portfolio
-http://localhost:8080/resume.html   printable résumé
+http://localhost:8080/resume.html   printable resume
 http://localhost:8080/api/profile   .NET API profile endpoint
 http://localhost:8080/api/work      .NET API project endpoint
 http://localhost:8080/api/architecture
 http://localhost:8080/health        ASP.NET health check via nginx
 http://localhost:8080/healthz       nginx health check
 ```
+
+## Public exposure with ngrok
+
+After the local stack is healthy:
+
+```powershell
+ngrok http 8080 --url https://doubling-albatross-retainer.ngrok-free.dev
+```
+
+Verify:
+
+```text
+https://doubling-albatross-retainer.ngrok-free.dev/
+https://doubling-albatross-retainer.ngrok-free.dev/resume.html
+https://doubling-albatross-retainer.ngrok-free.dev/api/profile
+https://doubling-albatross-retainer.ngrok-free.dev/health
+```
+
+The canonical URL, Open Graph URL, and Person JSON-LD metadata are set to the public endpoint.
 
 ## Local developer mode
 
@@ -105,20 +132,20 @@ Angular's dev server proxies `/api` and `/health` to `http://localhost:5088` thr
 
 The public site is organized around senior-engineering evidence rather than a generic list of skills:
 
-1. **Enterprise delivery case study** — Freight DNA CRM, LTL planning, and Yard operations work is described through architecture, delivery scope, integrations, cloud/on-prem migration, and team leadership. Proprietary employer source code is not published.
-2. **WorkLens** — the strongest current public full-stack example: ASP.NET Core, Angular, SQL Server, EF Core, Docker, CI, integrations, browser tooling, and AI-assisted matching.
-3. **Architecture + integration history** — links to public repositories covering Clean Architecture, Azure-oriented Angular/.NET work, AWS S3, APIs, authentication, webhooks, and business-rule-heavy tooling.
-4. **Career timeline** — recent roles are positioned around architecture, modernization, performance, security, distributed integrations, mentoring, and production ownership.
-5. **Endorsements** — selected excerpts from professional recommendations support the leadership/architecture positioning.
+1. **Enterprise delivery case study** - Freight DNA CRM, LTL planning, and Yard operations are presented as a recent three-application logistics suite within a broader career delivering and modernizing enterprise systems. Proprietary employer source code is not published.
+2. **WorkLens** - the strongest current public full-stack example: ASP.NET Core 10, Angular 20, SQL Server, EF Core, Docker, CI, integrations, browser tooling, Outlook/Microsoft Graph, and AI-assisted matching.
+3. **Architecture + integration history** - links to public repositories covering Clean Architecture, Azure-oriented Angular/.NET work, AWS S3, APIs, authentication, webhooks, and business-rule-heavy tooling.
+4. **Career timeline** - recent roles are positioned around architecture, modernization, performance, security, distributed integrations, mentoring, and production ownership.
+5. **Endorsements** - selected excerpts from professional recommendations support the leadership/architecture positioning.
 
 ## Public work highlighted
 
-- [WorkLens](https://github.com/poker-kid-100717/WorkLens) — ASP.NET Core 10 + SQL Server + Angular 18 + Docker Compose + Clean Architecture job-search/application platform.
-- [CleanArchitectureTemplate](https://github.com/poker-kid-100717/CleanArchitectureTemplate) — Clean Architecture reference work.
-- [AngularAppAzure](https://github.com/poker-kid-100717/AngularAppAzure) — Angular + .NET solution structured for Azure-oriented deployment.
-- [DotnetCoreS3APIBucketUtility](https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility) — .NET / AWS S3 integration work.
-- [allocation-proration-tool](https://github.com/poker-kid-100717/allocation-proration-tool) — business-rule-heavy allocation/proration tooling.
-- [webhook-challenge](https://github.com/poker-kid-100717/webhook-challenge) — webhook/API integration work.
+- [WorkLens](https://github.com/poker-kid-100717/WorkLens) - ASP.NET Core 10 + SQL Server + Angular 20 + Docker Compose + Clean Architecture job-search/application platform.
+- [CleanArchitectureTemplate](https://github.com/poker-kid-100717/CleanArchitectureTemplate) - Clean Architecture reference work.
+- [AngularAppAzure](https://github.com/poker-kid-100717/AngularAppAzure) - Angular + .NET solution structured for Azure-oriented deployment.
+- [DotnetCoreS3APIBucketUtility](https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility) - .NET / AWS S3 integration work.
+- [allocation-proration-tool](https://github.com/poker-kid-100717/allocation-proration-tool) - business-rule-heavy allocation/proration tooling.
+- [webhook-challenge](https://github.com/poker-kid-100717/webhook-challenge) - webhook/API integration work.
 
 ## CI
 
@@ -128,17 +155,7 @@ The public site is organized around senior-engineering evidence rather than a ge
 - .NET restore + Release build
 - `docker compose config` + full container image build
 
-There is deliberately **no deployment job** yet.
-
-## Before public exposure
-
-When the ngrok URL is available, the remaining host-specific work is intentionally small:
-
-- set the canonical URL and `og:url` metadata
-- optionally add the final social-preview image
-- run the full stack locally and verify the ngrok route
-- verify `/`, `/resume.html`, `/api/profile`, and `/health` through the public URL
-- optionally add the generated PDF résumé as a static asset if a direct `.pdf` download is preferred over the print-ready résumé page
+There is deliberately no deployment job; hosting is an explicit local operational step rather than a side effect of source control.
 
 ## Positioning
 
