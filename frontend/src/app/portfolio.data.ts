@@ -142,7 +142,7 @@ export const experience: Experience[] = [
   {
     company: 'Pilot Company',
     title: 'Software Engineer',
-    dates: 'Jun 2019 - Jan 2020',
+    dates: 'Jan 2019 - Jan 2020',
     summary: 'Full-stack business applications and integration work across .NET, Angular, React, and Node.js.',
     highlights: [
       'Built internal/customer-facing workflows and a React/Node billing platform.',
