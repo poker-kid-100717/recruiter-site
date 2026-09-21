@@ -7,17 +7,17 @@ A production-oriented engineering portfolio designed for Senior / Lead / Archite
 Public URL:
 
 ```text
-https://doubling-albatross-retainer.ngrok-free.dev
+https://portfolio-joshdavis.app
 ```
 
-The public endpoint is an ngrok route to the locally hosted Docker Compose stack. The site is reachable while the local containers and ngrok tunnel are running.
+The production site is hosted on Cloudflare Workers with static assets served from Cloudflare's edge. The public API endpoints used by the portfolio are also implemented at the edge, so the production site no longer depends on a local machine, Docker host, or ngrok tunnel.
 
 ## What this repository demonstrates
 
 - **Angular 20 / TypeScript** recruiter-facing frontend
-- **ASP.NET Core 10** API with OpenAPI and health checks
-- **Same-origin nginx gateway** so frontend and API are exposed through one URL
-- **Docker Compose** for a repeatable full-stack runtime
+- **Cloudflare Worker API** for the production portfolio endpoints, with the existing ASP.NET Core 10 API retained for local full-stack development
+- **Same-origin Cloudflare edge routing** so frontend and API are exposed through one production URL
+- **Cloudflare Workers** for production hosting plus **Docker Compose** for a repeatable local full-stack runtime
 - **GitHub Actions CI** for frontend, backend, and container builds
 - **Responsive and accessible UI** with reduced-motion support and semantic navigation
 - **Print-ready resume** at `/resume.html`
@@ -30,14 +30,14 @@ The public endpoint is an ngrok route to the locally hosted Docker Compose stack
 Browser / Recruiter
        |
        v
-nginx gateway :8080
+Cloudflare edge
   |            |
-  |            +---- /api/* ----> ASP.NET Core 10 API :8080 (internal)
+  |            +---- /api/* ----> Cloudflare Worker API
   |
   +---- /, assets, /resume.html -> Angular production build
 ```
 
-The host exposes only port `8080`. The API remains internal to the Compose network and is reached through nginx, keeping browser requests same-origin and avoiding a second public API endpoint.
+Production traffic is handled entirely by Cloudflare. Static assets and API routes stay same-origin under `portfolio-joshdavis.app`. Docker Compose remains available only as a local full-stack development option.
 
 ## Fastest local start
 
@@ -89,24 +89,29 @@ http://localhost:8080/health        ASP.NET health check via nginx
 http://localhost:8080/healthz       nginx health check
 ```
 
-## Public exposure with ngrok
+## Cloudflare production deployment
 
-After the local stack is healthy:
-
-```powershell
-ngrok http 8080 --url https://doubling-albatross-retainer.ngrok-free.dev
-```
-
-Verify:
+Production domain:
 
 ```text
-https://doubling-albatross-retainer.ngrok-free.dev/
-https://doubling-albatross-retainer.ngrok-free.dev/resume.html
-https://doubling-albatross-retainer.ngrok-free.dev/api/profile
-https://doubling-albatross-retainer.ngrok-free.dev/health
+https://portfolio-joshdavis.app
 ```
 
-The canonical URL, Open Graph URL, and Person JSON-LD metadata are set to the public endpoint.
+The Cloudflare configuration lives in `frontend/wrangler.jsonc`. It binds the Angular production build as static assets and routes `/api/*`, `/health`, and `/healthz` through the Worker in `frontend/worker/index.js`.
+
+From `frontend`:
+
+```bash
+npm install
+npm run deploy
+```
+
+For GitHub Actions deployment, add these repository secrets:
+
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
+
+The included deployment workflow publishes on pushes to `main` after CI succeeds.
 
 ## Local developer mode
 
@@ -155,7 +160,7 @@ The public site is organized around senior-engineering evidence rather than a ge
 - .NET restore + Release build
 - `docker compose config` + full container image build
 
-There is deliberately no deployment job; hosting is an explicit local operational step rather than a side effect of source control.
+Cloudflare deployment is automated through GitHub Actions once the Cloudflare account ID and scoped API token are stored as repository secrets.
 
 ## Positioning
 
