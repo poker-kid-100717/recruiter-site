@@ -3,89 +3,199 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Josh Davis | Senior Full-Stack Engineer Resume</title>
+  <title>Joshua Davis | Full-Stack Software Engineer Resume</title>
   <meta name="robots" content="index,follow">
+  <meta name="description" content="Joshua Davis - Full-Stack Software Engineer specializing in C#/.NET, Angular/React, Azure/AWS, SQL Server, enterprise applications, modernization, and production delivery.">
+  <link rel="canonical" href="https://portfolio-joshdavis.app/resume.html">
   <style>
-    :root{--ink:#101827;--muted:#5f6b7a;--brand:#245f73;--line:#dfe5ec;--soft:#f4f7fb}*{box-sizing:border-box}body{margin:0;background:#eef2f7;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.45}.toolbar{position:sticky;top:0;background:rgba(16,24,39,.96);color:#fff;padding:12px 20px;display:flex;justify-content:center;gap:12px;z-index:10}.toolbar a,.toolbar button{font:700 13px Arial;border:0;border-radius:8px;padding:9px 13px;text-decoration:none;cursor:pointer}.toolbar a{background:#fff;color:var(--ink)}.toolbar button{background:var(--brand);color:#fff}.page{width:min(8.5in,calc(100% - 24px));margin:24px auto;background:#fff;box-shadow:0 20px 60px rgba(15,23,42,.12);padding:.48in .58in}.header{text-align:center;border-bottom:1px solid var(--line);padding-bottom:12px}.header h1{margin:0;font-size:28px;letter-spacing:.02em}.headline{margin:4px 0;color:var(--brand);font-weight:700;font-size:13px}.contact{font-size:11px;color:var(--muted)}.contact a{color:inherit;text-decoration:none}h2{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--brand);border-bottom:1px solid var(--line);padding-bottom:4px;margin:15px 0 8px}.summary{font-size:11.5px}.skills{display:grid;grid-template-columns:1fr 3.4fr;gap:5px 12px;font-size:10.8px}.skills strong{font-size:10.8px}.skills span{color:var(--muted)}.role{margin-top:10px}.role-head{display:flex;justify-content:space-between;gap:18px;align-items:baseline}.role h3{font-size:12.5px;margin:0}.role .dates{font-size:10.5px;color:var(--muted);font-weight:700;white-space:nowrap}.title{font-size:10.8px;color:var(--muted);font-weight:700;margin:1px 0 4px}.role ul{margin:4px 0 0;padding-left:18px}.role li{font-size:10.6px;margin:2px 0}.selected{background:var(--soft);padding:10px 12px;border-radius:8px;font-size:10.5px}.selected strong{color:var(--brand)}.quotes{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quote{background:var(--soft);padding:10px 12px;border-radius:8px;font-size:10.2px}.quote p{margin:0 0 5px;font-style:italic}.quote strong{font-size:9.8px;color:var(--brand)}.education{font-size:10.8px}.fine{font-size:9.5px;color:var(--muted)}@media print{body{background:#fff}.toolbar{display:none}.page{width:auto;margin:0;box-shadow:none;padding:.42in .52in}@page{size:Letter;margin:0}.role{break-inside:avoid}.quotes,.selected{break-inside:avoid}}@media(max-width:680px){.page{padding:26px 20px}.skills{grid-template-columns:1fr}.role-head{align-items:flex-start;flex-direction:column;gap:1px}.quotes{grid-template-columns:1fr}}
+    :root{--ink:#111827;--muted:#5f6b7a;--brand:#245f73;--line:#d8dee8;--soft:#f5f7fa}
+    *{box-sizing:border-box}
+    html{background:#eef2f7}
+    body{margin:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.36}
+    .toolbar{position:sticky;top:0;z-index:20;display:flex;justify-content:center;gap:10px;padding:12px;background:rgba(17,24,39,.96)}
+    .toolbar a,.toolbar button{border:0;border-radius:8px;padding:9px 13px;font:700 13px Arial;text-decoration:none;cursor:pointer}
+    .toolbar a{background:#fff;color:var(--ink)}
+    .toolbar button{background:var(--brand);color:#fff}
+    .page{width:min(8.5in,calc(100% - 24px));margin:24px auto;background:#fff;box-shadow:0 18px 55px rgba(15,23,42,.12);padding:.45in .55in}
+    .header{text-align:center;border-bottom:1px solid var(--line);padding-bottom:10px}
+    .header h1{margin:0;font-size:27px;letter-spacing:.04em}
+    .headline{margin:4px 0 5px;color:var(--brand);font-size:12.5px;font-weight:700}
+    .contact{font-size:10.5px;color:var(--muted)}
+    .contact a{color:inherit;text-decoration:none}
+    h2{margin:13px 0 7px;padding-bottom:4px;border-bottom:1px solid var(--line);color:var(--brand);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase}
+    p{margin:0}
+    .summary{font-size:10.7px}
+    .impact{margin-top:8px;padding:7px 9px;background:var(--soft);border-left:3px solid var(--brand);font-size:10.1px}
+    .impact strong{color:var(--brand)}
+    .skills{display:grid;grid-template-columns:1.1fr 4fr;gap:4px 10px;font-size:10px}
+    .skills strong{font-size:10px}
+    .skills span{color:var(--muted)}
+    .role{margin-top:8px;break-inside:avoid}
+    .role-head{display:flex;justify-content:space-between;gap:18px;align-items:baseline}
+    .role h3{margin:0;font-size:11.5px}
+    .dates{font-size:9.7px;color:var(--muted);font-weight:700;white-space:nowrap}
+    .title{margin:1px 0 3px;color:var(--muted);font-size:10px;font-weight:700}
+    ul{margin:3px 0 0;padding-left:16px}
+    li{margin:1.5px 0;font-size:9.8px}
+    .education{font-size:10.3px}
+    @media(max-width:680px){
+      .page{padding:24px 18px}
+      .skills{grid-template-columns:1fr}
+      .role-head{flex-direction:column;align-items:flex-start;gap:0}
+    }
+    @media print{
+      html,body{background:#fff}
+      .toolbar{display:none}
+      .page{width:auto;margin:0;box-shadow:none;padding:.38in .48in}
+      @page{size:Letter;margin:0}
+    }
   </style>
+  <script src="/resume-print.js" defer></script>
 </head>
 <body>
-  <div class="toolbar"><a href="/">← Portfolio</a><button type="button" onclick="window.print()">Print / Save as PDF</button></div>
+  <div class="toolbar">
+    <a href="/">← Portfolio</a>
+    <button id="print-resume" type="button">Print / Save as PDF</button>
+  </div>
+
   <main class="page">
     <header class="header">
-      <h1>JOSH DAVIS</h1>
-      <p class="headline">Senior Full-Stack Engineer | Solution Architecture | Technical Leadership</p>
-      <div class="contact">Albuquerque, NM · joshuad100717@outlook.com · 619-569-6149<br><a href="https://doubling-albatross-retainer.ngrok-free.dev">Portfolio</a> · <a href="https://linkedin.com/in/full-stack-engineer-joshd">LinkedIn</a> · <a href="https://github.com/poker-kid-100717">GitHub</a></div>
+      <h1>JOSHUA DAVIS</h1>
+      <p class="headline">Full-Stack Software Engineer | C# / .NET | Angular / React | Azure / AWS</p>
+      <div class="contact">
+        Albuquerque, NM · joshuad100717@outlook.com · 619-569-6149 ·
+        <a href="https://www.linkedin.com/in/full-stack-engineer-joshd" target="_blank" rel="noreferrer">LinkedIn</a> ·
+        <a href="https://github.com/poker-kid-100717" target="_blank" rel="noreferrer">GitHub</a> ·
+        <a href="https://portfolio-joshdavis.app">Portfolio</a>
+      </div>
     </header>
 
     <h2>Professional Summary</h2>
-    <p class="summary">Senior full-stack software engineer and solution-architecture-focused technical lead with 10+ years across software and technology and 8+ years designing, delivering, and modernizing enterprise applications across multiple industries. Owns systems end to end across modern .NET, Angular/React, SQL Server, distributed integrations, CI/CD, and cloud/on-premises deployment. Experienced translating executive and operational requirements into maintainable architectures, mentoring engineers, and carrying delivery from discovery through production. Industry background includes logistics, manufacturing, fintech, healthcare, government, SaaS, and legal technology.</p>
+    <p class="summary">Hands-on full-stack software engineer with 10+ years across software and technology, including 8+ years building and modernizing enterprise applications. Ships production systems across C#, ASP.NET Core, Angular/React, SQL Server, REST APIs, Azure/AWS, CI/CD, and distributed integrations. Strong in end-to-end delivery, modernization, performance tuning, production troubleshooting, and hands-on technical mentoring.</p>
 
-    <h2>Technical Focus</h2>
+    <div class="impact"><strong>Career Impact:</strong> 3 enterprise apps in &lt;5 months · SQL gains: 15-25% Kenworth / ~20% Global Holdings · Cloud + on-prem delivery</div>
+
+    <h2>Core Expertise</h2>
     <div class="skills">
-      <strong>Architecture & Backend</strong><span>C#, .NET 8/9/10, ASP.NET Core, Clean Architecture, REST, EF Core, DI, SOLID, event-driven systems, microservices, resiliency</span>
-      <strong>Frontend & Data</strong><span>Angular, TypeScript, RxJS, React, AG Grid, responsive UI, SQL Server, T-SQL, stored procedures, indexing, query optimization</span>
-      <strong>Cloud & Delivery</strong><span>Azure, AWS, App Service, Azure SQL, Functions, Service Bus, Blob/S3, Docker, nginx, GitHub Actions, Azure DevOps, CI/CD, Entra ID</span>
+      <strong>Backend &amp; Architecture</strong><span>C#, .NET 8/9/10, ASP.NET Core, EF Core, REST APIs, Clean Architecture, SOLID, DI, distributed/event-driven systems</span>
+      <strong>Frontend &amp; Data</strong><span>Angular, TypeScript, React, RxJS, JavaScript, SQL Server, T-SQL, stored procedures, indexing, query tuning</span>
+      <strong>Cloud &amp; Delivery</strong><span>Azure, AWS, Functions, Service Bus, Blob/S3, Docker, GitHub Actions, Azure DevOps, CI/CD, Entra ID/SSO, observability, production support, mentoring</span>
     </div>
 
     <h2>Professional Experience</h2>
-    <section class="role"><div class="role-head"><h3>Value Truck</h3><span class="dates">May 2026 - Sep 2026</span></div><div class="title">Application Development Manager / Lead Application Developer</div><ul>
-      <li>Architected and delivered Freight DNA CRM, LTL planning, and Yard operations as a three-application enterprise logistics suite within a broader career delivering enterprise systems.</li>
-      <li>Owned full-stack delivery across Angular, ASP.NET Core, EF Core, SQL Server, Entra ID authentication, third-party transportation APIs, and business-logic-heavy operational workflows.</li>
-      <li>Designed and executed both Azure/cloud and on-premises deployment models, including a later migration from Azure-hosted architecture to containerized/on-prem infrastructure as business constraints changed.</li>
-      <li>Built a small delivery function around the products, mentoring an intern and support/QA contributor while setting technical direction, reviewing work, and running daily engineering coordination.</li>
-      <li>Worked directly with C-level and operations leaders to translate brokerage and asset-side needs into architecture, workflows, data models, APIs, UAT-ready features, and production-readiness decisions.</li>
-    </ul></section>
 
-    <section class="role"><div class="role-head"><h3>Kenworth Truck Co.</h3><span class="dates">May 2025 - May 2026</span></div><div class="title">Software Engineer</div><ul>
-      <li>Designed ASP.NET Core services using layered Clean Architecture, dependency injection, repository patterns, and explicit service boundaries.</li>
-      <li>Built workflow-heavy applications with complex grids, forms, validation, status transitions, and operational data contracts.</li>
-      <li>Improved SQL Server queries and stored procedures by roughly 15-25% through indexing, execution-plan analysis, and data-access optimization.</li>
-      <li>Implemented event-driven integration patterns with cloud messaging queues/topics and strengthened CI/CD, environment configuration, and structured logging.</li>
-    </ul></section>
+    <section class="role">
+      <div class="role-head"><h3>Value Truck</h3><span class="dates">May 2026 - Sep 2026</span></div>
+      <div class="title">Application Development Manager / Lead Application Developer</div>
+      <ul>
+        <li>Architected and shipped Freight DNA CRM, LTL planning, and Yard operations - three enterprise applications delivered through multiple iterations in under five months.</li>
+        <li>Owned hands-on full-stack delivery across Angular, ASP.NET Core, EF Core, SQL Server, Entra ID, transportation APIs, and operational workflows from discovery through UAT.</li>
+        <li>Designed Azure-hosted and containerized on-premises deployment models, adapting authentication, configuration, data access, networking, and release processes as constraints changed.</li>
+        <li>Continued coding while setting technical direction, reviewing work, mentoring two contributors, and translating business requests into maintainable APIs, data models, workflows, and production-ready features.</li>
+      </ul>
+    </section>
 
-    <section class="role"><div class="role-head"><h3>Global Holdings</h3><span class="dates">Jun 2024 - May 2025</span></div><div class="title">Software Engineer</div><ul>
-      <li>Architected reusable ASP.NET Core API and service patterns using Clean Architecture and clear dependency boundaries.</li>
-      <li>Improved SQL Server performance by approximately 20% across key workflows using indexing, partitioning, and stored procedure optimization.</li>
-      <li>Designed asynchronous object-storage and queue-based processing for large-file ingestion; added resiliency, structured logging, and correlation IDs.</li>
-    </ul></section>
+    <section class="role">
+      <div class="role-head"><h3>Kenworth Truck Co.</h3><span class="dates">May 2025 - May 2026</span></div>
+      <div class="title">Software Engineer</div>
+      <ul>
+        <li>Designed ASP.NET Core services with Clean Architecture, dependency injection, repository patterns, and explicit boundaries to improve maintainability, testability, and delivery.</li>
+        <li>Built workflow-heavy web applications with complex grids, forms, validation, status transitions, REST-backed features, and operational data contracts.</li>
+        <li>Improved SQL Server queries and stored procedures by roughly 15-25% through indexing, execution-plan analysis, query tuning, and data-access optimization.</li>
+        <li>Implemented event-driven cloud messaging and strengthened CI/CD, environment configuration, structured logging, code quality, and production troubleshooting.</li>
+      </ul>
+    </section>
 
-    <section class="role"><div class="role-head"><h3>PFA Solutions</h3><span class="dates">Jan 2022 - Jun 2024</span></div><div class="title">Software Engineer</div><ul>
-      <li>Owned full-stack SaaS delivery across Angular/TypeScript and .NET Core APIs from technical design through deployment.</li>
-      <li>Built reusable backend contracts with DTO mapping, FluentValidation, REST patterns, EF Core, and consistent response/error handling.</li>
-      <li>Created modular Angular architecture using lazy loading, shared components, RxJS, reactive patterns, and serverless/queue-based background automation.</li>
-    </ul></section>
+    <section class="role">
+      <div class="role-head"><h3>Global Holdings</h3><span class="dates">Jun 2024 - May 2025</span></div>
+      <div class="title">Software Engineer</div>
+      <ul>
+        <li>Architected reusable ASP.NET Core APIs and services using Clean Architecture, separation of concerns, and maintainable dependency boundaries.</li>
+        <li>Improved key SQL Server workflows by approximately 20% through indexing, partitioning, stored-procedure optimization, and query analysis.</li>
+        <li>Designed object-storage and queue-based processing for large-file ingestion and background workloads with transient-failure handling, structured logging, and correlation IDs.</li>
+        <li>Partnered with engineering and QA to define contracts, debug production issues, improve observability, and deliver reliable releases with clear ownership.</li>
+      </ul>
+    </section>
 
-    <section class="role"><div class="role-head"><h3>UnitedHealth Group / Optum</h3><span class="dates">Jan 2021 - Jan 2022</span></div><div class="title">Software Engineer</div><ul>
-      <li>Built secure Angular/TypeScript applications and ASP.NET Core APIs for healthcare workflows under HIPAA-aligned security expectations.</li>
-      <li>Implemented JWT authentication, role-based authorization, protected routes, secure data-access patterns, and production defect root-cause analysis.</li>
-    </ul></section>
+    <section class="role">
+      <div class="role-head"><h3>PFA Solutions</h3><span class="dates">Jan 2022 - Jun 2024</span></div>
+      <div class="title">Software Engineer</div>
+      <ul>
+        <li>Owned full-stack SaaS delivery across Angular/TypeScript and .NET Core REST APIs from technical design through implementation, testing, and deployment.</li>
+        <li>Built reusable backend patterns with DTO mapping, FluentValidation, EF Core, REST contracts, and consistent response/error handling.</li>
+        <li>Created modular Angular architecture with lazy loading, shared components, RxJS, reactive patterns, and responsive UI design.</li>
+        <li>Implemented serverless and queue-based automation while improving scalability through caching, query optimization, and cleaner service/data boundaries.</li>
+      </ul>
+    </section>
 
-    <section class="role"><div class="role-head"><h3>Wake County Government</h3><span class="dates">Jan 2020 - Jan 2021</span></div><div class="title">Software Engineer</div><ul>
-      <li>Developed enterprise .NET Core applications and SQL reporting for internal government workflows; applied repository/service patterns for maintainability.</li>
-    </ul></section>
+    <section class="role">
+      <div class="role-head"><h3>UnitedHealth Group / Optum</h3><span class="dates">Jan 2021 - Jan 2022</span></div>
+      <div class="title">Software Engineer</div>
+      <ul>
+        <li>Built secure Angular/TypeScript applications and ASP.NET Core APIs for healthcare workflows under HIPAA-aligned security expectations.</li>
+        <li>Implemented JWT authentication, role-based authorization, route protection, secure data access, and predictable API behavior.</li>
+        <li>Translated product and QA requirements into maintainable frontend/backend changes while preserving security, stability, and testability.</li>
+        <li>Diagnosed production defects through logs, reproduction, and root-cause analysis; delivered fixes and helped teammates troubleshoot automation and application issues.</li>
+      </ul>
+    </section>
 
-    <section class="role"><div class="role-head"><h3>Pilot Company</h3><span class="dates">Jan 2019 - Jan 2020</span></div><div class="title">Software Engineer</div><ul>
-      <li>Developed full-stack business applications with ASP.NET Core, Angular, TypeScript, React, and Node.js, including a billing platform and REST integrations.</li>
-    </ul></section>
+    <section class="role">
+      <div class="role-head"><h3>Wake County Government</h3><span class="dates">Jan 2020 - Jan 2021</span></div>
+      <div class="title">Software Engineer</div>
+      <ul>
+        <li>Developed enterprise .NET Core applications for government workflows, reporting, and operational processes across multiple departments.</li>
+        <li>Applied repository and service patterns to isolate data access, improve testability, and reduce coupling between business logic and persistence.</li>
+        <li>Designed SQL Server reporting solutions with stored procedures, views, and parameterized queries for dependable operational reporting.</li>
+        <li>Extended applications as requirements evolved while preserving stable data contracts, production reliability, and clear separation of concerns.</li>
+      </ul>
+    </section>
 
-    <section class="role"><div class="role-head"><h3>U.S. Bank</h3><span class="dates">May 2018 - May 2019</span></div><div class="title">Technical Support Specialist</div><ul><li>Supported enterprise hospitality payment environments for Wyndham, Hilton, and Marriott, building deep production-support and systems-troubleshooting experience.</li></ul></section>
+    <section class="role">
+      <div class="role-head"><h3>Pilot Company</h3><span class="dates">Jun 2019 - Jan 2020</span></div>
+      <div class="title">Software Engineer</div>
+      <ul>
+        <li>Developed full-stack applications using ASP.NET Core, Angular, TypeScript, React, and Node.js for internal and customer-facing workflows.</li>
+        <li>Designed and built a React/Node.js billing platform supporting transaction workflows, API integrations, and reliable data processing.</li>
+        <li>Created REST APIs with explicit contracts, standardized response models, validation, and consistent error handling.</li>
+        <li>Troubleshot across frontend, backend, and integration layers while establishing reusable patterns as requirements evolved.</li>
+      </ul>
+    </section>
 
-    <section class="role"><div class="role-head"><h3>Markettech</h3><span class="dates">Sep 2017 - Feb 2018</span></div><div class="title">iOS Developer (Contract)</div><ul><li>Built a Swift/Xcode iOS application for call-center performance metrics and operational reporting.</li></ul></section>
+    <section class="role">
+      <div class="role-head"><h3>U.S. Bank</h3><span class="dates">May 2018 - May 2019</span></div>
+      <div class="title">Technical Support Specialist</div>
+      <ul>
+        <li>Supported enterprise hospitality payment environments for clients including Wyndham, Hilton, and Marriott.</li>
+        <li>Diagnosed network, connectivity, hardware, application, and payment-processing issues across interconnected systems.</li>
+        <li>Isolated faults across dependent services and communicated clear resolution steps to technical and non-technical stakeholders.</li>
+        <li>Built deep experience in production support, incident ownership, escalation, customer communication, and root-cause troubleshooting.</li>
+      </ul>
+    </section>
 
-    <section class="role"><div class="role-head"><h3>Litera</h3><span class="dates">Jan 2016 - Aug 2017</span></div><div class="title">Technical Support Specialist</div><ul><li>Provided legal-technology support, investigated complex software issues, and implemented targeted DLL-related patches for client environments.</li></ul></section>
+    <section class="role">
+      <div class="role-head"><h3>Markettech</h3><span class="dates">Sep 2017 - Feb 2018</span></div>
+      <div class="title">iOS Developer (Contract)</div>
+      <ul>
+        <li>Built a Swift/Xcode iOS application capturing call-center metrics and surfacing employee performance data.</li>
+        <li>Translated reporting requirements into mobile UI workflows, data presentation, and application behavior.</li>
+        <li>Implemented application logic and UI components while troubleshooting integration and usability issues.</li>
+        <li>Delivered a mobile solution that improved leadership visibility into employee performance and operational reporting.</li>
+      </ul>
+    </section>
 
-    <h2>Selected Engineering Work</h2>
-    <div class="selected"><strong>WorkLens</strong> - Public Clean Architecture platform using ASP.NET Core 10, Angular 20, SQL Server, EF Core, Docker Compose, GitHub Actions, browser-extension workflows, Microsoft Graph/Outlook, multiple job-source integrations, and OpenAI-assisted resume matching. <span class="fine">github.com/poker-kid-100717/WorkLens</span></div>
-
-    <h2>Selected Endorsements</h2>
-    <div class="quotes">
-      <div class="quote"><p>“Josh owned the solution end to end, leading its architecture, development, integrations, and deployment... a strong addition to any organization seeking a Lead Engineer or Architect.”</p><strong>Ben Beddes · President of Logistics, Value Truck</strong></div>
-      <div class="quote"><p>“As a Senior Developer, you are required to do more than just crank out code... I have seen him mentoring others, helping develop technical design solutions, and encouraging good technical practices.”</p><strong>Nathaniel J. Lynn · Scrum Master, Kenworth</strong></div>
-    </div>
+    <section class="role">
+      <div class="role-head"><h3>Litera</h3><span class="dates">Jan 2016 - Aug 2017</span></div>
+      <div class="title">Technical Support Specialist</div>
+      <ul>
+        <li>Provided high-volume technical support for major legal-industry clients, including Baker McKenzie.</li>
+        <li>Investigated application issues through structured diagnosis, reproduction, escalation, and resolution across client environments.</li>
+        <li>Reviewed DLL behavior and implemented targeted patches to improve performance, compatibility, and user experience.</li>
+        <li>Built a strong foundation in production diagnostics, customer-facing communication, issue ownership, and software troubleshooting.</li>
+      </ul>
+    </section>
 
     <h2>Education</h2>
-    <p class="education"><strong>Juris Doctor</strong> - Elon University School of Law &nbsp; | &nbsp; <strong>B.A., English & Political Science</strong> - Florida State University</p>
+    <p class="education"><strong>Juris Doctor</strong> - Elon University School of Law &nbsp; | &nbsp; <strong>B.A., English &amp; Political Science</strong> - Florida State University</p>
   </main>
 </body>
 </html>
