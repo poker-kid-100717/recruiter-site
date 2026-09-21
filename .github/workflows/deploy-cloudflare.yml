@@ -49,7 +49,15 @@ jobs:
           set -euo pipefail
           SITE="https://portfolio-joshdavis.app"
 
-          HTML="$(curl --fail --silent --show-error --retry 6 --retry-delay 5 "$SITE/")"
+          HTML=""
+          for attempt in 1 2 3 4 5 6; do
+            HTML="$(curl --fail --silent --show-error -H 'Cache-Control: no-cache' "$SITE/?deploy_check=$GITHUB_SHA")"
+            if ! printf '%s' "$HTML" | grep -qE '<link[^>]+rel="stylesheet"[^>]+media="print"[^>]+onload='; then
+              break
+            fi
+            echo "Production HTML is still stale on attempt $attempt; retrying..."
+            sleep 5
+          done
 
           if printf '%s' "$HTML" | grep -qE '<link[^>]+rel="stylesheet"[^>]+media="print"[^>]+onload='; then
             echo "Production HTML still contains a CSP-incompatible deferred stylesheet loader."
@@ -71,7 +79,7 @@ jobs:
 
           HEADERS_FILE="$(mktemp)"
           BODY_FILE="$(mktemp)"
-          curl --fail --silent --show-error --retry 6 --retry-delay 5 -D "$HEADERS_FILE" -o "$BODY_FILE" "$CSS_URL"
+          curl --fail --silent --show-error -H 'Cache-Control: no-cache' -D "$HEADERS_FILE" -o "$BODY_FILE" "$CSS_URL"
 
           echo "Production stylesheet: $CSS_URL"
           grep -i '^content-type:' "$HEADERS_FILE"
@@ -87,4 +95,4 @@ jobs:
             exit 1
           fi
 
-          curl --fail --silent --show-error --retry 6 --retry-delay 5 "$SITE/api/profile" | grep -q '"name":"Joshua Davis"'
+          curl --fail --silent --show-error "$SITE/api/profile" | grep -q '"name":"Joshua Davis"'
