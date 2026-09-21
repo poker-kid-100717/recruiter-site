@@ -19,6 +19,17 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build
+      - name: Verify CSP-safe stylesheet link
+        shell: bash
+        run: |
+          set -euo pipefail
+          INDEX="dist/portfolio/browser/index.html"
+          grep -qE '<link[^>]+rel="stylesheet"[^>]+href="[^"]+\.css"' "$INDEX"
+          if grep -qE '<link[^>]+rel="stylesheet"[^>]+media="print"[^>]+onload=' "$INDEX"; then
+            echo "Angular emitted a CSP-incompatible deferred stylesheet loader."
+            cat "$INDEX"
+            exit 1
+          fi
       - run: npm audit --audit-level=high
       - run: npx wrangler deploy --dry-run
 
