@@ -25,6 +25,17 @@ jobs:
           node-version: 22
       - run: npm install
       - run: npm run build
+      - name: Verify CSP-safe stylesheet link
+        shell: bash
+        run: |
+          set -euo pipefail
+          INDEX="dist/portfolio/browser/index.html"
+          grep -qE '<link[^>]+rel="stylesheet"[^>]+href="[^"]+\.css"' "$INDEX"
+          if grep -qE '<link[^>]+rel="stylesheet"[^>]+media="print"[^>]+onload=' "$INDEX"; then
+            echo "Angular emitted a CSP-incompatible deferred stylesheet loader."
+            cat "$INDEX"
+            exit 1
+          fi
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
@@ -39,6 +50,12 @@ jobs:
           SITE="https://portfolio-joshdavis.app"
 
           HTML="$(curl --fail --silent --show-error --retry 6 --retry-delay 5 "$SITE/")"
+
+          if printf '%s' "$HTML" | grep -qE '<link[^>]+rel="stylesheet"[^>]+media="print"[^>]+onload='; then
+            echo "Production HTML still contains a CSP-incompatible deferred stylesheet loader."
+            exit 1
+          fi
+
           CSS_PATH="$(printf '%s' "$HTML" | grep -oE 'href="[^"]+\.css"' | head -n 1 | cut -d '"' -f 2)"
 
           if [ -z "$CSS_PATH" ]; then
