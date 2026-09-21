@@ -10,7 +10,7 @@ Public URL:
 https://portfolio-joshdavis.app
 ```
 
-The production site is hosted on Cloudflare Workers with static assets served from Cloudflare's edge. The public API endpoints used by the portfolio are also implemented at the edge, so the production site no longer depends on a local machine, Docker host, or ngrok tunnel.
+The production site is hosted on Cloudflare Workers with static assets served from Cloudflare's edge. The public API endpoints used by the portfolio are also implemented at the edge, so production no longer depends on a local machine or Docker host.
 
 ## What this repository demonstrates
 
