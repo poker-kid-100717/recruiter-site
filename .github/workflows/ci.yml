@@ -20,6 +20,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm audit --audit-level=high
+      - run: npx wrangler deploy --dry-run
 
   backend:
     runs-on: ubuntu-latest
