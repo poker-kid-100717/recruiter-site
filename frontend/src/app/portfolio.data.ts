@@ -72,11 +72,12 @@ export const experience: Experience[] = [
     company: 'Value Truck',
     title: 'Application Development Manager / Lead Application Developer',
     dates: 'May 2026 - Sep 2026',
-    summary: 'Owned application architecture and delivery for logistics operations across brokerage and asset-side workflows.',
+    summary: 'Application architecture, full-stack delivery, modernization, and technical leadership for logistics operations across brokerage and asset-side workflows.',
     highlights: [
-      'Delivered Freight DNA CRM, LTL planning, and Yard operations as a recent three-application enterprise suite within a broader career of enterprise software delivery.',
-      'Owned cloud and on-premises architecture, integrations, authentication, database design, deployment, and UAT readiness.',
-      'Built a small delivery team and provided daily technical direction, mentoring, review, and delivery coordination.'
+      'Architected and shipped Freight DNA CRM, LTL planning, and Yard operations - three enterprise applications delivered through multiple iterations in under five months.',
+      'Owned hands-on full-stack delivery across Angular, ASP.NET Core, EF Core, SQL Server, Entra ID, transportation APIs, and operational workflows from discovery through UAT.',
+      'Designed Azure-hosted and containerized on-premises deployment models, adapting authentication, configuration, data access, networking, and release processes as constraints changed.',
+      'Continued coding while setting technical direction, reviewing work, mentoring two contributors, and translating business requests into maintainable APIs, data models, workflows, and production-ready features.'
     ],
     tech: ['.NET', 'Angular', 'SQL Server', 'Azure', 'Docker', 'Entra ID']
   },
@@ -84,11 +85,12 @@ export const experience: Experience[] = [
     company: 'Kenworth Truck Co.',
     title: 'Software Engineer',
     dates: 'May 2025 - May 2026',
-    summary: 'Enterprise application development focused on maintainable .NET architecture, operational workflows, SQL performance, and integration reliability.',
+    summary: 'Enterprise application development focused on maintainable .NET architecture, operational workflows, SQL performance, integration reliability, and production support.',
     highlights: [
-      'Designed ASP.NET Core services with Clean Architecture, DI, repositories, and explicit service boundaries.',
-      'Built complex workflow UIs and improved SQL Server queries/stored procedures by roughly 15-25%.',
-      'Implemented event-driven integration patterns and improved CI/CD, configuration, and structured logging.'
+      'Designed ASP.NET Core services with Clean Architecture, dependency injection, repository patterns, and explicit boundaries to improve maintainability, testability, and delivery.',
+      'Built workflow-heavy web applications with complex grids, forms, validation, status transitions, REST-backed features, and operational data contracts.',
+      'Improved SQL Server queries and stored procedures by roughly 15-25% through indexing, execution-plan analysis, query tuning, and data-access optimization.',
+      'Implemented event-driven cloud messaging and strengthened CI/CD, environment configuration, structured logging, code quality, and production troubleshooting.'
     ],
     tech: ['ASP.NET Core', 'SQL Server', 'Clean Architecture', 'Messaging', 'CI/CD']
   },
@@ -96,11 +98,12 @@ export const experience: Experience[] = [
     company: 'Global Holdings',
     title: 'Software Engineer',
     dates: 'Jun 2024 - May 2025',
-    summary: 'Backend architecture, SQL performance, asynchronous processing, and production resiliency for distributed applications.',
+    summary: 'Backend architecture, SQL performance, asynchronous processing, observability, and production resiliency for distributed applications.',
     highlights: [
-      'Built reusable ASP.NET Core API/service patterns with clean dependency boundaries.',
-      'Improved key SQL workflows by approximately 20% using indexing, partitioning, and stored procedure tuning.',
-      'Designed object-storage + queue processing and added transient-failure handling, structured logging, and correlation IDs.'
+      'Architected reusable ASP.NET Core APIs and services using Clean Architecture, separation of concerns, and maintainable dependency boundaries.',
+      'Improved key SQL Server workflows by approximately 20% through indexing, partitioning, stored-procedure optimization, and query analysis.',
+      'Designed object-storage and queue-based processing for large-file ingestion and background workloads with transient-failure handling, structured logging, and correlation IDs.',
+      'Partnered with engineering and QA to define contracts, debug production issues, improve observability, and deliver reliable releases with clear ownership.'
     ],
     tech: ['.NET', 'SQL Server', 'Cloud Storage', 'Queues', 'Observability']
   },
@@ -108,11 +111,12 @@ export const experience: Experience[] = [
     company: 'PFA Solutions',
     title: 'Software Engineer',
     dates: 'Jan 2022 - Jun 2024',
-    summary: 'Full-stack SaaS delivery across Angular/TypeScript and .NET Core APIs.',
+    summary: 'Full-stack SaaS delivery across Angular/TypeScript and .NET Core APIs from technical design through deployment.',
     highlights: [
-      'Owned features from technical approach through implementation and deployment.',
-      'Built DTO/validation/API patterns with EF Core and consistent error contracts.',
-      'Created modular Angular architecture with RxJS, reusable components, lazy loading, and serverless/queue-based automation.'
+      'Owned full-stack SaaS delivery across Angular/TypeScript and .NET Core REST APIs from technical design through implementation, testing, and deployment.',
+      'Built reusable backend patterns with DTO mapping, FluentValidation, EF Core, REST contracts, and consistent response/error handling.',
+      'Created modular Angular architecture with lazy loading, shared components, RxJS, reactive patterns, and responsive UI design.',
+      'Implemented serverless and queue-based automation while improving scalability through caching, query optimization, and cleaner service/data boundaries.'
     ],
     tech: ['Angular', 'TypeScript', '.NET Core', 'EF Core', 'RxJS']
   },
@@ -120,11 +124,12 @@ export const experience: Experience[] = [
     company: 'UnitedHealth Group / Optum',
     title: 'Software Engineer',
     dates: 'Jan 2021 - Jan 2022',
-    summary: 'Secure full-stack development for healthcare workflows.',
+    summary: 'Secure full-stack development, authorization, and production troubleshooting for healthcare workflows.',
     highlights: [
-      'Built Angular + ASP.NET Core applications under HIPAA-aligned security expectations.',
-      'Implemented JWT authentication, role-based authorization, protected routes, and secure data-access patterns.',
-      'Troubleshot production defects through logs, reproduction, root-cause analysis, and targeted fixes.'
+      'Built secure Angular/TypeScript applications and ASP.NET Core APIs for healthcare workflows under HIPAA-aligned security expectations.',
+      'Implemented JWT authentication, role-based authorization, route protection, secure data access, and predictable API behavior.',
+      'Translated product and QA requirements into maintainable frontend/backend changes while preserving security, stability, and testability.',
+      'Diagnosed production defects through logs, reproduction, and root-cause analysis; delivered fixes and helped teammates troubleshoot automation and application issues.'
     ],
     tech: ['Angular', 'ASP.NET Core', 'JWT', 'RBAC', 'Healthcare']
   },
@@ -132,10 +137,12 @@ export const experience: Experience[] = [
     company: 'Wake County Government',
     title: 'Software Engineer',
     dates: 'Jan 2020 - Jan 2021',
-    summary: 'Enterprise .NET applications and SQL reporting for internal government workflows.',
+    summary: 'Enterprise .NET Core applications, SQL reporting, and maintainable service/data boundaries for government workflows.',
     highlights: [
-      'Applied repository/service patterns to improve testability and reduce coupling.',
-      'Designed SQL Server reporting with stored procedures, views, and parameterized queries.'
+      'Developed enterprise .NET Core applications for government workflows, reporting, and operational processes across multiple departments.',
+      'Applied repository and service patterns to isolate data access, improve testability, and reduce coupling between business logic and persistence.',
+      'Designed SQL Server reporting solutions with stored procedures, views, and parameterized queries for dependable operational reporting.',
+      'Extended applications as requirements evolved while preserving stable data contracts, production reliability, and clear separation of concerns.'
     ],
     tech: ['.NET Core', 'SQL Server', 'Stored Procedures', 'Government']
   },
@@ -143,10 +150,12 @@ export const experience: Experience[] = [
     company: 'Pilot Company',
     title: 'Software Engineer',
     dates: 'Jun 2019 - Jan 2020',
-    summary: 'Full-stack business applications and integration work across .NET, Angular, React, and Node.js.',
+    summary: 'Full-stack business applications and integration work across ASP.NET Core, Angular, React, and Node.js.',
     highlights: [
-      'Built internal/customer-facing workflows and a React/Node billing platform.',
-      'Designed REST contracts, validation, standardized responses, and cross-layer integrations.'
+      'Developed full-stack applications using ASP.NET Core, Angular, TypeScript, React, and Node.js for internal and customer-facing workflows.',
+      'Designed and built a React/Node.js billing platform supporting transaction workflows, API integrations, and reliable data processing.',
+      'Created REST APIs with explicit contracts, standardized response models, validation, and consistent error handling.',
+      'Troubleshot across frontend, backend, and integration layers while establishing reusable patterns as requirements evolved.'
     ],
     tech: ['ASP.NET Core', 'Angular', 'React', 'Node.js', 'REST']
   },
@@ -156,8 +165,10 @@ export const experience: Experience[] = [
     dates: 'May 2018 - May 2019',
     summary: 'Enterprise production support for hospitality payment environments and business-critical systems.',
     highlights: [
-      'Supported payment environments serving major hospitality clients including Wyndham, Hilton, and Marriott.',
-      'Built production troubleshooting experience across integrations, systems behavior, incident diagnosis, and user-impacting defects.'
+      'Supported enterprise hospitality payment environments for clients including Wyndham, Hilton, and Marriott.',
+      'Diagnosed network, connectivity, hardware, application, and payment-processing issues across interconnected systems.',
+      'Isolated faults across dependent services and communicated clear resolution steps to technical and non-technical stakeholders.',
+      'Built deep experience in production support, incident ownership, escalation, customer communication, and root-cause troubleshooting.'
     ],
     tech: ['Production Support', 'Payments', 'Troubleshooting', 'Enterprise Systems']
   },
@@ -165,9 +176,12 @@ export const experience: Experience[] = [
     company: 'Markettech',
     title: 'iOS Developer (Contract)',
     dates: 'Sep 2017 - Feb 2018',
-    summary: 'Contract iOS development for operational performance reporting.',
+    summary: 'Contract iOS development for operational performance reporting and call-center metrics.',
     highlights: [
-      'Built a Swift/Xcode application for call-center performance metrics and operational reporting.'
+      'Built a Swift/Xcode iOS application capturing call-center metrics and surfacing employee performance data.',
+      'Translated reporting requirements into mobile UI workflows, data presentation, and application behavior.',
+      'Implemented application logic and UI components while troubleshooting integration and usability issues.',
+      'Delivered a mobile solution that improved leadership visibility into employee performance and operational reporting.'
     ],
     tech: ['Swift', 'Xcode', 'iOS']
   },
@@ -175,9 +189,12 @@ export const experience: Experience[] = [
     company: 'Litera',
     title: 'Technical Support Specialist',
     dates: 'Jan 2016 - Aug 2017',
-    summary: 'Legal-technology support and deep software troubleshooting for client environments.',
+    summary: 'Legal-technology production support and deep software troubleshooting for enterprise client environments.',
     highlights: [
-      'Investigated complex software issues and implemented targeted DLL-related patches and client-environment fixes.'
+      'Provided high-volume technical support for major legal-industry clients, including Baker McKenzie.',
+      'Investigated application issues through structured diagnosis, reproduction, escalation, and resolution across client environments.',
+      'Reviewed DLL behavior and implemented targeted patches to improve performance, compatibility, and user experience.',
+      'Built a strong foundation in production diagnostics, customer-facing communication, issue ownership, and software troubleshooting.'
     ],
     tech: ['Legal Tech', 'Production Support', 'Troubleshooting']
   }

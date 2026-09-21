@@ -130,7 +130,6 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
             </div>
           </article>
         </div>
-        <p class="timeline-note">Earlier technology experience includes U.S. Bank, Markettech (iOS/Swift), and Litera. Full chronology is available in the resume.</p>
       </section>
 
       <section id="stack" class="section stack-section">
