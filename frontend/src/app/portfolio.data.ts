@@ -229,9 +229,7 @@ export const stackGroups = [
 
 export const publicRepos = [
   { name: 'WorkLens', description: 'Full-stack job intelligence + application tracking platform', tech: '.NET 10 · Angular 20 · SQL Server · Docker', href: 'https://github.com/poker-kid-100717/WorkLens' },
-  { name: 'CleanArchitectureTemplate', description: 'Reference work around clean boundaries and maintainable .NET structure', tech: '.NET · Clean Architecture', href: 'https://github.com/poker-kid-100717/CleanArchitectureTemplate' },
-  { name: 'AngularAppAzure', description: 'Angular + .NET solution structured around Azure-oriented delivery', tech: 'Angular · .NET · Azure', href: 'https://github.com/poker-kid-100717/AngularAppAzure' },
-  { name: 'DotnetCoreS3APIBucketUtility', description: 'AWS S3 integration utility built with .NET', tech: '.NET · AWS S3 · API', href: 'https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility' },
-  { name: 'allocation-proration-tool', description: 'Business-rule-heavy allocation and proration tooling', tech: '.NET · Business Logic', href: 'https://github.com/poker-kid-100717/allocation-proration-tool' },
-  { name: 'webhook-challenge', description: 'Webhook/API processing implementation and integration work', tech: 'API · Webhooks · Integration', href: 'https://github.com/poker-kid-100717/webhook-challenge' }
+  { name: 'CleanArchitectureTemplate', description: 'CQRS/MediatR build-out of the Clean Architecture pattern with EF Core, Identity, and an Angular client', tech: '.NET · Clean Architecture · CQRS', href: 'https://github.com/poker-kid-100717/CleanArchitectureTemplate' },
+  { name: 'AngularAppAzure', description: 'Angular + .NET solution wired to Azure API Management as a connected service', tech: 'Angular · .NET · Azure', href: 'https://github.com/poker-kid-100717/AngularAppAzure' },
+  { name: 'DotnetCoreS3APIBucketUtility', description: 'Layered AWS S3 bucket/object management API with integration tests', tech: '.NET · AWS S3 · API', href: 'https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility' }
 ];
