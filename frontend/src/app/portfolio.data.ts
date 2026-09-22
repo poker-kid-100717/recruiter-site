@@ -51,19 +51,6 @@ export const projects: Project[] = [
     ],
     tech: ['ASP.NET Core 10', 'Angular 20', 'SQL Server', 'EF Core', 'Docker', 'GitHub Actions', 'OpenAI', 'Microsoft Graph', 'MCP'],
     href: 'https://github.com/poker-kid-100717/WorkLens'
-  },
-  {
-    title: 'Architecture + Integration Repositories',
-    eyebrow: 'Public engineering evidence',
-    summary: 'A collection of repositories that show the progression of my engineering work across .NET, Angular/React, cloud storage, authentication, API design, and full-stack application delivery.',
-    outcomes: [
-      'A full-stack Pokémon TCG marketplace with JWT auth, EF Core/SQLite persistence, and CI-tested ASP.NET Core + React code.',
-      'Reusable Clean Architecture reference patterns and dependency-boundary work.',
-      'AWS S3 integration utilities and Azure-oriented Angular/.NET application structure.',
-      'A public code history that reflects both breadth and continued modernization of the stack.'
-    ],
-    tech: ['.NET', 'Angular', 'React', 'Azure', 'AWS S3', 'OAuth/Auth', 'REST', 'SQL'],
-    href: 'https://github.com/poker-kid-100717?tab=repositories'
   }
 ];
 
@@ -228,9 +215,8 @@ export const stackGroups = [
 ];
 
 export const publicRepos = [
-  { name: 'WorkLens', description: 'Full-stack job intelligence + application tracking platform', tech: '.NET 10 · Angular 20 · SQL Server · Docker', href: 'https://github.com/poker-kid-100717/WorkLens' },
   { name: 'tcg', description: 'Pokémon TCG marketplace with JWT auth, server-persisted cart/orders/wishlist, and price/investment analytics', tech: 'ASP.NET Core 8 · React 19 · SQLite · EF Core · JWT · xUnit · Jest', href: 'https://github.com/poker-kid-100717/tcg' },
-  { name: 'CleanArchitectureTemplate', description: 'CQRS/MediatR build-out of the Clean Architecture pattern with EF Core, Identity, and an Angular client', tech: '.NET · Clean Architecture · CQRS', href: 'https://github.com/poker-kid-100717/CleanArchitectureTemplate' },
-  { name: 'AngularAppAzure', description: 'Angular + .NET solution wired to Azure API Management as a connected service', tech: 'Angular · .NET · Azure', href: 'https://github.com/poker-kid-100717/AngularAppAzure' },
-  { name: 'DotnetCoreS3APIBucketUtility', description: 'Layered AWS S3 bucket/object management API with integration tests', tech: '.NET · AWS S3 · API', href: 'https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility' }
+  { name: 'CleanArchitectureTemplate', description: 'CQRS/MediatR Clean Architecture reference — the same Core/Infrastructure/API boundary I’ve shipped at Kenworth, Global Holdings, and in WorkLens', tech: '.NET · Clean Architecture · CQRS', href: 'https://github.com/poker-kid-100717/CleanArchitectureTemplate' },
+  { name: 'AngularAppAzure', description: 'Azure API Management deployment reference — the same shape I stood up, then rebuilt for on-prem, on the Freight DNA suite', tech: 'Angular · .NET · Azure', href: 'https://github.com/poker-kid-100717/AngularAppAzure' },
+  { name: 'DotnetCoreS3APIBucketUtility', description: 'Layered S3 bucket/object API — the pattern behind the large-file ingestion pipeline I built at Global Holdings', tech: '.NET · AWS S3 · API', href: 'https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility' }
 ];
