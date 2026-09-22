@@ -73,7 +73,7 @@ export const projects: Project[] = [
       'Docker Compose stack with SQL Server, ASP.NET Core, Angular/nginx, EF migrations, health-aware startup, and GitHub Actions CI.',
       'Integrates RemoteOK, Remotive, Greenhouse, Dice MCP, browser-extension workflows, Microsoft Graph/Outlook, and OpenAI-assisted matching.'
     ],
-    tech: ['ASP.NET Core 10', 'Angular 20', 'SQL Server', 'EF Core', 'Docker', 'GitHub Actions', 'OpenAI', 'Microsoft Graph', 'MCP'],
+    tech: ['ASP.NET Core 10', 'Angular 18', 'SQL Server', 'EF Core', 'Docker', 'GitHub Actions', 'OpenAI', 'Microsoft Graph', 'MCP'],
     href: 'https://github.com/poker-kid-100717/WorkLens'
   }
 ];
