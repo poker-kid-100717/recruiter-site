@@ -25,6 +25,30 @@ export interface Endorsement {
   role: string;
 }
 
+export interface ArchitectureLayer {
+  name: string;
+  note: string;
+}
+
+export interface ArchitectureDecision {
+  choice: string;
+  instead: string;
+  why: string;
+}
+
+export interface RepoArchitecture {
+  layers: ArchitectureLayer[];
+  decisions: ArchitectureDecision[];
+}
+
+export interface PublicRepo {
+  name: string;
+  description: string;
+  tech: string;
+  href: string;
+  architecture?: RepoArchitecture;
+}
+
 export const projects: Project[] = [
   {
     title: 'Freight DNA + Logistics Application Suite',
@@ -51,19 +75,6 @@ export const projects: Project[] = [
     ],
     tech: ['ASP.NET Core 10', 'Angular 20', 'SQL Server', 'EF Core', 'Docker', 'GitHub Actions', 'OpenAI', 'Microsoft Graph', 'MCP'],
     href: 'https://github.com/poker-kid-100717/WorkLens'
-  },
-  {
-    title: 'Architecture + Integration Repositories',
-    eyebrow: 'Public engineering evidence',
-    summary: 'A collection of repositories that show the progression of my engineering work across .NET, Angular, cloud storage, authentication, API design, deployment, webhooks, and business-rule-heavy applications.',
-    outcomes: [
-      'Reusable Clean Architecture reference patterns and dependency-boundary work.',
-      'AWS S3 integration utilities and Azure-oriented Angular/.NET application structure.',
-      'Authentication/authorization, REST APIs, webhook processing, CRUD foundations, and data-centric business tooling.',
-      'A public code history that reflects both breadth and continued modernization of the stack.'
-    ],
-    tech: ['.NET', 'Angular', 'Azure', 'AWS S3', 'OAuth/Auth', 'Webhooks', 'REST', 'SQL'],
-    href: 'https://github.com/poker-kid-100717?tab=repositories'
   }
 ];
 
@@ -227,11 +238,92 @@ export const stackGroups = [
   { name: 'Architecture', items: ['Clean Architecture', 'SOLID', 'DI', 'Event-Driven Systems', 'API Integration', 'AuthN/AuthZ', 'Cloud + On-Prem', 'Observability'] }
 ];
 
-export const publicRepos = [
-  { name: 'WorkLens', description: 'Full-stack job intelligence + application tracking platform', tech: '.NET 10 · Angular 20 · SQL Server · Docker', href: 'https://github.com/poker-kid-100717/WorkLens' },
-  { name: 'CleanArchitectureTemplate', description: 'Reference work around clean boundaries and maintainable .NET structure', tech: '.NET · Clean Architecture', href: 'https://github.com/poker-kid-100717/CleanArchitectureTemplate' },
-  { name: 'AngularAppAzure', description: 'Angular + .NET solution structured around Azure-oriented delivery', tech: 'Angular · .NET · Azure', href: 'https://github.com/poker-kid-100717/AngularAppAzure' },
-  { name: 'DotnetCoreS3APIBucketUtility', description: 'AWS S3 integration utility built with .NET', tech: '.NET · AWS S3 · API', href: 'https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility' },
-  { name: 'allocation-proration-tool', description: 'Business-rule-heavy allocation and proration tooling', tech: '.NET · Business Logic', href: 'https://github.com/poker-kid-100717/allocation-proration-tool' },
-  { name: 'webhook-challenge', description: 'Webhook/API processing implementation and integration work', tech: 'API · Webhooks · Integration', href: 'https://github.com/poker-kid-100717/webhook-challenge' }
+export const publicRepos: PublicRepo[] = [
+  {
+    name: 'tcg',
+    description: 'Pokémon TCG marketplace with JWT auth, server-persisted cart/orders/wishlist, and price/investment analytics',
+    tech: 'ASP.NET Core 8 · React 19 · SQLite · EF Core · JWT · xUnit · Jest',
+    href: 'https://github.com/poker-kid-100717/tcg'
+  },
+  {
+    name: 'CleanArchitectureTemplate',
+    description: 'CQRS/MediatR Clean Architecture reference — the same Core/Infrastructure/API boundary I’ve shipped at Kenworth, Global Holdings, and in WorkLens',
+    tech: '.NET · Clean Architecture · CQRS',
+    href: 'https://github.com/poker-kid-100717/CleanArchitectureTemplate',
+    architecture: {
+      layers: [
+        { name: 'Domain', note: 'Entities, value objects, domain events — no outward dependencies' },
+        { name: 'Application', note: 'CQRS handlers, validation, mapping, interfaces Infrastructure implements' },
+        { name: 'Infrastructure', note: 'EF Core, Identity, file export, external services' },
+        { name: 'WebUI', note: 'ASP.NET Core API + Angular client, wires it together via DI' }
+      ],
+      decisions: [
+        {
+          choice: 'CQRS with MediatR for every use case',
+          instead: 'a conventional service layer with multi-purpose service classes',
+          why: 'Each handler stays single-purpose and testable in isolation, and cross-cutting concerns (validation, logging, performance, authorization) attach as pipeline behaviours instead of being re-implemented per method. I default to this once a domain has more than a handful of use cases; for a 3-endpoint CRUD app the pipeline machinery isn’t worth it.'
+        },
+        {
+          choice: 'IApplicationDbContext exposing DbSet<T> directly',
+          instead: 'a generic IRepository<T> wrapper over EF Core',
+          why: 'EF Core’s DbContext already is a unit-of-work; a generic repository on top of it usually just renames Where() calls without adding real substitutability. I only introduce a repository interface when there’s an actual second implementation to swap in — see the S3 utility below, where the backing store legitimately varies.'
+        },
+        {
+          choice: 'Five MediatR pipeline behaviours (validation, logging, performance, authorization, exception handling) ahead of every handler',
+          instead: 'handling each concern inline, per handler',
+          why: 'A new contributor adding an endpoint gets validation, logging, and auth enforcement for free, structurally, instead of relying on them remembering to add it. The cost is indirection — tracing a request means reading the pipeline, not just the handler, which is a real tradeoff on a small team.'
+        }
+      ]
+    }
+  },
+  {
+    name: 'AngularAppAzure',
+    description: 'Azure API Management deployment reference — the same shape I stood up, then rebuilt for on-prem, on the Freight DNA suite',
+    tech: 'Angular · .NET · Azure',
+    href: 'https://github.com/poker-kid-100717/AngularAppAzure',
+    architecture: {
+      layers: [
+        { name: 'Angular SPA', note: 'Built assets served from the same host as the API' },
+        { name: 'ASP.NET Core host', note: 'Single deployable: UseStaticFiles + MapControllers' },
+        { name: 'Azure API Management', note: 'Gateway in front of the host — policy point for auth, rate limiting, versioning' }
+      ],
+      decisions: [
+        {
+          choice: 'One ASP.NET Core host serving both the compiled Angular build and the API',
+          instead: 'a separate static-hosting target (Azure Static Web Apps / Blob + CDN) for the SPA',
+          why: 'It collapses deployment to one artifact, one App Service, one release pipeline — the right shape for a small internal tool. When the frontend needs to scale or cache independently from the API, as on the Freight DNA suite, I split them; that’s a call made from traffic shape, not a default.'
+        },
+        {
+          choice: 'API surface published through Azure API Management',
+          instead: 'exposing the App Service directly to callers',
+          why: 'APIM gives you a policy point — rate limiting, auth, versioning — in front of the backend without touching backend code, which matters once there’s an external contract or multiple client teams to protect the backend from. For a genuinely internal tool with a handful of users, I’d skip APIM and put auth straight on the App Service — the gateway earns its complexity, it isn’t free by default.'
+        }
+      ]
+    }
+  },
+  {
+    name: 'DotnetCoreS3APIBucketUtility',
+    description: 'Layered S3 bucket/object API — the pattern behind the large-file ingestion pipeline I built at Global Holdings',
+    tech: '.NET · AWS S3 · API',
+    href: 'https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility',
+    architecture: {
+      layers: [
+        { name: 'API', note: 'Controllers, request/response wiring' },
+        { name: 'Core', note: 'IBucketRepository / IFilesRepository interfaces, own DTOs' },
+        { name: 'Infrastructure', note: 'AWS SDK-backed implementation, mapped to Core DTOs' }
+      ],
+      decisions: [
+        {
+          choice: 'Own response DTOs (CreateBucketResponse, etc.) instead of returning AWS SDK types up through the API',
+          instead: 'passing PutBucketResponse and other SDK response objects straight through to callers',
+          why: 'The AWS SDK’s response shapes change across major versions and carry AWS-specific metadata callers don’t need. Mapping at the Infrastructure boundary means an SDK upgrade is a one-file change, not an API contract break.'
+        },
+        {
+          choice: 'Interface-driven IBucketRepository / IFilesRepository over the AWS SDK',
+          instead: 'calling IAmazonS3 directly from the controllers',
+          why: 'This is the case where the abstraction actually pays for itself: the object-storage backend legitimately varies — S3 here, a different cloud provider’s storage on the Global Holdings project — and the interface is what let me carry the same Core-layer contract across both without touching callers. If I only ever expected one provider for the life of a project, I’d skip this layer and call the SDK directly from a thin service.'
+        }
+      ]
+    }
+  }
 ];

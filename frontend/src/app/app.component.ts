@@ -150,12 +150,39 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
           <p>Not every professional system can be public. These repositories provide inspectable evidence across architecture, cloud, integration, and full-stack work.</p>
         </div>
         <div class="repo-grid">
-          <a class="repo-card" *ngFor="let repo of publicRepos" [href]="repo.href" target="_blank" rel="noreferrer">
-            <div class="repo-icon">&lt;/&gt;</div>
-            <h3>{{ repo.name }}</h3>
-            <p>{{ repo.description }}</p>
-            <span>{{ repo.tech }}</span>
-          </a>
+          <div class="repo-card" *ngFor="let repo of publicRepos">
+            <a class="repo-card-link" [href]="repo.href" target="_blank" rel="noreferrer">
+              <div class="repo-icon">&lt;/&gt;</div>
+              <h3>{{ repo.name }} <span class="repo-external" aria-hidden="true">↗</span></h3>
+              <p>{{ repo.description }}</p>
+              <span class="repo-tech">{{ repo.tech }}</span>
+            </a>
+            <button
+              *ngIf="repo.architecture"
+              type="button"
+              class="repo-arch-toggle"
+              (click)="toggleArchitecture(repo.name)"
+              [attr.aria-expanded]="isArchitectureOpen(repo.name)"
+            >
+              {{ isArchitectureOpen(repo.name) ? 'Hide architecture' : 'How it’s built' }}
+              <span aria-hidden="true">{{ isArchitectureOpen(repo.name) ? '↑' : '↓' }}</span>
+            </button>
+            <div class="repo-arch" *ngIf="repo.architecture && isArchitectureOpen(repo.name)">
+              <div class="repo-arch-diagram">
+                <ng-container *ngFor="let layer of repo.architecture.layers; let last = last">
+                  <div class="repo-arch-node"><strong>{{ layer.name }}</strong><small>{{ layer.note }}</small></div>
+                  <div class="repo-arch-arrow" *ngIf="!last" aria-hidden="true">→</div>
+                </ng-container>
+              </div>
+              <ul class="repo-arch-decisions">
+                <li *ngFor="let decision of repo.architecture.decisions">
+                  <strong>{{ decision.choice }}</strong>
+                  <span class="repo-arch-instead">instead of {{ decision.instead }}</span>
+                  <p>{{ decision.why }}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -213,6 +240,7 @@ export class AppComponent implements OnInit {
   stackGroups = stackGroups;
   publicRepos = publicRepos;
   apiOnline = false;
+  private openArchitecture = new Set<string>();
 
   profileCode = `{
   "engineer": "Joshua Davis",
@@ -233,5 +261,17 @@ export class AppComponent implements OnInit {
       next: () => this.apiOnline = true,
       error: () => this.apiOnline = false
     });
+  }
+
+  toggleArchitecture(repoName: string): void {
+    if (this.openArchitecture.has(repoName)) {
+      this.openArchitecture.delete(repoName);
+    } else {
+      this.openArchitecture.add(repoName);
+    }
+  }
+
+  isArchitectureOpen(repoName: string): boolean {
+    return this.openArchitecture.has(repoName);
   }
 }
