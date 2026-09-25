@@ -74,8 +74,36 @@ export const projects: Project[] = [
       'Docker Compose stack with SQL Server, ASP.NET Core, Angular/nginx, EF migrations, health-aware startup, and GitHub Actions CI.',
       'Integrates RemoteOK, Remotive, Greenhouse, Dice MCP, browser-extension workflows, Microsoft Graph/Outlook, and OpenAI-assisted matching.'
     ],
-    tech: ['ASP.NET Core 10', 'Angular 18', 'SQL Server', 'EF Core', 'Docker', 'GitHub Actions', 'OpenAI', 'Microsoft Graph', 'MCP'],
+    tech: ['ASP.NET Core 10', 'Angular 22', 'SQL Server', 'EF Core 10', 'Docker', 'GitHub Actions', 'Vitest', 'OpenAI', 'Microsoft Graph', 'MCP'],
     href: 'https://github.com/poker-kid-100717/WorkLens'
+  },
+  {
+    title: 'Card Marketplace',
+    eyebrow: 'Public full-stack platform · live',
+    summary: 'A Pokémon TCG marketplace with accounts, a server-persisted cart, orders and wishlist, and price and investment analytics, running entirely on Cloudflare.',
+    outcomes: [
+      'ASP.NET Core 10 API with EF Core on PostgreSQL (Neon), JWT auth, and a readiness check that stays unhealthy until migrations have actually applied.',
+      'React 19 + Vite front end with route-level code splitting (first-load bundle cut from 739 kB to 289 kB).',
+      'A Cloudflare Worker serves the SPA and routes /api to the .NET API in a Cloudflare Container; requests wait for database initialization instead of failing on a cold start.',
+      'GitHub Actions: build, tests, migration-drift check, then deploy and production smoke tests.'
+    ],
+    tech: ['ASP.NET Core 10', 'React 19', 'Vite', 'PostgreSQL', 'EF Core 10', 'Cloudflare Workers', 'Cloudflare Containers', 'xUnit', 'Vitest'],
+    href: 'https://github.com/poker-kid-100717/tcg',
+    secondaryHref: 'https://tcg-portfolio-sample.app',
+    secondaryLabel: 'Open the live app'
+  },
+  {
+    title: 'GoodMusic',
+    eyebrow: 'Public full-stack platform',
+    summary: 'A music catalog of artists, songs and composers: a Next.js front end over an ASP.NET Core API on MongoDB, served from one Cloudflare Worker.',
+    outcomes: [
+      'Next.js 16 backend-for-frontend: Server Components read the API on the server, Server Actions handle every write, and the JWT stays in an httpOnly cookie.',
+      'MongoDB document design with multi-document transactions, so concurrent renames, moves and deletes can never leave song counts or artist names out of step.',
+      'API validation and conflict errors surface in context: under the field, or beside the button that caused them.',
+      'Playwright end-to-end suite runs the real site, API and database in CI, and also passes on the Workers runtime.'
+    ],
+    tech: ['Next.js 16', 'React 19', 'ASP.NET Core 10', 'MongoDB', 'Tailwind CSS', 'Cloudflare Workers', 'Cloudflare Containers', 'Playwright', 'Testcontainers'],
+    href: 'https://github.com/poker-kid-100717/GoodMusic'
   }
 ];
 
@@ -241,10 +269,29 @@ export const stackGroups = [
 
 export const publicRepos: PublicRepo[] = [
   {
-    name: 'Card Marketplace',
-    description: 'Pokémon TCG marketplace with JWT auth, server-persisted cart/orders/wishlist, and price/investment analytics',
-    tech: 'ASP.NET Core 8 · React 19 · SQLite · EF Core · JWT · xUnit · Jest',
-    href: 'https://github.com/poker-kid-100717/tcg'
+    name: 'Allocation Proration',
+    description: 'Pro-rates a limited investment allocation across investors by historical average, redistributing whatever capped investors can’t take',
+    tech: 'TypeScript · React · Cloudflare Workers · Vitest',
+    href: 'https://github.com/poker-kid-100717/allocation-proration-tool',
+    architecture: {
+      layers: [
+        { name: 'React UI', note: 'Form and results, served as static assets' },
+        { name: 'Worker API', note: 'POST /api/prorate: validation and limits' },
+        { name: 'Proration core', note: 'Pure function, no dependencies, fully unit-tested' }
+      ],
+      decisions: [
+        {
+          choice: 'The allocation math as a pure, dependency-free function',
+          instead: 'computing inside the request handler',
+          why: 'The algorithm is the part that has to be right: it caps investors at their request and keeps redistributing the remainder until nothing is left. Isolating it means every edge case (zero history, everyone capped, duplicate names, a “__proto__” investor) is a fast unit test rather than an HTTP test.'
+        },
+        {
+          choice: 'One Cloudflare Worker serving both the UI and the API',
+          instead: 'a separate static host and API server',
+          why: 'One deployable, one origin (so no CORS), and no server to keep warm. Input limits on investor count and amounts keep the per-request work bounded, which matters on a platform that bills by CPU time.'
+        }
+      ]
+    }
   },
   {
     name: 'Clean Architecture',

@@ -146,8 +146,8 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
 
       <section class="section shell">
         <div class="section-heading">
-          <div><p class="kicker">Public code</p><h2>Evidence behind the resume.</h2></div>
-          <p>Not every professional system can be public. These repositories provide inspectable evidence across architecture, cloud, integration, and full-stack work.</p>
+          <div><p class="kicker">Architecture references</p><h2>Patterns, isolated and inspectable.</h2></div>
+          <p>Smaller repositories that each isolate one architectural idea I use in production systems. Open “How it’s built” for the layers and the tradeoffs behind each decision.</p>
         </div>
         <div class="repo-grid">
           <div class="repo-card" *ngFor="let repo of publicRepos">
