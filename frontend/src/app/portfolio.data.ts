@@ -78,16 +78,16 @@ export const projects: Project[] = [
     href: 'https://github.com/poker-kid-100717/WorkLens'
   },
   {
-    title: 'Card Marketplace',
+    title: 'TCG Price Guide',
     eyebrow: 'Public full-stack platform · live',
-    summary: 'A Pokémon TCG marketplace with accounts, a server-persisted cart, orders and wishlist, and price and investment analytics, running entirely on Cloudflare.',
+    summary: 'A price and set guide for the Pokémon TCG: TCGplayer market prices for every card in every set, a daily price history, the week’s biggest movers, and a Shop now link from each card to its TCGplayer listing.',
     outcomes: [
-      'ASP.NET Core 10 API with EF Core on PostgreSQL (Neon), JWT auth, and a readiness check that stays unhealthy until migrations have actually applied.',
-      'React 19 + Vite front end with route-level code splitting (first-load bundle cut from 739 kB to 289 kB).',
-      'A Cloudflare Worker serves the SPA and routes /api to the .NET API in a Cloudflare Container; requests wait for database initialization instead of failing on a cold start.',
-      'GitHub Actions: build, tests, migration-drift check, then deploy and production smoke tests.'
+      'ASP.NET Core 10 minimal API over the Pokémon TCG API: typed client with escaped queries, HybridCache, a resilience pipeline, and a clear 502 when the upstream is down.',
+      'Daily price snapshots of every card into PostgreSQL, triggered by a Cloudflare Cron Trigger and written with Postgres unnest bulk upserts, which power price-history charts and market movers.',
+      'React 19 + TypeScript front end with TanStack Query: set guide, sortable and filterable set pages, card pages with price history and Shop now.',
+      'Runs entirely on Cloudflare (Worker + Container, Neon Postgres); integration tests use a real Postgres via Testcontainers.'
     ],
-    tech: ['ASP.NET Core 10', 'React 19', 'Vite', 'PostgreSQL', 'EF Core 10', 'Cloudflare Workers', 'Cloudflare Containers', 'xUnit', 'Vitest'],
+    tech: ['ASP.NET Core 10', 'React 19', 'TypeScript', 'TanStack Query', 'PostgreSQL', 'EF Core 10', 'Cloudflare Workers', 'Cloudflare Containers', 'Testcontainers'],
     href: 'https://github.com/poker-kid-100717/tcg',
     secondaryHref: 'https://tcg-portfolio-sample.app',
     secondaryLabel: 'Open the live app'
