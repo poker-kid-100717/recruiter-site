@@ -42,6 +42,7 @@ export interface RepoArchitecture {
 }
 
 export interface PublicRepo {
+  /** Short display name shown on the card; the GitHub repo name lives in href. */
   name: string;
   description: string;
   tech: string;
@@ -240,13 +241,13 @@ export const stackGroups = [
 
 export const publicRepos: PublicRepo[] = [
   {
-    name: 'tcg',
+    name: 'Card Marketplace',
     description: 'Pokémon TCG marketplace with JWT auth, server-persisted cart/orders/wishlist, and price/investment analytics',
     tech: 'ASP.NET Core 8 · React 19 · SQLite · EF Core · JWT · xUnit · Jest',
     href: 'https://github.com/poker-kid-100717/tcg'
   },
   {
-    name: 'CleanArchitectureTemplate',
+    name: 'Clean Architecture',
     description: 'CQRS/MediatR Clean Architecture reference — the same Core/Infrastructure/API boundary I’ve shipped at Kenworth, Global Holdings, and in WorkLens',
     tech: '.NET · Clean Architecture · CQRS',
     href: 'https://github.com/poker-kid-100717/CleanArchitectureTemplate',
@@ -277,7 +278,7 @@ export const publicRepos: PublicRepo[] = [
     }
   },
   {
-    name: 'AngularAppAzure',
+    name: 'Azure Gateway',
     description: 'Azure API Management deployment reference — the same shape I stood up, then rebuilt for on-prem, on the Freight DNA suite',
     tech: 'Angular · .NET · Azure',
     href: 'https://github.com/poker-kid-100717/AngularAppAzure',
@@ -302,7 +303,7 @@ export const publicRepos: PublicRepo[] = [
     }
   },
   {
-    name: 'DotnetCoreS3APIBucketUtility',
+    name: 'S3 Storage',
     description: 'Layered S3 bucket/object API — the pattern behind the large-file ingestion pipeline I built at Global Holdings',
     tech: '.NET · AWS S3 · API',
     href: 'https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility',
