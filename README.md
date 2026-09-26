@@ -14,7 +14,7 @@ The production site is hosted on Cloudflare Workers with static assets served fr
 
 ## What this repository demonstrates
 
-- **Angular 20 / TypeScript** recruiter-facing frontend
+- **Angular 22 / TypeScript** recruiter-facing frontend
 - **Cloudflare Worker API** for the production portfolio endpoints, with the existing ASP.NET Core 10 API retained for local full-stack development
 - **Same-origin Cloudflare edge routing** so frontend and API are exposed through one production URL
 - **Cloudflare Workers** for production hosting plus **Docker Compose** for a repeatable local full-stack runtime
@@ -102,7 +102,7 @@ The Cloudflare configuration lives in `frontend/wrangler.jsonc`. It binds the An
 From `frontend`:
 
 ```bash
-npm install
+npm ci
 npm run deploy
 ```
 
@@ -127,7 +127,7 @@ Then run Angular in another terminal:
 
 ```bash
 cd frontend
-npm install
+npm ci
 npm start
 ```
 
@@ -139,13 +139,13 @@ The public site is organized around senior-engineering evidence rather than a ge
 
 1. **Enterprise delivery case study** - Freight DNA CRM, LTL planning, and Yard operations are presented as a recent three-application logistics suite within a broader career delivering and modernizing enterprise systems. Proprietary employer source code is not published.
 2. **WorkLens** - the strongest current public full-stack example: ASP.NET Core 10, Angular 22, SQL Server, EF Core 10, Docker, CI, integrations, browser tooling, Outlook/Microsoft Graph, and AI-assisted matching.
-3. **Architecture + integration history** - links to public repositories covering Clean Architecture, Azure-oriented Angular/.NET work, AWS S3, APIs, authentication, webhooks, and business-rule-heavy tooling.
+3. **Architecture + integration history** - links to public repositories covering Clean Architecture, AWS S3, full-stack application delivery, integrations, and business-rule-heavy tooling.
 4. **Career timeline** - recent roles are positioned around architecture, modernization, performance, security, distributed integrations, mentoring, and production ownership.
 5. **Endorsements** - selected excerpts from professional recommendations support the leadership/architecture positioning.
 
 ## Public work highlighted
 
-- [WorkLens](https://github.com/poker-kid-100717/WorkLens) - ASP.NET Core 10 + SQL Server + Angular 20 + Docker Compose + Clean Architecture job-search/application platform.
+- [WorkLens](https://github.com/poker-kid-100717/WorkLens) - ASP.NET Core 10 + SQL Server + Angular 22 + Docker Compose + Clean Architecture job-search/application platform.
 - [CleanArchitectureTemplate](https://github.com/poker-kid-100717/CleanArchitectureTemplate) - Clean Architecture reference work.
 - [DotnetCoreS3APIBucketUtility](https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility) - .NET / AWS S3 integration work.
 - [allocation-proration-tool](https://github.com/poker-kid-100717/allocation-proration-tool) - business-rule-heavy allocation/proration tooling.
