@@ -104,6 +104,19 @@ export const projects: Project[] = [
     ],
     tech: ['Next.js 16', 'React 19', 'ASP.NET Core 10', 'MongoDB', 'Tailwind CSS', 'Cloudflare Workers', 'Cloudflare Containers', 'Playwright', 'Testcontainers'],
     href: 'https://github.com/poker-kid-100717/GoodMusic'
+  },
+  {
+    title: 'Mile Marker Billing',
+    eyebrow: 'Public full-stack platform',
+    summary: 'A billing portal for trucking fleets, for a fictional fuel network: find any fuel receipt, download receipts in bulk, and track weekly statements and what’s due.',
+    outcomes: [
+      'Redux Toolkit throughout: RTK Query with cache tags for all server state, an entity adapter for a receipt selection that persists across pages, listener middleware for session expiry, toasts and saved preferences, and a thunk for the ZIP download.',
+      'Receipt finder with filters, sort and the open receipt kept in the URL; totals for the whole result; bulk PDF/ZIP download and CSV export.',
+      'Express 5 + TypeScript on SQL Server 2022: plain-SQL migrations, parameterized queries, tenant-scoped queries, Argon2id, hashed session and reset tokens, and a JSON/same-origin CSRF guard.',
+      'Integration tests against a real SQL Server (Testcontainers) and whole-app UI tests with MSW; runs on a Cloudflare Worker + Container.'
+    ],
+    tech: ['React 19', 'Redux Toolkit', 'RTK Query', 'TypeScript', 'Express 5', 'Node.js', 'SQL Server', 'Tailwind CSS', 'Cloudflare Workers', 'Testcontainers'],
+    href: 'https://github.com/poker-kid-100717/ReactReduxExpressWebPlatform'
   }
 ];
 
@@ -260,7 +273,7 @@ export const endorsements: Endorsement[] = [
 
 export const stackGroups = [
   { name: 'Backend', items: ['C#', '.NET 8/9/10', 'ASP.NET Core', 'REST APIs', 'EF Core', 'Background Services', 'OpenAPI', 'Node.js'] },
-  { name: 'Frontend', items: ['Angular', 'TypeScript', 'RxJS', 'AG Grid', 'React', 'Tailwind CSS', 'Responsive UI', 'Reactive Forms'] },
+  { name: 'Frontend', items: ['Angular', 'TypeScript', 'RxJS', 'AG Grid', 'React', 'Redux Toolkit', 'Tailwind CSS', 'Responsive UI', 'Reactive Forms'] },
   { name: 'Data', items: ['SQL Server', 'T-SQL', 'Stored Procedures', 'Views', 'EF Migrations', 'Indexing', 'Query Optimization', 'MySQL'] },
   { name: 'Cloud & Platform', items: ['Azure App Service', 'Azure SQL', 'Azure Functions', 'Service Bus', 'Blob Storage', 'AWS S3', 'Docker', 'nginx'] },
   { name: 'Delivery', items: ['GitHub Actions', 'Azure DevOps', 'CI/CD', 'Git', 'Containers', 'Environment Configuration', 'Health Checks', 'UAT'] },
