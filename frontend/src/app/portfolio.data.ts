@@ -92,32 +92,6 @@ export const projects: Project[] = [
     secondaryHref: 'https://tcg-portfolio-sample.app',
     secondaryLabel: 'Open the live app'
   },
-  {
-    title: 'GoodMusic',
-    eyebrow: 'Public full-stack platform',
-    summary: 'A music catalog of artists, songs and composers: a Next.js front end over an ASP.NET Core API on MongoDB, served from one Cloudflare Worker.',
-    outcomes: [
-      'Next.js 16 backend-for-frontend: Server Components read the API on the server, Server Actions handle every write, and the JWT stays in an httpOnly cookie.',
-      'MongoDB document design with multi-document transactions, so concurrent renames, moves and deletes can never leave song counts or artist names out of step.',
-      'API validation and conflict errors surface in context: under the field, or beside the button that caused them.',
-      'Playwright end-to-end suite runs the real site, API and database in CI, and also passes on the Workers runtime.'
-    ],
-    tech: ['Next.js 16', 'React 19', 'ASP.NET Core 10', 'MongoDB', 'Tailwind CSS', 'Cloudflare Workers', 'Cloudflare Containers', 'Playwright', 'Testcontainers'],
-    href: 'https://github.com/poker-kid-100717/GoodMusic'
-  },
-  {
-    title: 'Mile Marker Billing',
-    eyebrow: 'Public full-stack platform',
-    summary: 'A billing portal for trucking fleets, for a fictional fuel network: find any fuel receipt, download receipts in bulk, and track weekly statements and what’s due.',
-    outcomes: [
-      'Redux Toolkit throughout: RTK Query with cache tags for all server state, an entity adapter for a receipt selection that persists across pages, listener middleware for session expiry, toasts and saved preferences, and a thunk for the ZIP download.',
-      'Receipt finder with filters, sort and the open receipt kept in the URL; totals for the whole result; bulk PDF/ZIP download and CSV export.',
-      'Express 5 + TypeScript on SQL Server 2022: plain-SQL migrations, parameterized queries, tenant-scoped queries, Argon2id, hashed session and reset tokens, and a JSON/same-origin CSRF guard.',
-      'Integration tests against a real SQL Server (Testcontainers) and whole-app UI tests with MSW; runs on a Cloudflare Worker + Container.'
-    ],
-    tech: ['React 19', 'Redux Toolkit', 'RTK Query', 'TypeScript', 'Express 5', 'Node.js', 'SQL Server', 'Tailwind CSS', 'Cloudflare Workers', 'Testcontainers'],
-    href: 'https://github.com/poker-kid-100717/ReactReduxExpressWebPlatform'
-  }
 ];
 
 export const experience: Experience[] = [
@@ -333,31 +307,6 @@ export const publicRepos: PublicRepo[] = [
           choice: 'Five MediatR pipeline behaviours (validation, logging, performance, authorization, exception handling) ahead of every handler',
           instead: 'handling each concern inline, per handler',
           why: 'A new contributor adding an endpoint gets validation, logging, and auth enforcement for free, structurally, instead of relying on them remembering to add it. The cost is indirection — tracing a request means reading the pipeline, not just the handler, which is a real tradeoff on a small team.'
-        }
-      ]
-    }
-  },
-  {
-    name: 'Azure Gateway',
-    description: 'Azure API Management deployment reference — the same shape I stood up, then rebuilt for on-prem, on the Freight DNA suite',
-    tech: 'Angular · .NET · Azure',
-    href: 'https://github.com/poker-kid-100717/AngularAppAzure',
-    architecture: {
-      layers: [
-        { name: 'Angular SPA', note: 'Built assets served from the same host as the API' },
-        { name: 'ASP.NET Core host', note: 'Single deployable: UseStaticFiles + MapControllers' },
-        { name: 'Azure API Management', note: 'Gateway in front of the host — policy point for auth, rate limiting, versioning' }
-      ],
-      decisions: [
-        {
-          choice: 'One ASP.NET Core host serving both the compiled Angular build and the API',
-          instead: 'a separate static-hosting target (Azure Static Web Apps / Blob + CDN) for the SPA',
-          why: 'It collapses deployment to one artifact, one App Service, one release pipeline — the right shape for a small internal tool. When the frontend needs to scale or cache independently from the API, as on the Freight DNA suite, I split them; that’s a call made from traffic shape, not a default.'
-        },
-        {
-          choice: 'API surface published through Azure API Management',
-          instead: 'exposing the App Service directly to callers',
-          why: 'APIM gives you a policy point — rate limiting, auth, versioning — in front of the backend without touching backend code, which matters once there’s an external contract or multiple client teams to protect the backend from. For a genuinely internal tool with a handful of users, I’d skip APIM and put auth straight on the App Service — the gateway earns its complexity, it isn’t free by default.'
         }
       ]
     }
