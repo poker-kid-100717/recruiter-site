@@ -137,7 +137,7 @@ Angular's dev server proxies `/api` and `/health` to `http://localhost:5088` thr
 
 The public site is organized around senior-engineering evidence rather than a generic list of skills:
 
-1. **Enterprise delivery case study** - Freight DNA CRM, LTL planning, and Yard operations are presented as a recent three-application logistics suite within a broader career delivering and modernizing enterprise systems. Proprietary employer source code is not published.
+1. **Logistics Portfolio Suite** - three connected .NET 10 + Angular 22 apps (Freight Ops, LTL Planner, Yard Ops) with a signed, idempotent Yard -> LTL integration and an optional read-only TMS adapter.
 2. **WorkLens** - the strongest current public full-stack example: ASP.NET Core 10, Angular 22, SQL Server, EF Core 10, Docker, CI, integrations, browser tooling, Outlook/Microsoft Graph, and AI-assisted matching.
 3. **Architecture + integration history** - links to public repositories covering Clean Architecture, AWS S3, full-stack application delivery, integrations, and business-rule-heavy tooling.
 4. **Career timeline** - recent roles are positioned around architecture, modernization, performance, security, distributed integrations, mentoring, and production ownership.

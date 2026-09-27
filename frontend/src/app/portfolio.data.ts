@@ -52,17 +52,18 @@ export interface PublicRepo {
 
 export const projects: Project[] = [
   {
-    title: 'Freight DNA + Logistics Application Suite',
-    eyebrow: 'Enterprise architecture / delivery',
-    summary: 'Professional case study covering a business-logic-heavy CRM, LTL planning workflows, and yard operations tooling. These three applications are a recent example within a broader career delivering and modernizing enterprise systems across multiple industries.',
+    title: 'Logistics Portfolio Suite',
+    eyebrow: 'Public full-stack platform · 3 apps',
+    summary: 'Three connected logistics applications: Freight Ops (customer and opportunity intelligence), LTL Planner (explainable shipment-to-truck planning) and Yard Ops (gate, dock and trailer workflows), with Yard and LTL integrated in real time.',
     outcomes: [
-      'Architected and delivered a three-application logistics suite with multiple iterations from discovery through UAT readiness.',
-      'Built Angular + ASP.NET Core + SQL Server workflows with Entra ID authentication, external transportation APIs, complex operational grids, and business-rule-heavy user experiences.',
-      'Designed an Azure-hosted architecture and later reworked the platform for containerized/on-premises deployment when infrastructure requirements changed.',
-      'Established a small delivery function around the products, mentoring contributors and translating C-level and operations requests into architecture, data models, APIs, workflows, and release decisions.'
+      '.NET 10 minimal APIs and Angular 22 standalone apps with signal-based state, one per product, each deployable on its own.',
+      'Yard -> LTL integration two ways: synchronous candidate queries plus an outbox that delivers HMAC-signed events to an idempotent consumer.',
+      'Explainable planning: every shipment-to-truck recommendation carries the capacity and rule checks behind it, instead of opaque automation.',
+      'Optional read-only TMS integration (Alvys Public API) behind an adapter with OAuth 2.0 client credentials, retries and time-outs; synthetic demo data by default.',
+      'Docker Compose locally; GitHub Actions CI and a composite action that deploys each app to Cloudflare (Worker + Container).'
     ],
-    tech: ['C#', 'ASP.NET Core', 'Angular', 'TypeScript', 'EF Core', 'SQL Server', 'Azure', 'Docker', 'Entra ID', 'REST APIs', 'AG Grid'],
-    professional: true
+    tech: ['ASP.NET Core 10', 'Angular 22', 'TypeScript', 'REST APIs', 'OAuth 2.0', 'HMAC-signed events', 'Outbox pattern', 'Docker', 'GitHub Actions', 'Cloudflare Containers'],
+    href: 'https://github.com/poker-kid-100717/logistics-portfolio-suite'
   },
   {
     title: 'WorkLens',
@@ -101,7 +102,7 @@ export const experience: Experience[] = [
     dates: 'May 2026 - Sep 2026',
     summary: 'Application architecture, full-stack delivery, modernization, and technical leadership for logistics operations across brokerage and asset-side workflows.',
     highlights: [
-      'Architected and shipped Freight DNA CRM, LTL planning, and Yard operations - three enterprise applications delivered through multiple iterations in under five months.',
+      'Architected and shipped a freight CRM, LTL planning, and yard operations - three enterprise applications delivered through multiple iterations in under five months.',
       'Owned hands-on full-stack delivery across Angular, ASP.NET Core, EF Core, SQL Server, Entra ID, transportation APIs, and operational workflows from discovery through UAT.',
       'Designed Azure-hosted and containerized on-premises deployment models, adapting authentication, configuration, data access, networking, and release processes as constraints changed.',
       'Continued coding while setting technical direction, reviewing work, mentoring two contributors, and translating business requests into maintainable APIs, data models, workflows, and production-ready features.'

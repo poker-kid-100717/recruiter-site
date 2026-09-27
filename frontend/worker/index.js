@@ -28,7 +28,7 @@ const architecture = {
 };
 
 const work = [
-  { name: "Freight DNA + Logistics Application Suite", type: "Professional case study", publicSource: false, repository: null },
+  { name: "Logistics Portfolio Suite", type: "Public full-stack platform", publicSource: true, repository: "https://github.com/poker-kid-100717/logistics-portfolio-suite" },
   { name: "WorkLens", type: "Public full-stack platform", publicSource: true, repository: "https://github.com/poker-kid-100717/WorkLens" },
   { name: "Architecture + Integration Repositories", type: "Public engineering evidence", publicSource: true, repository: "https://github.com/poker-kid-100717?tab=repositories" }
 ];
