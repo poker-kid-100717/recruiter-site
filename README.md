@@ -1,6 +1,6 @@
-# Joshua Davis - Senior Software Engineer Portfolio
+# Joshua Davis - Full-Stack Software Engineer Portfolio
 
-A production-oriented engineering portfolio designed for Senior / Lead / Architect-track individual-contributor opportunities. The repository intentionally demonstrates the same kinds of technology and delivery concerns used in real application work instead of being only a static resume page.
+A production-oriented engineering portfolio for hands-on full-stack engineering roles (C# / .NET, Angular / React, Azure / AWS), mid-level through senior/lead. The repository intentionally demonstrates the same kinds of technology and delivery concerns used in real application work instead of being only a static resume page.
 
 ## Live portfolio
 
@@ -133,11 +133,22 @@ npm start
 
 Angular's dev server proxies `/api` and `/health` to `http://localhost:5088` through `proxy.conf.json`.
 
+## Shared API content
+
+`content/api.json` is the single source for `/api/profile`, `/api/architecture`, and `/api/work`. The Cloudflare Worker bundles it at build time and the ASP.NET Core API copies it to its output folder, so production (Worker) and local full-stack mode (.NET) cannot drift. Check both locally:
+
+```bash
+node scripts/check-api-content.mjs                        # Worker only
+node scripts/check-api-content.mjs http://localhost:5088  # Worker + running .NET API
+```
+
+The API Docker image is built from the repository root (`docker-compose.yml` sets `dockerfile: backend/Dockerfile`) so the image can include the shared file.
+
 ## Portfolio content
 
 The public site is organized around senior-engineering evidence rather than a generic list of skills:
 
-1. **Enterprise delivery case study** - Freight DNA CRM, LTL planning, and Yard operations are presented as a recent three-application logistics suite within a broader career delivering and modernizing enterprise systems. Proprietary employer source code is not published.
+1. **Professional case study** - freight CRM, LTL planning, and yard operations applications at Value Truck, presented within a broader career delivering and modernizing enterprise systems. Employer source code, data, and screens are confidential and not published.
 2. **WorkLens** - the strongest current public full-stack example: ASP.NET Core 10, Angular 22, SQL Server, EF Core 10, Docker, CI, integrations, browser tooling, Outlook/Microsoft Graph, and AI-assisted matching.
 3. **Architecture + integration history** - links to public repositories covering Clean Architecture, AWS S3, full-stack application delivery, integrations, and business-rule-heavy tooling.
 4. **Career timeline** - recent roles are positioned around architecture, modernization, performance, security, distributed integrations, mentoring, and production ownership.
@@ -155,11 +166,11 @@ The public site is organized around senior-engineering evidence rather than a ge
 `.github/workflows/ci.yml` runs three independent checks on pushes and pull requests to `main`:
 
 - Angular install + production build
-- .NET restore + Release build
+- .NET restore + Release build, then a check that the running .NET API and the Cloudflare Worker both serve `content/api.json` unchanged (`scripts/check-api-content.mjs`)
 - `docker compose config` + full container image build
 
 Cloudflare deployment is automated through GitHub Actions once the Cloudflare account ID and scoped API token are stored as repository secrets.
 
 ## Positioning
 
-This portfolio is written for Senior Software Engineer, Lead Engineer, Lead Application Developer, Solution Architect, and architect-track IC opportunities. It emphasizes application architecture and delivery ownership while staying truthful about which work is public and which professional systems are confidential.
+This portfolio is written for hands-on full-stack software engineering roles, mid-level through senior/lead. It emphasizes delivery ownership while staying truthful about which work is public and which professional systems are confidential.

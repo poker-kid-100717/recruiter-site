@@ -26,7 +26,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
     <main id="main-content">
       <section class="hero shell" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="kicker">Senior Full-Stack Engineer · Solution Architecture · Technical Leadership</p>
+          <p class="kicker">Full-Stack Software Engineer · C# / .NET · Angular / React · Azure / AWS</p>
           <h1 id="hero-title">I turn ambiguous business problems into <span>production software.</span></h1>
           <p class="hero-text">10+ years across software and technology, with 8+ years delivering enterprise applications across logistics, manufacturing, fintech, healthcare, government, SaaS, and legal technology. My core stack is modern .NET, Angular/React, SQL Server, distributed integrations, CI/CD, and cloud/on-premises delivery.</p>
           <div class="actions">
@@ -252,7 +252,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
     
     <section class="cta shell">
       <div>
-        <p class="kicker">Senior · Lead · Architect-track IC</p>
+        <p class="kicker">Senior · Lead · Hands-on full-stack</p>
         <h2>Need someone who can build the system and explain why it should be built that way?</h2>
       </div>
       <div class="cta-panel">
@@ -264,7 +264,7 @@ import { endorsements, experience, projects, publicRepos, stackGroups } from './
     </section>
     </main>
     
-    <footer class="shell"><span>© 2026 Joshua Davis</span><span>Senior Full-Stack Engineer · Solution Architecture</span></footer>
+    <footer class="shell"><span>© 2026 Joshua Davis</span><span>Full-Stack Software Engineer · C# / .NET · Angular / React</span></footer>
     `
 })
 export class AppComponent implements OnInit {
@@ -281,8 +281,8 @@ export class AppComponent implements OnInit {
   profileCode = `{
   "engineer": "Joshua Davis",
   "focus": [
-    "solution architecture",
     "full-stack delivery",
+    "modernization",
     "technical leadership"
   ],
   "backend": ".NET / ASP.NET Core",

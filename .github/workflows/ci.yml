@@ -45,6 +45,19 @@ jobs:
           dotnet-version: 10.0.x
       - run: dotnet restore
       - run: dotnet build --configuration Release --no-restore
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24.15.0'
+      - name: Worker and .NET API serve the same content/api.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          ASPNETCORE_URLS=http://127.0.0.1:5088 dotnet bin/Release/net10.0/Portfolio.Api.dll > api.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            curl --fail --silent http://127.0.0.1:5088/health > /dev/null && break
+            sleep 1
+          done
+          node ../scripts/check-api-content.mjs http://127.0.0.1:5088 || { cat api.log; exit 1; }
 
   containers:
     runs-on: ubuntu-latest

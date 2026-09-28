@@ -52,9 +52,9 @@ export interface PublicRepo {
 
 export const projects: Project[] = [
   {
-    title: 'Freight DNA + Logistics Application Suite',
-    eyebrow: 'Enterprise architecture / delivery',
-    summary: 'Professional case study covering a business-logic-heavy CRM, LTL planning workflows, and yard operations tooling. These three applications are a recent example within a broader career delivering and modernizing enterprise systems across multiple industries.',
+    title: 'Freight CRM, LTL Planning & Yard Operations',
+    eyebrow: 'Professional work · Value Truck',
+    summary: 'Professional case study covering freight CRM, LTL planning, and yard operations applications at Value Truck. Employer source code, data, and screens are confidential and not published here.',
     outcomes: [
       'Architected and delivered a three-application logistics suite with multiple iterations from discovery through UAT readiness.',
       'Built Angular + ASP.NET Core + SQL Server workflows with Entra ID authentication, external transportation APIs, complex operational grids, and business-rule-heavy user experiences.',
@@ -101,7 +101,7 @@ export const experience: Experience[] = [
     dates: 'May 2026 - Sep 2026',
     summary: 'Application architecture, full-stack delivery, modernization, and technical leadership for logistics operations across brokerage and asset-side workflows.',
     highlights: [
-      'Architected and shipped Freight DNA CRM, LTL planning, and Yard operations - three enterprise applications delivered through multiple iterations in under five months.',
+      'Architected and shipped a freight CRM, LTL planning, and yard operations - three enterprise applications delivered through multiple iterations in under five months.',
       'Owned hands-on full-stack delivery across Angular, ASP.NET Core, EF Core, SQL Server, Entra ID, transportation APIs, and operational workflows from discovery through UAT.',
       'Designed Azure-hosted and containerized on-premises deployment models, adapting authentication, configuration, data access, networking, and release processes as constraints changed.',
       'Continued coding while setting technical direction, reviewing work, mentoring two contributors, and translating business requests into maintainable APIs, data models, workflows, and production-ready features.'

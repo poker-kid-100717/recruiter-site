@@ -1,9 +1,11 @@
+# Build context is the repository root so the shared content/api.json is available.
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
-COPY Portfolio.Api.csproj .
-RUN dotnet restore
-COPY . .
-RUN dotnet publish -c Release -o /app/publish --no-restore
+COPY backend/Portfolio.Api.csproj backend/
+RUN dotnet restore backend/Portfolio.Api.csproj
+COPY content/ content/
+COPY backend/ backend/
+RUN dotnet publish backend/Portfolio.Api.csproj -c Release -o /app/publish --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app

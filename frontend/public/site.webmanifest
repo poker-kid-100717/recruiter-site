@@ -1,7 +1,7 @@
 {
   "name": "Joshua Davis Engineering Portfolio",
   "short_name": "Joshua Davis",
-  "description": "Senior full-stack engineering and solution architecture portfolio.",
+  "description": "Full-stack software engineering portfolio: C# / .NET, Angular / React, Azure / AWS.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f6f8fb",
