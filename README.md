@@ -1,176 +1,81 @@
-# Joshua Davis - Full-Stack Software Engineer Portfolio
+# Joshua Davis — portfolio
 
-A production-oriented engineering portfolio for hands-on full-stack engineering roles (C# / .NET, Angular / React, Azure / AWS), mid-level through senior/lead. The repository intentionally demonstrates the same kinds of technology and delivery concerns used in real application work instead of being only a static resume page.
+Source for **[portfolio-joshdavis.app](https://portfolio-joshdavis.app)**: my resume, selected projects, and recommendations, for hands-on full-stack software roles (C# / .NET, Angular / React, Azure / AWS).
 
-## Live portfolio
+- **What it is:** an Angular 22 site served from Cloudflare Workers Static Assets, a small Worker for the `/api/*` content endpoints and security headers, and an ASP.NET Core 10 API + Docker Compose setup for local full-stack development.
+- **Who it's for:** recruiters and hiring teams who want the resume, the public source, and what is actually running, in one place.
+- **Status:** deployed to Cloudflare Workers (`joshua-davis-portfolio`) by the GitHub Actions workflow on every push to `main`. Last verified live: not yet re-verified after this change set; the verification date is recorded here once the production URL has been opened and checked.
+- **My role:** everything — design, content, code, and deployment.
 
-Public URL:
+## Where the content comes from
 
-```text
-https://portfolio-joshdavis.app
+| File | Used by | Rule |
+|---|---|---|
+| `content/resume.json` | Angular site (experience, skills, summary, impact, education) and `scripts/build-resume.mjs`, which generates `frontend/public/resume.html` | The resume is the source of truth. The only change from the PDF is that the former employer's product name is replaced with "a freight CRM". No phone number on web pages. |
+| `content/recommendations.json` | Recommendations section | Six featured LinkedIn recommendations, verbatim excerpts only, with author, relationship, date, and each author's current LinkedIn headline. |
+| `content/api.json` | Cloudflare Worker **and** ASP.NET Core API (`/api/profile`, `/api/architecture`, `/api/work`) | One file for both runtimes, so production (Worker) and local full-stack mode (.NET) cannot drift. |
+
+CI enforces both generated/shared paths:
+
+```bash
+node scripts/build-resume.mjs --check                     # resume.html matches content/resume.json
+node scripts/check-api-content.mjs http://localhost:5088  # Worker + running .NET API serve content/api.json
 ```
-
-The production site is hosted on Cloudflare Workers with static assets served from Cloudflare's edge. The public API endpoints used by the portfolio are also implemented at the edge, so production no longer depends on a local machine or Docker host.
-
-## What this repository demonstrates
-
-- **Angular 22 / TypeScript** recruiter-facing frontend
-- **Cloudflare Worker API** for the production portfolio endpoints, with the existing ASP.NET Core 10 API retained for local full-stack development
-- **Same-origin Cloudflare edge routing** so frontend and API are exposed through one production URL
-- **Cloudflare Workers** for production hosting plus **Docker Compose** for a repeatable local full-stack runtime
-- **GitHub Actions CI** for frontend, backend, and container builds
-- **Responsive and accessible UI** with reduced-motion support and semantic navigation
-- **Print-ready resume** at `/resume.html`
-- Architecture diagrams, career timeline, public-code evidence, project case studies, and professional endorsements
-- A cloud/on-premises delivery story that mirrors Joshua's engineering background
 
 ## Architecture
 
-```text
-Browser / Recruiter
-       |
-       v
-Cloudflare edge
-  |            |
-  |            +---- /api/* ----> Cloudflare Worker API
-  |
-  +---- /, assets, /resume.html -> Angular production build
+```
+Browser ──> Cloudflare Worker "joshua-davis-portfolio" (portfolio-joshdavis.app)
+              ├── /, assets, /resume.html ──> Angular production build (static assets)
+              └── /api/*, /health, /healthz ──> Worker handlers (frontend/worker/index.js, content/api.json)
 ```
 
-Production traffic is handled entirely by Cloudflare. Static assets and API routes stay same-origin under `portfolio-joshdavis.app`. Docker Compose remains available only as a local full-stack development option.
+The Worker is the production API. `backend/` serves the same endpoints from the same file for local development. Both Docker images build from the repository root (`docker-compose.yml` sets `dockerfile: backend/Dockerfile` and `frontend/Dockerfile`) so they can include `content/`.
 
-## Fastest local start
-
-### Windows / PowerShell
-
-```powershell
-./scripts/start-portfolio.ps1
-```
-
-The script builds the containers, waits for the gateway health endpoint, validates `/api/profile`, and opens:
-
-```text
-http://localhost:8080
-```
-
-Stop it with:
-
-```powershell
-./scripts/stop-portfolio.ps1
-```
-
-### macOS / Linux
+## Run locally
 
 ```bash
-sh ./scripts/start-portfolio.sh
+docker compose up -d --build     # http://localhost:8080
 ```
 
-Stop it with:
+Or without Docker:
 
 ```bash
-sh ./scripts/stop-portfolio.sh
+cd backend && dotnet run --urls http://localhost:5088
+cd frontend && npm ci && npm start   # proxies /api to :5088
 ```
 
-### Direct Docker Compose
+To run the production Worker locally: `cd frontend && npm run dev:cloudflare`.
 
-```bash
-docker compose up -d --build
-```
+Useful URLs: `/` portfolio · `/resume.html` printable resume · `/api/profile` · `/api/work` · `/api/architecture` · `/health` · `/healthz`.
 
-Useful checks:
+## Quality checks
 
-```text
-http://localhost:8080/              portfolio
-http://localhost:8080/resume.html   printable resume
-http://localhost:8080/api/profile   .NET API profile endpoint
-http://localhost:8080/api/work      .NET API project endpoint
-http://localhost:8080/api/architecture
-http://localhost:8080/health        ASP.NET health check via nginx
-http://localhost:8080/healthz       nginx health check
-```
+Measured locally on 2026-09-28 with `wrangler dev`, Playwright (Chromium) and axe-core, at 1440 px and 390 px:
 
-## Cloudflare production deployment
+- axe: 0 serious/critical violations on `/` (with the "Earlier" roles expanded).
+- No horizontal scroll at 390 px.
+- Lighthouse: not yet measured (to be recorded after the next production deploy).
 
-Production domain:
+## Deploy
 
-```text
-https://portfolio-joshdavis.app
-```
-
-The Cloudflare configuration lives in `frontend/wrangler.jsonc`. It binds the Angular production build as static assets and routes `/api/*`, `/health`, and `/healthz` through the Worker in `frontend/worker/index.js`.
-
-From `frontend`:
-
-```bash
-npm ci
-npm run deploy
-```
-
-For GitHub Actions deployment, add these repository secrets:
-
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ACCOUNT_ID`
-
-The included deployment workflow publishes on pushes to `main` after CI succeeds.
-
-## Local developer mode
-
-Run the API:
-
-```bash
-cd backend
-dotnet restore
-dotnet run --urls http://localhost:5088
-```
-
-Then run Angular in another terminal:
-
-```bash
-cd frontend
-npm ci
-npm start
-```
-
-Angular's dev server proxies `/api` and `/health` to `http://localhost:5088` through `proxy.conf.json`.
-
-## Shared API content
-
-`content/api.json` is the single source for `/api/profile`, `/api/architecture`, and `/api/work`. The Cloudflare Worker bundles it at build time and the ASP.NET Core API copies it to its output folder, so production (Worker) and local full-stack mode (.NET) cannot drift. Check both locally:
-
-```bash
-node scripts/check-api-content.mjs                        # Worker only
-node scripts/check-api-content.mjs http://localhost:5088  # Worker + running .NET API
-```
-
-The API Docker image is built from the repository root (`docker-compose.yml` sets `dockerfile: backend/Dockerfile`) so the image can include the shared file.
-
-## Portfolio content
-
-The public site is organized around senior-engineering evidence rather than a generic list of skills:
-
-1. **Professional case study** - freight CRM, LTL planning, and yard operations applications at Value Truck, presented within a broader career delivering and modernizing enterprise systems. Employer source code, data, and screens are confidential and not published.
-2. **WorkLens** - the strongest current public full-stack example: ASP.NET Core 10, Angular 22, SQL Server, EF Core 10, Docker, CI, integrations, browser tooling, Outlook/Microsoft Graph, and AI-assisted matching.
-3. **Architecture + integration history** - links to public repositories covering Clean Architecture, AWS S3, full-stack application delivery, integrations, and business-rule-heavy tooling.
-4. **Career timeline** - recent roles are positioned around architecture, modernization, performance, security, distributed integrations, mentoring, and production ownership.
-5. **Endorsements** - selected excerpts from professional recommendations support the leadership/architecture positioning.
-
-## Public work highlighted
-
-- [WorkLens](https://github.com/poker-kid-100717/WorkLens) - ASP.NET Core 10 + SQL Server + Angular 22 + Docker Compose + Clean Architecture job-search/application platform.
-- [CleanArchitectureTemplate](https://github.com/poker-kid-100717/CleanArchitectureTemplate) - Clean Architecture reference work.
-- [DotnetCoreS3APIBucketUtility](https://github.com/poker-kid-100717/DotnetCoreS3APIBucketUtility) - .NET / AWS S3 integration work.
-- [allocation-proration-tool](https://github.com/poker-kid-100717/allocation-proration-tool) - business-rule-heavy allocation/proration tooling.
+Pushes to `main` deploy through `.github/workflows/deploy-cloudflare.yml`, which builds, deploys with Wrangler, and then checks the production HTML, stylesheet, and `/api/profile`. Required repository secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`.
 
 ## CI
 
-`.github/workflows/ci.yml` runs three independent checks on pushes and pull requests to `main`:
+- Angular install, `resume.html` freshness check, production build, CSP-safe stylesheet check, `npm audit`, `wrangler deploy --dry-run`
+- .NET restore + Release build, then the Worker/.NET content check above
+- `docker compose config` + image build
 
-- Angular install + production build
-- .NET restore + Release build, then a check that the running .NET API and the Cloudflare Worker both serve `content/api.json` unchanged (`scripts/check-api-content.mjs`)
-- `docker compose config` + full container image build
+## Projects featured on the site
 
-Cloudflare deployment is automated through GitHub Actions once the Cloudflare account ID and scoped API token are stored as repository secrets.
+- [TCG Signal](https://github.com/poker-kid-100717/tcg) — React, ASP.NET Core, PostgreSQL on Cloudflare Workers + Containers (deployed)
+- [Logistics Portfolio Suite](https://github.com/poker-kid-100717/logistics-portfolio-suite) — clean-room .NET + Angular logistics apps on synthetic data; not employer code (implemented, not yet deployed)
+- [WorkLens](https://github.com/poker-kid-100717/WorkLens) — .NET + Angular job feed and application tracker, runs locally with Docker Compose (implemented)
 
-## Positioning
+Professional work at Value Truck, Kenworth, Global Holdings and earlier employers is described on the site in the resume's words only; no employer source code, data, or screens are published.
 
-This portfolio is written for hands-on full-stack software engineering roles, mid-level through senior/lead. It emphasizes delivery ownership while staying truthful about which work is public and which professional systems are confidential.
+## Known limits
+
+- The resume PDF download is intentionally offline until a revised PDF is supplied; `/resume.html` is the printable version.
+- Status labels on the site are updated by hand after each app is verified live.

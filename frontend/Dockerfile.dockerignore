@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+**/.angular
+**/bin
+**/obj
+.git
+.github
+backend
+scripts
+npm-debug.log*

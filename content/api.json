@@ -3,22 +3,95 @@
     "name": "Joshua Davis",
     "title": "Full-Stack Software Engineer",
     "location": "Albuquerque, NM",
-    "focus": ["Full-Stack Delivery", "Technical Leadership", "Modernization"],
-    "stack": [".NET 10", "ASP.NET Core", "Angular", "React", "TypeScript", "SQL Server", "EF Core", "Azure", "AWS", "Docker", "GitHub Actions", "Cloudflare Workers"],
-    "delivery": ["Cloud", "On-Premises", "Containers", "CI/CD", "Edge"]
+    "focus": [
+      "Full-stack .NET delivery",
+      "APIs and integrations",
+      "Cloud and on-premises deployment",
+      "Production support"
+    ],
+    "stack": [
+      "C#",
+      ".NET / ASP.NET Core",
+      "EF Core",
+      "SQL Server",
+      "Angular",
+      "TypeScript",
+      "React",
+      "RxJS",
+      "Azure",
+      "AWS",
+      "Entra ID",
+      "Docker",
+      "GitHub Actions",
+      "Azure DevOps",
+      "PostgreSQL",
+      "Cloudflare Workers"
+    ],
+    "delivery": [
+      "Azure",
+      "On-premises",
+      "Containers",
+      "CI/CD"
+    ]
   },
   "architecture": {
     "principles": [
-      { "name": "Domain first", "detail": "Keep business rules independent from hosting and framework choices." },
-      { "name": "Contracts over coupling", "detail": "Use explicit API and integration contracts with validation and authorization boundaries." },
-      { "name": "Data discipline", "detail": "Treat schema, migrations, indexing, and performance as deployable application concerns." },
-      { "name": "Production by design", "detail": "Build health checks, logging, configuration, CI/CD, and deployment paths into the system." }
+      {
+        "name": "Domain first",
+        "detail": "Keep business rules independent from hosting and framework choices."
+      },
+      {
+        "name": "Explicit contracts",
+        "detail": "Validate input and authorize at API and integration boundaries."
+      },
+      {
+        "name": "Data discipline",
+        "detail": "Treat schema, migrations, indexing, and query performance as part of the release."
+      },
+      {
+        "name": "Operable by default",
+        "detail": "Ship health checks, logging, configuration, and a repeatable deployment path."
+      }
     ],
-    "referenceFlow": ["Angular/React", "ASP.NET Core", "Application/Core", "EF Core + SQL Server + Integrations"]
+    "referenceFlow": [
+      "Angular",
+      "ASP.NET Core",
+      "Application/Core",
+      "EF Core + SQL Server + Integrations"
+    ]
   },
   "work": [
-    { "name": "Freight CRM, LTL Planning & Yard Operations (Value Truck)", "type": "Professional case study", "publicSource": false, "repository": null },
-    { "name": "WorkLens", "type": "Public full-stack platform", "publicSource": true, "repository": "https://github.com/poker-kid-100717/WorkLens" },
-    { "name": "Architecture + Integration Repositories", "type": "Public engineering evidence", "publicSource": true, "repository": "https://github.com/poker-kid-100717?tab=repositories" }
+    {
+      "name": "TCG Signal",
+      "type": "Public full-stack project",
+      "publicSource": true,
+      "repository": "https://github.com/poker-kid-100717/tcg",
+      "demo": "https://tcg-portfolio-sample.app",
+      "status": "deployed"
+    },
+    {
+      "name": "Logistics Portfolio Suite",
+      "type": "Public clean-room project (not employer source)",
+      "publicSource": true,
+      "repository": "https://github.com/poker-kid-100717/logistics-portfolio-suite",
+      "demo": null,
+      "status": "source"
+    },
+    {
+      "name": "WorkLens",
+      "type": "Public full-stack project",
+      "publicSource": true,
+      "repository": "https://github.com/poker-kid-100717/WorkLens",
+      "demo": null,
+      "status": "source"
+    },
+    {
+      "name": "Value Truck logistics applications",
+      "type": "Professional work (source not public)",
+      "publicSource": false,
+      "repository": null,
+      "demo": null,
+      "status": "professional"
+    }
   ]
 }

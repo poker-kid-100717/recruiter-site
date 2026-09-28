@@ -1,0 +1,149 @@
+{
+  "source": "Joshua_Davis_Resume.pdf (source of truth, 2026-09-28). Only deviation: the former employer's product name is replaced with 'a freight CRM'. The phone number is intentionally omitted from this public copy.",
+  "name": "Joshua Davis",
+  "headline": "Full-Stack Software Engineer | C# / .NET | Angular / React | Azure / AWS",
+  "location": "Albuquerque, NM",
+  "email": "joshuad100717@outlook.com",
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/full-stack-engineer-joshd",
+    "github": "https://github.com/poker-kid-100717",
+    "portfolio": "https://portfolio-joshdavis.app/"
+  },
+  "summary": "Hands-on full-stack software engineer with 10+ years across software and technology, including 8+ years building and modernizing enterprise applications. Ships production systems across C#, ASP.NET Core, Angular/React, SQL Server, REST APIs, Azure/AWS, CI/CD, and distributed integrations. Strong in end-to-end delivery, modernization, performance tuning, production troubleshooting, and hands-on technical mentoring.",
+  "impact": [
+    "3 enterprise apps in <5 months",
+    "SQL gains: 15-25% Kenworth / ~20% Global Holdings",
+    "Cloud + on-prem delivery"
+  ],
+  "skills": {
+    "Backend & Architecture": ["C#", ".NET 8/9/10", "ASP.NET Core", "EF Core", "REST APIs", "Clean Architecture", "SOLID", "DI", "distributed/event-driven systems"],
+    "Frontend & Data": ["Angular", "TypeScript", "React", "RxJS", "JavaScript", "SQL Server", "T-SQL", "stored procedures", "indexing", "query tuning"],
+    "Cloud & Delivery": ["Azure", "AWS", "Functions", "Service Bus", "Blob/S3", "Docker", "GitHub Actions", "Azure DevOps", "CI/CD", "Entra ID/SSO", "observability", "production support", "mentoring"]
+  },
+  "experience": [
+    {
+      "company": "Value Truck",
+      "title": "Application Development Manager / Lead Application Developer",
+      "start": "2026-05",
+      "end": "2026-09",
+      "bullets": [
+        "Architected and shipped a freight CRM, LTL planning, and yard operations — three enterprise applications delivered through multiple iterations in under five months.",
+        "Owned hands-on full-stack delivery across Angular, ASP.NET Core, EF Core, SQL Server, Entra ID, transportation APIs, and operational workflows from discovery through UAT.",
+        "Designed Azure-hosted and containerized on-premises deployment models, adapting authentication, configuration, data access, networking, and release processes as constraints changed.",
+        "Continued coding while setting technical direction, reviewing work, mentoring two contributors, and translating business requests into maintainable APIs, data models, workflows, and production-ready features."
+      ]
+    },
+    {
+      "company": "Kenworth Truck Co.",
+      "title": "Software Engineer",
+      "start": "2025-05",
+      "end": "2026-05",
+      "bullets": [
+        "Designed ASP.NET Core services with Clean Architecture, dependency injection, repository patterns, and explicit boundaries to improve maintainability, testability, and delivery.",
+        "Built workflow-heavy web applications with complex grids, forms, validation, status transitions, REST-backed features, and operational data contracts.",
+        "Improved SQL Server queries and stored procedures by roughly 15-25% through indexing, execution-plan analysis, query tuning, and data-access optimization.",
+        "Implemented event-driven cloud messaging and strengthened CI/CD, environment configuration, structured logging, code quality, and production troubleshooting."
+      ]
+    },
+    {
+      "company": "Global Holdings",
+      "title": "Software Engineer",
+      "start": "2024-06",
+      "end": "2025-05",
+      "bullets": [
+        "Architected reusable ASP.NET Core APIs and services using Clean Architecture, separation of concerns, and maintainable dependency boundaries.",
+        "Improved key SQL Server workflows by approximately 20% through indexing, partitioning, stored-procedure optimization, and query analysis.",
+        "Designed object-storage and queue-based processing for large-file ingestion and background workloads with transient-failure handling, structured logging, and correlation IDs.",
+        "Partnered with engineering and QA to define contracts, debug production issues, improve observability, and deliver reliable releases with clear ownership."
+      ]
+    },
+    {
+      "company": "PFA Solutions",
+      "title": "Software Engineer",
+      "start": "2022-01",
+      "end": "2024-06",
+      "bullets": [
+        "Owned full-stack SaaS delivery across Angular/TypeScript and .NET Core REST APIs from technical design through implementation, testing, and deployment.",
+        "Built reusable backend patterns with DTO mapping, FluentValidation, EF Core, REST contracts, and consistent response/error handling.",
+        "Created modular Angular architecture with lazy loading, shared components, RxJS, reactive patterns, and responsive UI design.",
+        "Implemented serverless and queue-based automation while improving scalability through caching, query optimization, and cleaner service/data boundaries."
+      ]
+    },
+    {
+      "company": "UnitedHealth Group / Optum",
+      "title": "Software Engineer",
+      "start": "2021-01",
+      "end": "2022-01",
+      "bullets": [
+        "Built secure Angular/TypeScript applications and ASP.NET Core APIs for healthcare workflows under HIPAA-aligned security expectations.",
+        "Implemented JWT authentication, role-based authorization, route protection, secure data access, and predictable API behavior.",
+        "Translated product and QA requirements into maintainable frontend/backend changes while preserving security, stability, and testability.",
+        "Diagnosed production defects through logs, reproduction, and root-cause analysis; delivered fixes and helped teammates troubleshoot automation and application issues."
+      ]
+    },
+    {
+      "company": "Wake County Government",
+      "title": "Software Engineer",
+      "start": "2020-01",
+      "end": "2021-01",
+      "bullets": [
+        "Developed enterprise .NET Core applications for government workflows, reporting, and operational processes across multiple departments.",
+        "Applied repository and service patterns to isolate data access, improve testability, and reduce coupling between business logic and persistence.",
+        "Designed SQL Server reporting solutions with stored procedures, views, and parameterized queries for dependable operational reporting.",
+        "Extended applications as requirements evolved while preserving stable data contracts, production reliability, and clear separation of concerns."
+      ]
+    },
+    {
+      "company": "Pilot Company",
+      "title": "Software Engineer",
+      "start": "2019-06",
+      "end": "2020-01",
+      "bullets": [
+        "Developed full-stack applications using ASP.NET Core, Angular, TypeScript, React, and Node.js for internal and customer-facing workflows.",
+        "Designed and built a React/Node.js billing platform supporting transaction workflows, API integrations, and reliable data processing.",
+        "Created REST APIs with explicit contracts, standardized response models, validation, and consistent error handling.",
+        "Troubleshot across frontend, backend, and integration layers while establishing reusable patterns as requirements evolved."
+      ]
+    },
+    {
+      "company": "U.S. Bank",
+      "title": "Technical Support Specialist",
+      "start": "2018-05",
+      "end": "2019-05",
+      "bullets": [
+        "Supported enterprise hospitality payment environments for clients including Wyndham, Hilton, and Marriott.",
+        "Diagnosed network, connectivity, hardware, application, and payment-processing issues across interconnected systems.",
+        "Isolated faults across dependent services and communicated clear resolution steps to technical and non-technical stakeholders.",
+        "Built deep experience in production support, incident ownership, escalation, customer communication, and root-cause troubleshooting."
+      ]
+    },
+    {
+      "company": "Markettech",
+      "title": "iOS Developer (Contract)",
+      "start": "2017-09",
+      "end": "2018-02",
+      "bullets": [
+        "Built a Swift/Xcode iOS application capturing call-center metrics and surfacing employee performance data.",
+        "Translated reporting requirements into mobile UI workflows, data presentation, and application behavior.",
+        "Implemented application logic and UI components while troubleshooting integration and usability issues.",
+        "Delivered a mobile solution that improved leadership visibility into employee performance and operational reporting."
+      ]
+    },
+    {
+      "company": "Litera",
+      "title": "Technical Support Specialist",
+      "start": "2016-01",
+      "end": "2017-08",
+      "bullets": [
+        "Provided high-volume technical support for major legal-industry clients, including Baker McKenzie.",
+        "Investigated application issues through structured diagnosis, reproduction, escalation, and resolution across client environments.",
+        "Reviewed DLL behavior and implemented targeted patches to improve performance, compatibility, and user experience.",
+        "Built a strong foundation in production diagnostics, customer-facing communication, issue ownership, and software troubleshooting."
+      ]
+    }
+  ],
+  "education": [
+    "Juris Doctor — Elon University School of Law",
+    "B.A., English & Political Science — Florida State University"
+  ]
+}
