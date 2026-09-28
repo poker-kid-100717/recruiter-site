@@ -1,6 +1,7 @@
 // Loads content/*.json into the database. Idempotent: resume, recommendation, and project text are
 // replaced on every run; a project's status, demo URL, and verified date are only set when the project
-// is first inserted, because after that the database owns them (db/set-status.mjs).
+// is first inserted, because after that the database owns them (db/set-status.mjs). Live apps are
+// content-owned: they are replaced from content/projects.json on every run.
 // Usage: DATABASE_URL=... node db/seed.mjs
 import { readFile } from 'node:fs/promises';
 import { connect } from './connection.mjs';
@@ -22,6 +23,7 @@ try {
     await tx`delete from site_settings`;
     await tx`delete from public_repos`;
     await tx`delete from architecture_principles`;
+    await tx`delete from live_apps`;
 
     await tx`
       insert into profile (id, name, headline, title, location, email, summary, linkedin_url, github_url, portfolio_url)
@@ -108,6 +110,16 @@ try {
         await tx`
           insert into repo_decisions (repo_position, position, choice, instead, why)
           values (${repoPosition}, ${position}, ${decision.choice}, ${decision.instead}, ${decision.why})`;
+      }
+    }
+
+    for (const [position, app] of projects.liveApps.entries()) {
+      await tx`
+        insert into live_apps (slug, position, name, tagline, status, url, repository_url, verified_on)
+        values (${app.slug}, ${position}, ${app.name}, ${app.tagline}, ${app.status}, ${app.url ?? null},
+                ${app.repository ?? null}, ${app.verifiedOn ?? null})`;
+      for (const [index, name] of app.skills.entries()) {
+        await tx`insert into live_app_skills (app_slug, position, name) values (${app.slug}, ${index}, ${name})`;
       }
     }
 

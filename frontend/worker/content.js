@@ -74,6 +74,16 @@ export function documentFromContent({ resume, recommendations, projects, site })
           }
         : null
     })),
+    liveApps: projects.liveApps.map((app) => ({
+      slug: app.slug,
+      name: app.name,
+      tagline: app.tagline,
+      status: app.status,
+      skills: app.skills,
+      url: app.url ?? null,
+      repository: app.repository ?? null,
+      verifiedOn: app.verifiedOn ?? null
+    })),
     architecture: {
       principles: site.architecture.principles.map(({ name, detail }) => ({ name, detail })),
       referenceFlow: site.architecture.referenceFlow

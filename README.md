@@ -16,7 +16,7 @@ The site's content lives in **PostgreSQL** (Neon in production). The Angular app
 | `db/migrations/*.sql` | Schema: profile, roles and bullets, skills, recommendations, projects (with status and verified date), supporting repos, architecture notes. Applied by `db/migrate.mjs` (advisory-locked, each file once). |
 | `content/resume.json` | The resume, the source of truth. Seeds the database and generates `frontend/public/resume.html` (`scripts/build-resume.mjs`). The only change from the PDF is that the former employer's product name is replaced with "a freight CRM"; no phone number on web pages. |
 | `content/recommendations.json` | Six featured LinkedIn recommendations: verbatim excerpts, author, relationship, date, and each author's current LinkedIn headline. |
-| `content/projects.json`, `content/site.json` | Project write-ups, supporting repos, profile lists, and architecture notes. |
+| `content/projects.json`, `content/site.json` | Project write-ups, supporting repos, the **Live Apps** section, profile lists, and architecture notes. Live apps are content-owned: their status, URL, and verified date change here, through a reviewed commit, and the seed replaces them on every run. |
 | `db/seed.mjs` | Loads the JSON into the database. Idempotent. Text is replaced on every run; a project's **status, demo URL, and verified date are owned by the database** after the first insert. |
 | `db/set-status.mjs` | Records status after checking an app: `node db/set-status.mjs tcg-signal "Verified live" 2026-10-01 https://…`. The schema rejects "Verified live" without a date, and the site shows a live link only for verified apps. |
 

@@ -1,7 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
-import { PortfolioDocument, Project, formatDay, formatMonth, formatRange } from './portfolio.data';
+import { LiveApp, PortfolioDocument, Project, formatDay, formatMonth, formatRange } from './portfolio.data';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +14,7 @@ import { PortfolioDocument, Project, formatDay, formatMonth, formatRange } from 
     <header class="nav shell" id="top">
       <a class="brand" href="#top" aria-label="Joshua Davis home">JD<span>.</span></a>
       <nav aria-label="Primary navigation">
+        <a href="#live-apps">Live apps</a>
         <a href="#work">Work</a>
         <a href="#architecture">Architecture</a>
         <a href="#experience">Experience</a>
@@ -85,6 +86,40 @@ import { PortfolioDocument, Project, formatDay, formatMonth, formatRange } from 
         </div>
       </section>
     
+      <section id="live-apps" class="section shell" aria-labelledby="live-apps-title">
+        <div class="section-heading">
+          <div><p class="kicker">Live apps</p><h2 id="live-apps-title">Open them. Click around.</h2></div>
+          <p>Applications I built and run in production, each picked to show a different set of skills. An app gets an <strong>Open app</strong> link once a real flow has passed against the live deployment, and the date says when.</p>
+        </div>
+
+        <div class="app-grid">
+          @for (app of d.liveApps; track app.slug) {
+            <article class="app-card">
+              <div class="app-topline">
+                <span class="status" [attr.data-status]="app.status">{{ app.status }}</span>
+                @if (app.verifiedOn) {
+                  <span class="app-verified">Checked {{ formatDay(app.verifiedOn) }}</span>
+                }
+              </div>
+              <h3>{{ app.name }}</h3>
+              <p>{{ app.tagline }}</p>
+              <p class="app-shows">Shows</p>
+              <div class="chips compact">@for (skill of app.skills; track skill) {
+                <span>{{ skill }}</span>
+              }</div>
+              <div class="app-links">
+                @if (liveUrl(app); as url) {
+                  <a class="app-open" [href]="url" target="_blank" rel="noreferrer">Open app ↗<span class="visually-hidden"> ({{ app.name }})</span></a>
+                }
+                @if (app.repository) {
+                  <a [href]="app.repository" target="_blank" rel="noreferrer">Source ↗<span class="visually-hidden"> ({{ app.name }})</span></a>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+
       <section id="work" class="section shell">
         <div class="section-heading">
           <div><p class="kicker">Selected work</p><h2>Systems, not screenshots.</h2></div>
@@ -379,6 +414,11 @@ export class AppComponent implements OnInit {
   /** Live links are shown only for apps that were opened and verified. */
   liveDemo(project: Project): string | null {
     return project.status === 'Verified live' ? project.demo : null;
+  }
+
+  /** Same rule as project demos: only link an app once a real flow has been verified against it. */
+  liveUrl(app: LiveApp): string | null {
+    return app.status === 'Verified live' ? app.url : null;
   }
 
   toggleArchitecture(repoName: string): void {

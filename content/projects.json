@@ -209,5 +209,103 @@
         ]
       }
     }
+  ],
+  "liveApps": [
+    {
+      "slug": "tcg-signal",
+      "name": "TCG Signal",
+      "tagline": "Price tracker and set guide for Pokémon card collectors, with daily price history and market movers.",
+      "status": "Verified live",
+      "verifiedOn": "2026-09-26",
+      "url": "https://tcg-portfolio-sample.app",
+      "repository": "https://github.com/poker-kid-100717/tcg",
+      "skills": [
+        "React",
+        "ASP.NET Core",
+        "PostgreSQL",
+        "Scheduled jobs",
+        "Cloudflare Containers"
+      ]
+    },
+    {
+      "slug": "ltl-planner",
+      "name": "LTL Planner",
+      "tagline": "Groups shipments onto trucks under hard pallet, weight, and equipment limits, and explains every assignment.",
+      "status": "Verified live",
+      "verifiedOn": "2026-09-28",
+      "url": "https://ltl-planner.app",
+      "repository": "https://github.com/poker-kid-100717/ltl-planner",
+      "skills": [
+        "ASP.NET Core",
+        "Angular",
+        "Constraint-based planning",
+        "HMAC-verified API",
+        "Cloudflare Containers"
+      ]
+    },
+    {
+      "slug": "yard-ops",
+      "name": "Yard Ops",
+      "tagline": "Yard board, gate, and dock workflows that notify LTL Planner through a signed, retrying outbox.",
+      "status": "Verified live",
+      "verifiedOn": "2026-09-28",
+      "url": "https://yard.ltl-planner.app",
+      "repository": "https://github.com/poker-kid-100717/yard-ops",
+      "skills": [
+        "Angular",
+        "ASP.NET Core",
+        "Outbox pattern",
+        "Service-to-service integration",
+        "Resilience"
+      ]
+    },
+    {
+      "slug": "worklens",
+      "name": "WorkLens",
+      "tagline": "Job feed and application tracker. The public demo is read-only, with live job listings and a sample pipeline.",
+      "status": "Verified live",
+      "verifiedOn": "2026-09-28",
+      "url": "https://worklens.portfolio-joshdavis.app",
+      "repository": "https://github.com/poker-kid-100717/WorkLens",
+      "skills": [
+        "ASP.NET Core",
+        "EF Core",
+        "Angular",
+        "Background services",
+        "Third-party APIs"
+      ]
+    },
+    {
+      "slug": "freight-ops",
+      "name": "Freight Ops",
+      "tagline": "Freight account intelligence, an opportunity queue, and load visibility from an external TMS.",
+      "status": "Implemented",
+      "verifiedOn": null,
+      "url": null,
+      "repository": "https://github.com/poker-kid-100717/logistics-portfolio-suite",
+      "skills": [
+        "Angular",
+        "ASP.NET Core",
+        "OAuth 2.0 client credentials",
+        "API adapters",
+        "Docker"
+      ]
+    },
+    {
+      "slug": "allocation-proration",
+      "name": "Allocation Proration",
+      "tagline": "Splits a capped investment allocation across investors by historical average and redistributes the remainder.",
+      "status": "Implemented",
+      "verifiedOn": null,
+      "url": null,
+      "repository": "https://github.com/poker-kid-100717/allocation-proration-tool",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Algorithm design",
+        "Vitest",
+        "Cloudflare Workers"
+      ]
+    }
   ]
 }

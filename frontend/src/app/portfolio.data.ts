@@ -85,6 +85,20 @@ export interface PublicRepo {
   architecture: RepoArchitecture | null;
 }
 
+/** A deployed, clickable app in the Live Apps section. Its status is content-owned (content/projects.json). */
+export interface LiveApp {
+  slug: string;
+  name: string;
+  tagline: string;
+  status: Exclude<ProjectStatus, 'Professional'>;
+  /** Skills the app demonstrates, shown as chips. */
+  skills: string[];
+  url: string | null;
+  repository: string | null;
+  /** YYYY-MM-DD of the last real flow run against the live app; required for "Verified live". */
+  verifiedOn: string | null;
+}
+
 export interface PortfolioDocument {
   profile: Profile;
   skills: SkillGroup[];
@@ -92,6 +106,7 @@ export interface PortfolioDocument {
   recommendations: { allUrl: string; total: number; featured: Recommendation[] };
   projects: Project[];
   publicRepos: PublicRepo[];
+  liveApps: LiveApp[];
   architecture: { principles: { name: string; detail: string }[]; referenceFlow: string[] };
 }
 
