@@ -9,3 +9,6 @@ frontend/.angular/
 backend/bin/
 backend/obj/
 frontend/.wrangler/
+frontend/.dev.vars
+db/node_modules/
+.env

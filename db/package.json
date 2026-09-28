@@ -1,0 +1,13 @@
+{
+  "name": "portfolio-db",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "node migrate.mjs",
+    "seed": "node seed.mjs",
+    "verify": "node verify.mjs"
+  },
+  "dependencies": {
+    "postgres": "^3.4.9"
+  }
+}

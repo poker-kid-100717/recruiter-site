@@ -1,17 +1,7 @@
 
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject, ChangeDetectionStrategy } from '@angular/core';
-import {
-  allRecommendationsUrl,
-  earlierExperience,
-  endorsements,
-  experience,
-  profile,
-  projects,
-  publicRepos,
-  recommendationCount,
-  stackGroups
-} from './portfolio.data';
+import { ChangeDetectionStrategy, Component, OnInit, computed, inject, signal } from '@angular/core';
+import { PortfolioDocument, Project, formatDay, formatMonth, formatRange } from './portfolio.data';
 
 @Component({
   selector: 'app-root',
@@ -36,35 +26,62 @@ import {
     <main id="main-content">
       <section class="hero shell" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="kicker">{{ profile.headline }}</p>
+          <p class="kicker">Full-Stack Software Engineer | C# / .NET | Angular / React | Azure / AWS</p>
           <h1 id="hero-title">Joshua Davis builds and supports <span>enterprise applications.</span></h1>
-          <p class="hero-text">From loosely defined requirements through design, integrations, release, and production support — 10+ years in software and technology, 8+ building and modernizing enterprise systems. Most of my work is C# and ASP.NET Core APIs over SQL Server with Angular front ends, deployed to Azure or on-premises.</p>
+          @if (doc(); as d) {
+            <p class="hero-text">{{ d.profile.summary }}</p>
+          } @else {
+            <p class="hero-text">Hands-on full-stack software engineer: C# and ASP.NET Core APIs over SQL Server with Angular and React front ends, deployed to Azure, AWS, or on-premises.</p>
+          }
           <div class="actions">
             <a class="primary" href="#work">Selected work</a>
             <a class="secondary" href="/resume.html" target="_blank" rel="noreferrer">View resume</a>
-            <a class="text-link" [href]="profile.links.github" target="_blank" rel="noreferrer">GitHub ↗</a>
-            <a class="text-link" [href]="profile.links.linkedin" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a class="text-link" href="https://github.com/poker-kid-100717" target="_blank" rel="noreferrer">GitHub ↗</a>
+            <a class="text-link" href="https://www.linkedin.com/in/full-stack-engineer-joshd" target="_blank" rel="noreferrer">LinkedIn ↗</a>
           </div>
-          <ul class="proof-grid" aria-label="Career impact from the resume">
-            @for (item of profile.impact; track item) {
-              <li>{{ item }}</li>
-            }
-          </ul>
+          @if (doc(); as d) {
+            <ul class="proof-grid" aria-label="Career impact from the resume">
+              @for (item of d.profile.impact; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          }
         </div>
     
         <aside class="terminal-card" aria-label="Engineering profile">
           <div class="terminal-bar"><i></i><i></i><i></i><span>engineering-profile.json</span></div>
-          <pre><code>{{ profileCode }}</code></pre>
-          <div class="api-status" [class.online]="apiOnline">
+          <pre><code>{{ profileCode() }}</code></pre>
+          <div class="api-status" [class.online]="source() === 'database'" role="status">
             <span class="status-dot"></span>
-            <div><strong>Portfolio API</strong><small>{{ apiOnline ? '.NET API reachable' : 'Static portfolio mode' }}</small></div>
+            <div><strong>Portfolio API</strong><small>{{ sourceLabel() }}</small></div>
           </div>
         </aside>
       </section>
     
+      @switch (state()) {
+        @case ('loading') {
+          <section class="section shell load-state" aria-live="polite" aria-busy="true">
+            <p>Loading projects, experience, and recommendations…</p>
+          </section>
+        }
+        @case ('error') {
+          <section class="section shell load-state" role="alert">
+            <h2>The portfolio content didn’t load.</h2>
+            <p>The resume is still available, and you can try again.</p>
+            <div class="actions">
+              <button type="button" class="primary" (click)="load()">Try again</button>
+              <a class="secondary" href="/resume.html">View resume</a>
+            </div>
+          </section>
+        }
+      }
+
+      @if (doc(); as d) {
       <section class="signal-band" aria-label="Core technologies">
         <div class="shell signal-inner" tabindex="0">
-          <span>ASP.NET Core</span><span>Angular</span><span>React</span><span>TypeScript</span><span>SQL Server</span><span>EF Core</span><span>Azure</span><span>AWS</span><span>Docker</span><span>GitHub Actions</span><span>REST APIs</span>
+          @for (item of d.profile.stack; track item) {
+            <span>{{ item }}</span>
+          }
         </div>
       </section>
     
@@ -75,7 +92,7 @@ import {
         </div>
     
         <div class="projects">
-          @for (project of projects; track project; let i = $index) {
+          @for (project of d.projects; track project.slug; let i = $index) {
             <article class="project-card" [class.featured]="i === 0">
               <div class="project-number" aria-hidden="true">0{{ i + 1 }}</div>
               <div class="project-content">
@@ -84,6 +101,9 @@ import {
                   <span class="status" [attr.data-status]="project.status">{{ project.status }}</span>
                   @if (project.professional) {
                     <span class="confidential">No proprietary code</span>
+                  }
+                  @if (project.verifiedOn) {
+                    <span class="confidential">Verified {{ formatDay(project.verifiedOn) }}</span>
                   }
                 </div>
                 <h3>{{ project.title }}</h3>
@@ -99,13 +119,13 @@ import {
                 <div class="chips">@for (tech of project.tech; track tech) {
                   <span>{{ tech }}</span>
                 }</div>
-                @if (project.href || project.secondaryHref) {
+                @if (project.repository || liveDemo(project)) {
                   <div class="project-links">
-                    @if (project.href) {
-                      <a [href]="project.href" target="_blank" rel="noreferrer">View repository ↗</a>
+                    @if (project.repository) {
+                      <a [href]="project.repository" target="_blank" rel="noreferrer">View repository ↗</a>
                     }
-                    @if (project.secondaryHref) {
-                      <a [href]="project.secondaryHref" target="_blank" rel="noreferrer">{{ project.secondaryLabel || 'View more' }} ↗</a>
+                    @if (liveDemo(project); as demo) {
+                      <a [href]="demo" target="_blank" rel="noreferrer">Open the live app ↗</a>
                     }
                   </div>
                 }
@@ -133,10 +153,9 @@ import {
           </div>
     
           <div class="architecture-grid">
-            <div class="arch-card"><span>01</span><h3>Domain first</h3><p>Keep business rules independent from framework and hosting choices. Dependency inversion makes infrastructure replaceable instead of contagious.</p></div>
-            <div class="arch-card"><span>02</span><h3>Contracts over coupling</h3><p>Explicit API contracts, validation, authorization boundaries, and integration adapters keep consumers from inheriting database or vendor concerns.</p></div>
-            <div class="arch-card"><span>03</span><h3>Operational data</h3><p>SQL Server, EF Core, migrations, indexing, execution plans, transactional boundaries, and schema changes treated as deployable software.</p></div>
-            <div class="arch-card"><span>04</span><h3>Production is part of design</h3><p>Containers, health checks, logs, CI pipelines, environment configuration, cloud/on-prem deployment, UAT, and rollback thinking belong in the architecture conversation.</p></div>
+            @for (principle of d.architecture.principles; track principle.name; let i = $index) {
+              <div class="arch-card"><span>0{{ i + 1 }}</span><h3>{{ principle.name }}</h3><p>{{ principle.detail }}</p></div>
+            }
           </div>
         </div>
       </section>
@@ -148,10 +167,10 @@ import {
         </div>
     
         <div class="timeline">
-          @for (role of experience; track role) {
+          @for (role of mainRoles(); track role.company) {
             <article class="timeline-item">
               <div class="timeline-marker" aria-hidden="true"></div>
-              <div class="timeline-date">{{ role.dates }}</div>
+              <div class="timeline-date">{{ formatRange(role.start, role.end) }}</div>
               <div class="timeline-body">
                 <div class="role-heading"><div><h3>{{ role.company }}</h3><p>{{ role.title }}</p></div></div>
                 <ul>@for (highlight of role.highlights; track highlight) {
@@ -163,12 +182,12 @@ import {
         </div>
 
         <details class="earlier">
-          <summary>Earlier: production support and contract roles ({{ earlierExperience.length }})</summary>
+          <summary>Earlier: production support and contract roles ({{ earlierRoles().length }})</summary>
           <div class="timeline">
-            @for (role of earlierExperience; track role) {
+            @for (role of earlierRoles(); track role.company) {
               <article class="timeline-item">
                 <div class="timeline-marker" aria-hidden="true"></div>
-                <div class="timeline-date">{{ role.dates }}</div>
+                <div class="timeline-date">{{ formatRange(role.start, role.end) }}</div>
                 <div class="timeline-body">
                   <div class="role-heading"><div><h3>{{ role.company }}</h3><p>{{ role.title }}</p></div></div>
                   <ul>@for (highlight of role.highlights; track highlight) {
@@ -182,7 +201,7 @@ import {
 
         <div class="education">
           <h3>Education</h3>
-          <ul>@for (entry of profile.education; track entry) {
+          <ul>@for (entry of d.profile.education; track entry) {
             <li>{{ entry }}</li>
           }</ul>
         </div>
@@ -195,7 +214,7 @@ import {
             <p>Grouped as on my resume.</p>
           </div>
           <div class="stack-grid">
-            @for (group of stackGroups; track group) {
+            @for (group of d.skills; track group.name) {
               <div class="stack-group"><h3>{{ group.name }}</h3><div class="stack-list">@for (item of group.items; track item) {
               <span>{{ item }}</span>
             }</div></div>
@@ -210,7 +229,7 @@ import {
         <p>Smaller repositories that each isolate one architectural idea I use in production systems. Open “How it’s built” for the layers and the tradeoffs behind each decision.</p>
       </div>
       <div class="repo-grid">
-        @for (repo of publicRepos; track repo) {
+        @for (repo of d.publicRepos; track repo.name) {
           <div class="repo-card">
             <a class="repo-card-link" [href]="repo.href" target="_blank" rel="noreferrer">
               <div class="repo-icon">&lt;/&gt;</div>
@@ -259,24 +278,26 @@ import {
       <div class="shell">
         <div class="section-heading">
           <div><p class="kicker">Recommendations</p><h2>How people describe the work.</h2></div>
-          <p>Verbatim excerpts from {{ endorsements.length }} of the {{ recommendationCount }} recommendations on my LinkedIn profile. Titles are each author’s current LinkedIn headline.</p>
+          <p>Verbatim excerpts from {{ d.recommendations.featured.length }} of the {{ d.recommendations.total }} recommendations on my LinkedIn profile. Titles are each author’s current LinkedIn headline.</p>
         </div>
         <div class="quote-grid">
-          @for (endorsement of endorsements; track endorsement) {
+          @for (rec of d.recommendations.featured; track rec.id) {
             <figure class="quote-card">
-              <blockquote>“{{ endorsement.quote }}”</blockquote>
+              <blockquote>“{{ rec.excerpt }}”</blockquote>
               <figcaption>
-                <strong>{{ endorsement.name }}</strong>
-                <span><span class="label">Current title:</span> {{ endorsement.currentTitle }}</span>
-                <span>{{ endorsement.relationship ? endorsement.relationship + ' · ' : '' }}{{ endorsement.date }}</span>
+                <strong>{{ rec.author }}</strong>
+                <span><span class="label">Current title:</span> {{ rec.currentTitle }}</span>
+                <span>{{ rec.relationship ? rec.relationship + ' · ' : '' }}{{ formatMonth(rec.date) }}</span>
               </figcaption>
             </figure>
           }
         </div>
-        <p class="all-recommendations"><a [href]="allRecommendationsUrl" target="_blank" rel="noreferrer">Read all {{ recommendationCount }} recommendations on LinkedIn ↗</a></p>
+        <p class="all-recommendations"><a [href]="d.recommendations.allUrl" target="_blank" rel="noreferrer">Read all {{ d.recommendations.total }} recommendations on LinkedIn ↗</a></p>
       </div>
     </section>
     
+      }
+
     <section class="section shell leadership-scope">
       <div>
         <p class="kicker">Senior / Lead scope</p>
@@ -296,11 +317,11 @@ import {
         <h2>Need someone who can build the system and explain why it should be built that way?</h2>
       </div>
       <div class="cta-panel">
-        <a class="primary" [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+        <a class="primary" href="mailto:joshuad100717@outlook.com">joshuad100717@outlook.com</a>
         <a class="secondary" href="/resume.html" target="_blank" rel="noreferrer">View / print resume</a>
-        <a class="text-link" [href]="profile.links.linkedin" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-        <a class="text-link" [href]="profile.links.github" target="_blank" rel="noreferrer">GitHub ↗</a>
-        <p>{{ profile.location }} · Open to remote opportunities</p>
+        <a class="text-link" href="https://www.linkedin.com/in/full-stack-engineer-joshd" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a class="text-link" href="https://github.com/poker-kid-100717" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <p>Albuquerque, NM · Open to remote opportunities</p>
       </div>
     </section>
     </main>
@@ -311,37 +332,53 @@ import {
 export class AppComponent implements OnInit {
   private readonly http = inject(HttpClient);
 
-  profile = profile;
-  projects = projects;
-  experience = experience;
-  earlierExperience = earlierExperience;
-  endorsements = endorsements;
-  allRecommendationsUrl = allRecommendationsUrl;
-  recommendationCount = recommendationCount;
-  stackGroups = stackGroups;
-  publicRepos = publicRepos;
-  apiOnline = false;
+  readonly doc = signal<PortfolioDocument | null>(null);
+  readonly state = signal<'loading' | 'ready' | 'error'>('loading');
+  /** "database" when served from Postgres; otherwise the Worker's fallback reason. */
+  readonly source = signal<string | null>(null);
+
+  readonly mainRoles = computed(() => this.doc()?.experience.filter((role) => !role.earlier) ?? []);
+  readonly earlierRoles = computed(() => this.doc()?.experience.filter((role) => role.earlier) ?? []);
+  readonly sourceLabel = computed(() => {
+    const source = this.source();
+    if (this.state() === 'loading') return 'Loading…';
+    if (source === 'database') return 'Content served from Postgres';
+    return source ? `Seed content (${source.replace('fallback: ', '')})` : 'Content API unavailable';
+  });
+  readonly profileCode = computed(() => {
+    const profile = this.doc()?.profile;
+    if (!profile) return '{ "engineer": "Joshua Davis" }';
+    return JSON.stringify(
+      { engineer: profile.name, title: profile.title, location: profile.location, focus: profile.focus, delivery: profile.delivery },
+      null,
+      2
+    );
+  });
+
+  readonly formatRange = formatRange;
+  readonly formatMonth = formatMonth;
+  readonly formatDay = formatDay;
   private openArchitecture = new Set<string>();
 
-  profileCode = `{
-  "engineer": "Joshua Davis",
-  "focus": [
-    "full-stack .NET delivery",
-    "APIs and integrations",
-    "production support"
-  ],
-  "backend": ".NET / ASP.NET Core",
-  "frontend": "Angular / React / TypeScript",
-  "data": "SQL Server / EF Core",
-  "delivery": ["Azure", "AWS", "Docker", "CI/CD"],
-  "mode": "cloud + on-prem"
-}`;
-
   ngOnInit(): void {
-    this.http.get('/api/profile').subscribe({
-      next: () => this.apiOnline = true,
-      error: () => this.apiOnline = false
+    this.load();
+  }
+
+  load(): void {
+    this.state.set('loading');
+    this.http.get<PortfolioDocument>('/api/portfolio', { observe: 'response' }).subscribe({
+      next: (response) => {
+        this.doc.set(response.body);
+        this.source.set(response.headers.get('X-Content-Source') ?? 'database');
+        this.state.set(response.body ? 'ready' : 'error');
+      },
+      error: () => this.state.set('error')
     });
+  }
+
+  /** Live links are shown only for apps that were opened and verified. */
+  liveDemo(project: Project): string | null {
+    return project.status === 'Verified live' ? project.demo : null;
   }
 
   toggleArchitecture(repoName: string): void {

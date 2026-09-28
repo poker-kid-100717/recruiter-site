@@ -15,6 +15,8 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.WORKER_DATABASE_URL }}
     defaults:
       run:
         working-directory: frontend
@@ -36,6 +38,13 @@ jobs:
             cat "$INDEX"
             exit 1
           fi
+      - name: Migrate and seed the Neon database
+        if: env.DATABASE_URL != ''
+        working-directory: .
+        run: |
+          npm ci --prefix db
+          node db/migrate.mjs
+          node db/seed.mjs
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v4
         with:
@@ -43,6 +52,9 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: frontend
           command: deploy
+          # Uploaded as the Worker secret DATABASE_URL once WORKER_DATABASE_URL exists; until then the
+          # Worker serves the bundled content/*.json seed and /health reports "Degraded".
+          secrets: ${{ env.DATABASE_URL != '' && 'DATABASE_URL' || '' }}
       - name: Verify production site and stylesheet
         shell: bash
         run: |
@@ -96,3 +108,10 @@ jobs:
           fi
 
           curl --fail --silent --show-error "$SITE/api/profile" | grep -q '"name":"Joshua Davis"'
+
+          HEALTH="$(curl --fail --silent --show-error "$SITE/health")"
+          echo "Health: $HEALTH"
+          if [ -n "${DATABASE_URL:-}" ]; then
+            printf '%s' "$HEALTH" | grep -q '"database":"ok"'
+          fi
+          curl --fail --silent --show-error --head "$SITE/api/portfolio" | grep -i '^x-content-source:'

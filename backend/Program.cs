@@ -1,29 +1,37 @@
-using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.HttpOverrides;
+using Npgsql;
+using Portfolio.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddHealthChecks();
+// Same database and SQL function as the Cloudflare Worker: select portfolio_document().
+var connectionString = PostgresUrl.ToConnectionString(
+    builder.Configuration["DATABASE_URL"] ?? builder.Configuration.GetConnectionString("Portfolio")
+    ?? throw new InvalidOperationException("Set DATABASE_URL (postgres://...) or ConnectionStrings:Portfolio."));
+
+builder.Services.AddSingleton(NpgsqlDataSource.Create(connectionString));
+builder.Services.AddSingleton<PortfolioContent>();
+builder.Services.AddHealthChecks().AddCheck<DatabaseHealthCheck>("database");
+builder.Services.AddProblemDetails();
 builder.Services.AddOpenApi();
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-    options.KnownNetworks.Clear();
+    options.KnownIPNetworks.Clear();
     options.KnownProxies.Clear();
 });
 
 var app = builder.Build();
 
 app.UseForwardedHeaders();
+app.UseExceptionHandler();
 app.MapOpenApi();
 app.MapHealthChecks("/health");
 
-// Shared with the Cloudflare Worker (frontend/worker/index.js); scripts/check-api-content.mjs keeps them in sync.
-var content = JsonNode.Parse(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "content", "api.json")))
-    ?? throw new InvalidOperationException("content/api.json is empty.");
-
-app.MapGet("/api/profile", () => Results.Json(content["profile"]));
-app.MapGet("/api/architecture", () => Results.Json(content["architecture"]));
-app.MapGet("/api/work", () => Results.Json(content["work"]));
+var api = app.MapGroup("/api");
+api.MapGet("/portfolio", async (PortfolioContent content, CancellationToken ct) => Results.Json(await content.DocumentAsync(ct)));
+api.MapGet("/profile", async (PortfolioContent content, CancellationToken ct) => Results.Json(PortfolioViews.Profile(await content.DocumentAsync(ct), "ASP.NET Core")));
+api.MapGet("/architecture", async (PortfolioContent content, CancellationToken ct) => Results.Json((await content.DocumentAsync(ct))["architecture"]));
+api.MapGet("/work", async (PortfolioContent content, CancellationToken ct) => Results.Json(PortfolioViews.Work(await content.DocumentAsync(ct))));
 
 app.Run();

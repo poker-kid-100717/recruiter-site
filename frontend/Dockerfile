@@ -1,9 +1,8 @@
-# Build context is the repository root so the shared content/*.json files are available.
+# Build context is the repository root (see docker-compose.yml).
 FROM node:22-alpine AS build
 WORKDIR /app/frontend
 COPY frontend/package.json frontend/package-lock.json ./
 RUN npm ci
-COPY content/ /app/content/
 COPY frontend/ ./
 RUN npm run build
 

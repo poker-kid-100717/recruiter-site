@@ -1,8 +1,6 @@
 {
   "profile": {
-    "name": "Joshua Davis",
     "title": "Full-Stack Software Engineer",
-    "location": "Albuquerque, NM",
     "focus": [
       "Full-stack .NET delivery",
       "APIs and integrations",
@@ -60,38 +58,9 @@
       "EF Core + SQL Server + Integrations"
     ]
   },
-  "work": [
-    {
-      "name": "TCG Signal",
-      "type": "Public full-stack project",
-      "publicSource": true,
-      "repository": "https://github.com/poker-kid-100717/tcg",
-      "demo": "https://tcg-portfolio-sample.app",
-      "status": "deployed"
-    },
-    {
-      "name": "Logistics Portfolio Suite",
-      "type": "Public clean-room project (not employer source)",
-      "publicSource": true,
-      "repository": "https://github.com/poker-kid-100717/logistics-portfolio-suite",
-      "demo": null,
-      "status": "source"
-    },
-    {
-      "name": "WorkLens",
-      "type": "Public full-stack project",
-      "publicSource": true,
-      "repository": "https://github.com/poker-kid-100717/WorkLens",
-      "demo": null,
-      "status": "source"
-    },
-    {
-      "name": "Value Truck logistics applications",
-      "type": "Professional work (source not public)",
-      "publicSource": false,
-      "repository": null,
-      "demo": null,
-      "status": "professional"
-    }
+  "earlierCompanies": [
+    "U.S. Bank",
+    "Markettech",
+    "Litera"
   ]
 }
