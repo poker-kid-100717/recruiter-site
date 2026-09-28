@@ -26,6 +26,8 @@ jobs:
         with:
           node-version: '24.15.0'
       - run: npm ci
+      - name: resume.html is generated from content/resume.json
+        run: node ../scripts/build-resume.mjs --check
       - run: npm run build
       - name: Verify CSP-safe stylesheet link
         shell: bash

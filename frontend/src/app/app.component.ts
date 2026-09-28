@@ -88,7 +88,7 @@ import { PortfolioDocument, Project, formatDay, formatMonth, formatRange } from 
       <section id="work" class="section shell">
         <div class="section-heading">
           <div><p class="kicker">Selected work</p><h2>Systems, not screenshots.</h2></div>
-          <p>Public source for each project, with its status stated plainly: <strong>Verified live</strong> only after the app was opened and a real flow run; <strong>Deployed</strong> when it is hosted but not yet re-verified; <strong>Implemented</strong> when it runs locally from source.</p>
+          <p>Public source wherever the work is mine to publish (employer code stays private), with each status stated plainly: <strong>Verified live</strong> only after the app was opened and a real flow run; <strong>Deployed</strong> when it is hosted but not yet re-verified; <strong>Implemented</strong> when it runs locally from source.</p>
         </div>
     
         <div class="projects">

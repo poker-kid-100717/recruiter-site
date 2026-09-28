@@ -6,7 +6,7 @@ export function connect() {
     console.error('DATABASE_URL is not set.');
     process.exit(1);
   }
-  // Neon requires TLS; a local Postgres (localhost/127.0.0.1) does not.
-  const local = /@(localhost|127\.0\.0\.1)(:\d+)?\//.test(url);
-  return postgres(url, { max: 1, ssl: local ? false : 'require', onnotice: () => {} });
+  // TLS follows the URL's sslmode (Neon connection strings include ?sslmode=require); a plain
+  // postgres:// URL, as used for local and Docker Compose databases, connects without TLS.
+  return postgres(url, { max: 1, onnotice: () => {} });
 }
