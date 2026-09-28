@@ -1,9 +1,10 @@
+# Build context is the repository root (see docker-compose.yml).
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
-COPY Portfolio.Api.csproj .
-RUN dotnet restore
-COPY . .
-RUN dotnet publish -c Release -o /app/publish --no-restore
+COPY backend/Portfolio.Api.csproj backend/
+RUN dotnet restore backend/Portfolio.Api.csproj
+COPY backend/ backend/
+RUN dotnet publish backend/Portfolio.Api.csproj -c Release -o /app/publish --no-restore
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app

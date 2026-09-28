@@ -1,0 +1,60 @@
+{
+  "source": "LinkedIn recommendations received (visibility: All LinkedIn members), captured 2026-09-28. Public copy: featured entries only, verbatim excerpts only.",
+  "rules": [
+    "Show only the excerpt, verbatim, with author name, relationship and date.",
+    "Titles are the author's LinkedIn headline at capture time; label them 'current title'.",
+    "Never edit wording; never combine sentences from different people."
+  ],
+  "allRecommendationsUrl": "https://www.linkedin.com/in/full-stack-engineer-joshd/details/recommendations/",
+  "totalReceived": 13,
+  "featured": [
+    {
+      "id": "ben-beddes",
+      "author": "Ben Beddes",
+      "currentTitle": "President of Logistics | Freight Brokerage & 3PL Growth | P&L Leadership | Sales & Operations Execution | Private Equity Environments",
+      "date": "2026-09-01",
+      "relationship": "Ben managed Joshua directly",
+      "excerpt": "Josh owned the solution end to end, leading its architecture, development, integrations, and deployment. He successfully delivered the platform across both cloud and on-premises environments and worked directly with business leadership to translate complex operational, brokerage, and sales requirements into a scalable enterprise application."
+    },
+    {
+      "id": "nathaniel-lynn",
+      "author": "Nathaniel J Lynn",
+      "currentTitle": "Scrum Master | PSM III, ICP-ACC, SA, KMP",
+      "date": "2025-02-15",
+      "relationship": "Nathaniel J worked with Joshua on the same team",
+      "excerpt": "I have seen him put time & effort into mentoring others, helping develop technical design solutions, & encouraging good technical practices (using consistent naming conventions, creating effective data structures, writing code that is readable, modular, scalable, well-documented, etc.)"
+    },
+    {
+      "id": "aysim-kudu",
+      "author": "Aysim Kudu",
+      "currentTitle": "Software Development Engineer In Test | Quality Assurance Engineer | UI & Back End Test Specialist | Full Stack (SDET).",
+      "date": "2025-05-27",
+      "relationship": "Aysim worked with Joshua on the same team",
+      "excerpt": "Josh always completes his tickets on time, communicates clearly, and responds quickly to any questions or issues. He takes ownership of his tasks and is very responsible."
+    },
+    {
+      "id": "emundo-trivelli",
+      "author": "Emundo Trivelli",
+      "currentTitle": "Senior Software Engineer @ RegScale | Fullstack .NET | Agentic Engineering Aficionado",
+      "date": "2023-11-22",
+      "relationship": "Emundo worked with Joshua on the same team",
+      "excerpt": "He's quick to ask the right questions when he needs clarity, he's a strong collaborator that knows when to ask others for advice, he's very technically knowledgeable and happy to offer his own help in return to others."
+    },
+    {
+      "id": "praneeth-avisa",
+      "author": "Praneeth Avisa",
+      "currentTitle": "Sr Software Test Engineer at OptumInsight",
+      "date": "2022-02-23",
+      "relationship": null,
+      "excerpt": "Technically strong. Easy to work with. Dependable and reliable. Always helps me to troubleshoot issues or defects."
+    },
+    {
+      "id": "sarrah-clark",
+      "author": "Sarrah Clark",
+      "currentTitle": "Senior Business Analyst (MBA, PMP, SAFe Agilist)",
+      "date": "2023-06-22",
+      "relationship": "Sarrah worked with Joshua on the same team",
+      "excerpt": "He is an incredibly collaborative team member to work with, being open to ideas while always providing great suggestions to improve the system and our operations."
+    }
+  ]
+}

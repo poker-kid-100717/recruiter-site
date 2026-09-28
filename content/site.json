@@ -1,0 +1,66 @@
+{
+  "profile": {
+    "title": "Full-Stack Software Engineer",
+    "focus": [
+      "Full-stack .NET delivery",
+      "APIs and integrations",
+      "Cloud and on-premises deployment",
+      "Production support"
+    ],
+    "stack": [
+      "C#",
+      ".NET / ASP.NET Core",
+      "EF Core",
+      "SQL Server",
+      "Angular",
+      "TypeScript",
+      "React",
+      "RxJS",
+      "Azure",
+      "AWS",
+      "Entra ID",
+      "Docker",
+      "GitHub Actions",
+      "Azure DevOps",
+      "PostgreSQL",
+      "Cloudflare Workers"
+    ],
+    "delivery": [
+      "Azure",
+      "On-premises",
+      "Containers",
+      "CI/CD"
+    ]
+  },
+  "architecture": {
+    "principles": [
+      {
+        "name": "Domain first",
+        "detail": "Keep business rules independent from hosting and framework choices."
+      },
+      {
+        "name": "Explicit contracts",
+        "detail": "Validate input and authorize at API and integration boundaries."
+      },
+      {
+        "name": "Data discipline",
+        "detail": "Treat schema, migrations, indexing, and query performance as part of the release."
+      },
+      {
+        "name": "Operable by default",
+        "detail": "Ship health checks, logging, configuration, and a repeatable deployment path."
+      }
+    ],
+    "referenceFlow": [
+      "Angular",
+      "ASP.NET Core",
+      "Application/Core",
+      "EF Core + SQL Server + Integrations"
+    ]
+  },
+  "earlierCompanies": [
+    "U.S. Bank",
+    "Markettech",
+    "Litera"
+  ]
+}

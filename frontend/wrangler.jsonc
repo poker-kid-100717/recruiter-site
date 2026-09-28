@@ -3,6 +3,8 @@
   "name": "joshua-davis-portfolio",
   "main": "worker/index.js",
   "compatibility_date": "2026-09-21",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
   "workers_dev": true,
   "routes": [
     {

@@ -1,3 +1,10 @@
+import postgres from "postgres";
+import resume from "../../content/resume.json" with { type: "json" };
+import recommendations from "../../content/recommendations.json" with { type: "json" };
+import projects from "../../content/projects.json" with { type: "json" };
+import site from "../../content/site.json" with { type: "json" };
+import { architectureView, documentFromContent, profileView, workView } from "./content.js";
+
 const securityHeaders = {
   "X-Content-Type-Options": "nosniff",
   "Referrer-Policy": "strict-origin-when-cross-origin",
@@ -7,31 +14,12 @@ const securityHeaders = {
   "Content-Security-Policy": "default-src 'self'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'self'; object-src 'none'; img-src 'self' data:; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self'; manifest-src 'self'"
 };
 
-const profile = {
-  name: "Joshua Davis",
-  title: "Senior Full-Stack Software Engineer",
-  location: "Albuquerque, NM",
-  focus: ["Solution Architecture", "Full-Stack Delivery", "Technical Leadership", "Modernization"],
-  stack: [".NET 10", "ASP.NET Core", "Angular", "React", "TypeScript", "SQL Server", "EF Core", "Azure", "AWS", "Docker", "GitHub Actions", "Cloudflare Workers"],
-  delivery: ["Cloud", "On-Premises", "Containers", "CI/CD", "Edge"],
-  runtime: "Cloudflare Worker"
-};
+// Served only when the database is not configured or not reachable, so the page never goes blank.
+const fallbackDocument = documentFromContent({ resume, recommendations, projects, site });
 
-const architecture = {
-  principles: [
-    { name: "Domain first", detail: "Keep business rules independent from hosting and framework choices." },
-    { name: "Contracts over coupling", detail: "Use explicit API and integration contracts with validation and authorization boundaries." },
-    { name: "Data discipline", detail: "Treat schema, migrations, indexing, and performance as deployable application concerns." },
-    { name: "Production by design", detail: "Build health checks, logging, configuration, CI/CD, and deployment paths into the system." }
-  ],
-  referenceFlow: ["Angular/React", "ASP.NET Core", "Application/Core", "EF Core + SQL Server + Integrations"]
-};
-
-const work = [
-  { name: "Freight DNA + Logistics Application Suite", type: "Professional case study", publicSource: false, repository: null },
-  { name: "WorkLens", type: "Public full-stack platform", publicSource: true, repository: "https://github.com/poker-kid-100717/WorkLens" },
-  { name: "Architecture + Integration Repositories", type: "Public engineering evidence", publicSource: true, repository: "https://github.com/poker-kid-100717?tab=repositories" }
-];
+const CACHE_MS = 60_000;
+const DB_TIMEOUT_MS = 4_000;
+let cached = null; // { doc, source, at } — per isolate; keeps Neon (which scales to zero) off the hot path
 
 function withSecurityHeaders(response, extra = {}) {
   const headers = new Headers(response.headers);
@@ -44,20 +32,64 @@ function withSecurityHeaders(response, extra = {}) {
   });
 }
 
-function json(data, status = 200) {
+function json(data, status = 200, extra = {}) {
   return withSecurityHeaders(
     new Response(JSON.stringify(data), {
       status,
       headers: {
         "Content-Type": "application/json; charset=utf-8",
-        "Cache-Control": "no-store"
+        "Cache-Control": "no-store",
+        ...extra
       }
     })
   );
 }
 
+function problem(status, title) {
+  return withSecurityHeaders(
+    new Response(JSON.stringify({ type: "about:blank", title, status }), {
+      status,
+      headers: { "Content-Type": "application/problem+json; charset=utf-8", "Cache-Control": "no-store" }
+    })
+  );
+}
+
+async function queryDocument(env, ctx) {
+  const sql = postgres(env.DATABASE_URL, { max: 1, fetch_types: false, prepare: false, connect_timeout: 3 });
+  try {
+    const timeout = new Promise((_, reject) => setTimeout(() => reject(new Error("database timeout")), DB_TIMEOUT_MS));
+    const [row] = await Promise.race([sql`select portfolio_document() as doc`, timeout]);
+    return row.doc;
+  } finally {
+    ctx.waitUntil(sql.end({ timeout: 1 }));
+  }
+}
+
+/** Returns { doc, source } where source is "database", "fallback: <reason>". */
+async function loadDocument(env, ctx, { fresh = false } = {}) {
+  if (!fresh && cached && Date.now() - cached.at < CACHE_MS) return cached;
+  if (!env.DATABASE_URL) {
+    cached = { doc: fallbackDocument, source: "fallback: database not configured", at: Date.now() };
+    return cached;
+  }
+  try {
+    cached = { doc: await queryDocument(env, ctx), source: "database", at: Date.now() };
+  } catch (error) {
+    console.error(JSON.stringify({ event: "portfolio_document_failed", message: String(error?.message ?? error) }));
+    cached = { doc: fallbackDocument, source: "fallback: database unreachable", at: Date.now() };
+  }
+  return cached;
+}
+
+const views = {
+  "/api/portfolio": (doc) => doc,
+  "/api/profile": (doc) => ({ ...profileView(doc), runtime: "Cloudflare Worker" }),
+  "/api/architecture": architectureView,
+  "/api/work": workView
+};
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
     if (url.pathname === "/healthz") {
@@ -70,13 +102,23 @@ export default {
     }
 
     if (url.pathname === "/health") {
-      return json({ status: "Healthy", runtime: "Cloudflare Worker", site: "portfolio-joshdavis.app" });
+      const { source } = await loadDocument(env, ctx, { fresh: true });
+      const database = source === "database" ? "ok" : source.replace("fallback: database ", "");
+      return json({
+        status: source === "database" ? "Healthy" : "Degraded",
+        runtime: "Cloudflare Worker",
+        site: "portfolio-joshdavis.app",
+        database
+      });
     }
 
-    if (url.pathname === "/api/profile") return json(profile);
-    if (url.pathname === "/api/architecture") return json(architecture);
-    if (url.pathname === "/api/work") return json(work);
-    if (url.pathname.startsWith("/api/")) return json({ error: "Not found" }, 404);
+    const view = views[url.pathname];
+    if (view) {
+      if (request.method !== "GET" && request.method !== "HEAD") return problem(405, "Method not allowed");
+      const { doc, source } = await loadDocument(env, ctx);
+      return json(view(doc), 200, { "X-Content-Source": source });
+    }
+    if (url.pathname.startsWith("/api/")) return problem(404, "Not found");
 
     const assetResponse = await env.ASSETS.fetch(request);
 
