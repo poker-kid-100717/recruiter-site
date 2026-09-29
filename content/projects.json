@@ -53,7 +53,7 @@
       "slug": "ltl-planner",
       "title": "LTL Planner",
       "eyebrow": "Public clean-room project",
-      "status": "Implemented",
+      "status": "Deployed",
       "summary": "Standalone LTL planning app that groups shipment orders onto compatible trucks under pallet, weight, and equipment limits, and explains every assignment it makes. Built to work in tandem with Yard Ops through a signed, versioned HTTP contract.",
       "outcomes": [
         "Hard constraints (equipment, pallets, weight) filter trucks before any scoring; each planned truck carries a plain-language explanation.",
@@ -71,14 +71,14 @@
       ],
       "note": "Clean-room project built from general domain knowledge on synthetic data. It is not employer code and contains no employer data, schemas, or screens.",
       "repository": "https://github.com/poker-kid-100717/ltl-planner",
-      "demo": null,
+      "demo": "https://ltl-planner.app",
       "professional": false
     },
     {
       "slug": "yard-ops",
       "title": "Yard Ops",
       "eyebrow": "Public clean-room project",
-      "status": "Implemented",
+      "status": "Deployed",
       "summary": "Standalone yard execution app: yard board, gate in/out, and dock inspections in a tablet-friendly UI. Built to work in tandem with LTL Planner, and still fully usable when the planner is offline.",
       "outcomes": [
         "Works in tandem with LTL Planner: looks up planning candidates synchronously and sends state changes as HMAC-signed events.",
@@ -96,7 +96,7 @@
       ],
       "note": "Clean-room project built from general domain knowledge on synthetic data. It is not employer code and contains no employer data, schemas, or screens.",
       "repository": "https://github.com/poker-kid-100717/yard-ops",
-      "demo": null,
+      "demo": "https://yard.ltl-planner.app",
       "professional": false
     },
     {
