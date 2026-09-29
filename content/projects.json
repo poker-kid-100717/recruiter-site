@@ -28,7 +28,7 @@
       "slug": "freight-ops",
       "title": "Freight Ops",
       "eyebrow": "Public clean-room project",
-      "status": "Implemented",
+      "status": "Deployed",
       "summary": "Standalone freight CRM: customer accounts, a ranked opportunity queue, an operational dashboard, and read-only external load visibility. Built as a companion to LTL Planner and Yard Ops, covering the customer side of the same freight workflow.",
       "outcomes": [
         "Explainable opportunity scoring: every account gets a priority score, the reason behind it, and a suggested next action.",
@@ -46,7 +46,7 @@
       ],
       "note": "Clean-room project built from general domain knowledge on synthetic data. It is not employer code and contains no employer data, schemas, or screens.",
       "repository": "https://github.com/poker-kid-100717/freight-ops",
-      "demo": null,
+      "demo": "https://freight.ltl-planner.app",
       "professional": false
     },
     {
