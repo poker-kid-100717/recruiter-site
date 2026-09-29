@@ -86,6 +86,7 @@ Repository secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `WORKER
 ## Projects featured on the site
 
 - [TCG Signal](https://github.com/poker-kid-100717/tcg) — React, ASP.NET Core, PostgreSQL on Cloudflare Workers + Containers (deployed)
+- [Freight Ops](https://github.com/poker-kid-100717/freight-ops) — standalone clean-room .NET + Angular freight CRM on synthetic data; companion to LTL Planner and Yard Ops; not employer code (implemented)
 - [LTL Planner](https://github.com/poker-kid-100717/ltl-planner) — standalone clean-room .NET + Angular shipment-to-truck planner on synthetic data; built to work in tandem with Yard Ops; not employer code (implemented)
 - [Yard Ops](https://github.com/poker-kid-100717/yard-ops) — standalone clean-room .NET + Angular yard execution app on synthetic data; built to work in tandem with LTL Planner; not employer code (implemented)
 - [WorkLens](https://github.com/poker-kid-100717/WorkLens) — .NET + Angular job feed and application tracker, runs locally with Docker Compose (implemented)
