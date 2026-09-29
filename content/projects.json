@@ -55,18 +55,19 @@
       "title": "LTL Planner",
       "eyebrow": "Public clean-room project",
       "status": "Deployed",
-      "summary": "Standalone LTL planning app that groups shipment orders onto compatible trucks under pallet, weight, and equipment limits, and explains every assignment it makes. Built to work in tandem with Yard Ops through a signed, versioned HTTP contract.",
+      "summary": "Working LTL planning tool: orders and trucks on PostgreSQL, a plan builder that explains every assignment and every order it cannot place, and a commit step that is all-or-nothing. Built to work in tandem with Yard Ops through a signed, versioned HTTP contract.",
       "outcomes": [
-        "Hard constraints (equipment, pallets, weight) filter trucks before any scoring; each planned truck carries a plain-language explanation.",
-        "Works in tandem with Yard Ops: serves trailer-fit candidates and ingests HMAC-signed Yard events idempotently by event ID, rejecting unknown schema versions.",
-        "Runs on its own with Docker Compose on synthetic data; deploys to Cloudflare Workers + Containers from GitHub Actions."
+        "Hard constraints (equipment, pallets, weight) filter trucks before any scoring; drafts are saved with a plain-language explanation per truck and a reason for each unplaced order.",
+        "Committing a draft marks its orders Planned in one transaction and returns 409, changing nothing, if any order or truck changed since the draft was built.",
+        "Works in tandem with Yard Ops: serves trailer-fit candidates and stores HMAC-signed Yard events once per event ID, keeping a live view of each trailer's status."
       ],
       "tech": [
         ".NET 10",
         "ASP.NET Core",
+        "EF Core",
+        "PostgreSQL",
         "Angular 22",
         "TypeScript",
-        "Docker",
         "Cloudflare Containers",
         "GitHub Actions"
       ],
@@ -80,18 +81,19 @@
       "title": "Yard Ops",
       "eyebrow": "Public clean-room project",
       "status": "Deployed",
-      "summary": "Standalone yard execution app: yard board, gate in/out, and dock inspections in a tablet-friendly UI. Built to work in tandem with LTL Planner, and still fully usable when the planner is offline.",
+      "summary": "Working yard management tool: a board of parking spots and dock doors, gate in/out, moves, checklist inspections and holds on PostgreSQL. Built to work in tandem with LTL Planner, and still fully usable when the planner is offline.",
       "outcomes": [
-        "Works in tandem with LTL Planner: looks up planning candidates synchronously and sends state changes as HMAC-signed events.",
-        "Yard actions commit locally first; an outbox retries delivery to the planner with bounded exponential backoff.",
-        "Runs on its own with Docker Compose on synthetic data; deploys to Cloudflare Workers + Containers from GitHub Actions."
+        "Trailer lifecycle enforced as one rules table (Expected → Arrived → At door → Loading → Ready → Departed, with holds); refused actions say what the trailer can do next.",
+        "Works in tandem with LTL Planner through a transactional outbox: each event is saved with the yard change that caused it, then delivered HMAC-signed with exponential backoff.",
+        "EF Core 10 on PostgreSQL; CI tests against SQLite and PostgreSQL with a fake LTL endpoint that checks the exact signed payload."
       ],
       "tech": [
         ".NET 10",
         "ASP.NET Core",
+        "EF Core",
+        "PostgreSQL",
         "Angular 22",
         "TypeScript",
-        "Docker",
         "Cloudflare Containers",
         "GitHub Actions"
       ],

@@ -87,8 +87,8 @@ Repository secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `WORKER
 
 - [TCG Signal](https://github.com/poker-kid-100717/tcg) — React, ASP.NET Core, PostgreSQL on Cloudflare Workers + Containers (deployed)
 - [Freight Ops](https://github.com/poker-kid-100717/freight-ops) — standalone clean-room .NET + Angular + PostgreSQL freight CRM on synthetic data; companion to LTL Planner and Yard Ops; not employer code (deployed at [freight.ltl-planner.app](https://freight.ltl-planner.app))
-- [LTL Planner](https://github.com/poker-kid-100717/ltl-planner) — standalone clean-room .NET + Angular shipment-to-truck planner on synthetic data; built to work in tandem with Yard Ops; not employer code (deployed at [ltl-planner.app](https://ltl-planner.app))
-- [Yard Ops](https://github.com/poker-kid-100717/yard-ops) — standalone clean-room .NET + Angular yard execution app on synthetic data; built to work in tandem with LTL Planner; not employer code (deployed at [yard.ltl-planner.app](https://yard.ltl-planner.app))
+- [LTL Planner](https://github.com/poker-kid-100717/ltl-planner) — standalone clean-room .NET + Angular + PostgreSQL shipment-to-truck planner on synthetic data; built to work in tandem with Yard Ops; not employer code (deployed at [ltl-planner.app](https://ltl-planner.app))
+- [Yard Ops](https://github.com/poker-kid-100717/yard-ops) — standalone clean-room .NET + Angular + PostgreSQL yard management app on synthetic data; built to work in tandem with LTL Planner; not employer code (deployed at [yard.ltl-planner.app](https://yard.ltl-planner.app))
 - [WorkLens](https://github.com/poker-kid-100717/WorkLens) — .NET + Angular job feed and application tracker, runs locally with Docker Compose (implemented)
 
 Professional work at Value Truck, Kenworth, Global Holdings and earlier employers is described on the site in the resume's words only; no employer source code, data, or screens are published.
