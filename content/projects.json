@@ -25,25 +25,52 @@
       "professional": false
     },
     {
-      "slug": "logistics-portfolio-suite",
-      "title": "Logistics Portfolio Suite",
+      "slug": "ltl-planner",
+      "title": "LTL Planner",
       "eyebrow": "Public clean-room project",
       "status": "Implemented",
-      "summary": "Clean-room reconstruction of freight CRM, LTL planning, and yard workflows on synthetic data, with a signed, idempotent event hand-off from Yard Ops to the LTL planner.",
+      "summary": "Standalone LTL planning app that groups shipment orders onto compatible trucks under pallet, weight, and equipment limits, and explains every assignment it makes. Built to work in tandem with Yard Ops through a signed, versioned HTTP contract.",
       "outcomes": [
-        "Three ASP.NET Core APIs with Angular front ends, one per product.",
-        "Yard Ops writes events to an outbox and delivers them HMAC-signed; the LTL planner ignores an event it has already processed.",
-        "Runs locally with Docker Compose on synthetic data."
+        "Hard constraints (equipment, pallets, weight) filter trucks before any scoring; each planned truck carries a plain-language explanation.",
+        "Works in tandem with Yard Ops: serves trailer-fit candidates and ingests HMAC-signed Yard events idempotently by event ID, rejecting unknown schema versions.",
+        "Runs on its own with Docker Compose on synthetic data; deploys to Cloudflare Workers + Containers from GitHub Actions."
       ],
       "tech": [
+        ".NET 10",
         "ASP.NET Core",
-        "Angular",
+        "Angular 22",
         "TypeScript",
         "Docker",
+        "Cloudflare Containers",
         "GitHub Actions"
       ],
-      "note": "Built from general domain knowledge on synthetic data. It is not employer code and contains no employer data, schemas, or screens.",
-      "repository": "https://github.com/poker-kid-100717/logistics-portfolio-suite",
+      "note": "Clean-room project built from general domain knowledge on synthetic data. It is not employer code and contains no employer data, schemas, or screens.",
+      "repository": "https://github.com/poker-kid-100717/ltl-planner",
+      "demo": null,
+      "professional": false
+    },
+    {
+      "slug": "yard-ops",
+      "title": "Yard Ops",
+      "eyebrow": "Public clean-room project",
+      "status": "Implemented",
+      "summary": "Standalone yard execution app: yard board, gate in/out, and dock inspections in a tablet-friendly UI. Built to work in tandem with LTL Planner, and still fully usable when the planner is offline.",
+      "outcomes": [
+        "Works in tandem with LTL Planner: looks up planning candidates synchronously and sends state changes as HMAC-signed events.",
+        "Yard actions commit locally first; an outbox retries delivery to the planner with bounded exponential backoff.",
+        "Runs on its own with Docker Compose on synthetic data; deploys to Cloudflare Workers + Containers from GitHub Actions."
+      ],
+      "tech": [
+        ".NET 10",
+        "ASP.NET Core",
+        "Angular 22",
+        "TypeScript",
+        "Docker",
+        "Cloudflare Containers",
+        "GitHub Actions"
+      ],
+      "note": "Clean-room project built from general domain knowledge on synthetic data. It is not employer code and contains no employer data, schemas, or screens.",
+      "repository": "https://github.com/poker-kid-100717/yard-ops",
       "demo": null,
       "professional": false
     },

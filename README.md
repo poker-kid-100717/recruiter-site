@@ -86,7 +86,8 @@ Repository secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `WORKER
 ## Projects featured on the site
 
 - [TCG Signal](https://github.com/poker-kid-100717/tcg) — React, ASP.NET Core, PostgreSQL on Cloudflare Workers + Containers (deployed)
-- [Logistics Portfolio Suite](https://github.com/poker-kid-100717/logistics-portfolio-suite) — clean-room .NET + Angular logistics apps on synthetic data; not employer code (implemented, not yet deployed)
+- [LTL Planner](https://github.com/poker-kid-100717/ltl-planner) — standalone clean-room .NET + Angular shipment-to-truck planner on synthetic data; built to work in tandem with Yard Ops; not employer code (implemented)
+- [Yard Ops](https://github.com/poker-kid-100717/yard-ops) — standalone clean-room .NET + Angular yard execution app on synthetic data; built to work in tandem with LTL Planner; not employer code (implemented)
 - [WorkLens](https://github.com/poker-kid-100717/WorkLens) — .NET + Angular job feed and application tracker, runs locally with Docker Compose (implemented)
 
 Professional work at Value Truck, Kenworth, Global Holdings and earlier employers is described on the site in the resume's words only; no employer source code, data, or screens are published.
