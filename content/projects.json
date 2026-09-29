@@ -29,18 +29,19 @@
       "title": "Freight Ops",
       "eyebrow": "Public clean-room project",
       "status": "Deployed",
-      "summary": "Standalone freight CRM: customer accounts, a ranked opportunity queue, an operational dashboard, and read-only external load visibility. Built as a companion to LTL Planner and Yard Ops, covering the customer side of the same freight workflow.",
+      "summary": "Working freight CRM for a brokerage sales team: leads, accounts, contacts, quotes, lanes and carriers on PostgreSQL, with an explainable priority score and a four-section navigation. Built as a companion to LTL Planner and Yard Ops, covering the customer side of the same freight workflow.",
       "outcomes": [
-        "Explainable opportunity scoring: every account gets a priority score, the reason behind it, and a suggested next action.",
-        "Optional read-only Alvys load search through a server-side OAuth client-credentials adapter; falls back to synthetic data by default.",
-        "Runs on its own with Docker Compose on synthetic data; deploys to Cloudflare Workers + Containers from GitHub Actions."
+        "Real workflows with enforced rules: qualified leads convert to an account and primary contact in one transaction; quotes move Draft → Sent → Won/Lost and log themselves on the account timeline.",
+        "Priority score computed from live data (days since last logged activity, volume, margin, stage, overdue follow-ups), with a plain-language reason and next step for every account.",
+        "EF Core 10 on PostgreSQL with migrations; integration tests run against SQLite and PostgreSQL in CI; deploys to Cloudflare Workers + Containers with a daily demo reset."
       ],
       "tech": [
         ".NET 10",
         "ASP.NET Core",
+        "EF Core",
+        "PostgreSQL",
         "Angular 22",
         "TypeScript",
-        "Docker",
         "Cloudflare Containers",
         "GitHub Actions"
       ],
