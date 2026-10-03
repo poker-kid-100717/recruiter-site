@@ -75,7 +75,7 @@ Measured locally on 2026-09-28 with `wrangler dev` against Postgres 16, Playwrig
 
 Pushes to `main` deploy through `.github/workflows/deploy-cloudflare.yml`: build, migrate + seed Neon, deploy with Wrangler (uploading the Worker secret `DATABASE_URL`), then check the production HTML, stylesheet, `/api/profile`, and that `/health` reports the database as `ok`.
 
-Repository secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `WORKER_DATABASE_URL` (the Neon pooled connection string for this app's own Neon project, including `?sslmode=require`; TLS follows the URL's `sslmode`, so local and Compose databases connect without it). Without `WORKER_DATABASE_URL` the deploy still works and the site serves the seed.
+Repository secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `DATABASE_URL` (the Neon pooled connection string for this app's own Neon project, including `?sslmode=require`; TLS follows the URL's `sslmode`, so local and Compose databases connect without it). Without `DATABASE_URL` the deploy still works and the site serves the seed. (An existing `WORKER_DATABASE_URL` secret is still read as a fallback.)
 
 ## CI
 

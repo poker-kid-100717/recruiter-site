@@ -16,7 +16,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      DATABASE_URL: ${{ secrets.WORKER_DATABASE_URL }}
+      # DATABASE_URL is the secret name used across the portfolio; WORKER_DATABASE_URL is still read for older setups.
+      DATABASE_URL: ${{ secrets.DATABASE_URL || secrets.WORKER_DATABASE_URL }}
     defaults:
       run:
         working-directory: frontend
@@ -54,7 +55,7 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: frontend
           command: deploy
-          # Uploaded as the Worker secret DATABASE_URL once WORKER_DATABASE_URL exists; until then the
+          # Uploaded as the Worker secret DATABASE_URL once that repository secret exists; until then the
           # Worker serves the bundled content/*.json seed and /health reports "Degraded".
           secrets: ${{ env.DATABASE_URL != '' && 'DATABASE_URL' || '' }}
       - name: Verify production site and stylesheet
