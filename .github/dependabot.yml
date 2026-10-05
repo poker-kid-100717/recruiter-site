@@ -9,6 +9,10 @@ updates:
   - package-ecosystem: "npm"
     directory: "/frontend"
     schedule: { interval: "weekly" }
+    ignore:
+      # Angular's compiler pins TypeScript to a minor range; take TypeScript majors with the Angular upgrade.
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
     groups:
       frontend:
         patterns: ["*"]
