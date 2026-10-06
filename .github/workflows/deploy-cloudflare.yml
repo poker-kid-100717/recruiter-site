@@ -10,7 +10,8 @@ permissions:
 
 concurrency:
   group: portfolio-cloudflare-production
-  cancel-in-progress: true
+  # Never cancel a deploy that is mid-migration; the next push waits instead.
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -43,6 +44,10 @@ jobs:
       - name: Migrate and seed the Neon database
         if: env.DATABASE_URL != ''
         working-directory: .
+        env:
+          # Schema changes and seeding run as the owner over a direct (non-pooled) connection;
+          # the Worker itself only gets the read-only role in WORKER_DATABASE_URL.
+          DATABASE_URL: ${{ secrets.DATABASE_URL_UNPOOLED || secrets.WORKER_DATABASE_URL }}
         run: |
           npm ci --prefix db
           node db/migrate.mjs

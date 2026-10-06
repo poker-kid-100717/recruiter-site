@@ -75,7 +75,27 @@ Measured locally on 2026-09-28 with `wrangler dev` against Postgres 16, Playwrig
 
 Pushes to `main` deploy through `.github/workflows/deploy-cloudflare.yml`: build, migrate + seed Neon, deploy with Wrangler (uploading the Worker secret `DATABASE_URL`), then check the production HTML, stylesheet, `/api/profile`, and that `/health` reports the database as `ok`.
 
-Repository secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `WORKER_DATABASE_URL` (the Neon pooled connection string for this app's own Neon project, including `?sslmode=require`; TLS follows the URL's `sslmode`, so local and Compose databases connect without it). Without `WORKER_DATABASE_URL` the deploy still works and the site serves the seed.
+Repository secrets:
+
+| Secret | Purpose |
+| --- | --- |
+| `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | Wrangler deploys |
+| `WORKER_DATABASE_URL` | What the Worker uses: the Neon **pooled** URL (with `?sslmode=require`) for a **read-only** role. The Worker only ever runs `select portfolio_document()`. Without it the deploy still works and the site serves the seed. |
+| `DATABASE_URL_UNPOOLED` | The owner's **direct** (non-pooled) URL. The deploy runs `db/migrate.mjs` and `db/seed.mjs` with it. Without it they fall back to `WORKER_DATABASE_URL`, which then needs write rights. |
+
+TLS follows the URL's `sslmode`, so local and Compose databases connect without it.
+
+The Worker's role can read the content and nothing else:
+
+```sql
+CREATE ROLE portfolio_reader LOGIN PASSWORD '...';
+GRANT CONNECT ON DATABASE portfolio TO portfolio_reader;
+GRANT USAGE ON SCHEMA public TO portfolio_reader;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO portfolio_reader;
+ALTER DEFAULT PRIVILEGES FOR ROLE portfolio_owner IN SCHEMA public GRANT SELECT ON TABLES TO portfolio_reader;
+```
+
+A deploy never cancels another one mid-migration (`cancel-in-progress: false`).
 
 ## CI
 
