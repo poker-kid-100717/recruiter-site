@@ -62,6 +62,17 @@ jobs:
           # Uploaded as the Worker secret DATABASE_URL once WORKER_DATABASE_URL exists; until then the
           # Worker serves the bundled content/*.json seed and /health reports "Degraded".
           secrets: ${{ env.DATABASE_URL != '' && 'DATABASE_URL' || '' }}
+      # The Worker logs why it fell back to the seed only in Cloudflare; tail it during the checks so a
+      # failed database connection shows its reason in this job. Started first because the result is
+      # cached per isolate, so the first request is the one that tries the database.
+      - name: Start Worker log tail
+        if: env.DATABASE_URL != ''
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          nohup npx wrangler tail --format json > "$RUNNER_TEMP/worker-tail.json" 2> "$RUNNER_TEMP/worker-tail.err" &
+          sleep 10
       - name: Verify production site and stylesheet
         shell: bash
         run: |
@@ -122,3 +133,15 @@ jobs:
             printf '%s' "$HEALTH" | grep -q '"database":"ok"'
           fi
           curl --fail --silent --show-error --head "$SITE/api/portfolio" | grep -i '^x-content-source:'
+      - name: Report Worker database errors
+        if: always() && env.DATABASE_URL != ''
+        run: |
+          sleep 3
+          pkill -f 'wrangler tail' || true
+          ERRORS="$(jq -r '(.logs[]?.message[]? | tostring | select(contains("portfolio_document_failed"))), (.exceptions[]? | "exception: \(.name): \(.message)")' "$RUNNER_TEMP/worker-tail.json" 2>/dev/null || true)"
+          if [ -n "$ERRORS" ]; then
+            echo "$ERRORS"
+          else
+            echo "No database errors logged by the Worker during the checks."
+            head -c 500 "$RUNNER_TEMP/worker-tail.err" || true
+          fi
