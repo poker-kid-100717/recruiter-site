@@ -28,6 +28,7 @@ jobs:
       - name: Apply nonbreaking audit fixes and update lockfile
         run: |
           npm ci
+          npm update @angular/router @angular/common @angular/core @angular/compiler @angular/platform-browser @angular/compiler-cli --no-fund
           npm audit fix --no-fund || true
       - name: Report remaining advisories
         run: npm audit --audit-level=high || true
