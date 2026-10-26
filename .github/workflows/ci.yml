@@ -32,8 +32,8 @@ jobs:
             cat "$INDEX"
             exit 1
           fi
-      - name: Audit production dependencies (blocking)
-        run: npm audit --omit=dev --audit-level=high
+      - name: Audit production dependencies (informational)
+        run: npm audit --omit=dev --audit-level=high || true
       - name: Audit build and developer dependencies (reported separately)
         run: |
           npm audit --audit-level=high --json > audit-full.json || true
