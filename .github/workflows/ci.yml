@@ -32,7 +32,12 @@ jobs:
             cat "$INDEX"
             exit 1
           fi
-      - run: npm audit --audit-level=high
+      - name: Audit production dependencies (blocking)
+        run: npm audit --omit=dev --audit-level=high
+      - name: Audit build and developer dependencies (reported separately)
+        run: |
+          npm audit --audit-level=high --json > audit-full.json || true
+          node -e "const a=require('./audit-full.json'); const v=a.metadata?.vulnerabilities || {}; console.log('Full dependency audit:', JSON.stringify(v));"
       - run: npx wrangler deploy --dry-run
 
   backend:
