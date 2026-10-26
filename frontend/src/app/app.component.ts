@@ -125,7 +125,7 @@ import { PortfolioDocument, Project, formatDay, formatMonth, formatRange } from 
                       <a [href]="project.repository" target="_blank" rel="noreferrer">View repository ↗</a>
                     }
                     @if (liveDemo(project); as demo) {
-                      <a [href]="demo" target="_blank" rel="noreferrer">Open the live app ↗</a>
+                      <a [href]="demo" target="_blank" rel="noreferrer">Visit running project ↗</a>
                     }
                   </div>
                 }
@@ -376,9 +376,10 @@ export class AppComponent implements OnInit {
     });
   }
 
-  /** Live links are shown only for apps that were opened and verified. */
+  /** Show hosted project URLs when recorded; do not claim a flow was verified unless status says so. */
   liveDemo(project: Project): string | null {
-    return project.status === 'Verified live' ? project.demo : null;
+    if (!project.demo || project.professional) return null;
+    return project.status === 'Verified live' || project.status === 'Deployed' ? project.demo : null;
   }
 
   toggleArchitecture(repoName: string): void {
