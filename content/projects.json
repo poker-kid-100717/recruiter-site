@@ -1,6 +1,33 @@
 {
   "projects": [
     {
+      "slug": "northstar-fixiq",
+      "title": "Northstar Software Studio · FixIQ",
+      "eyebrow": "Independent product · Software rescue MVP",
+      "status": "Implemented",
+      "summary": "A commercial software-rescue storefront for small businesses, combining fixed-price technical fixes with FixIQ: an interactive, privacy-conscious triage flow for broken integrations, automations, data workflows and applications.",
+      "outcomes": [
+        "Built an Angular 20 client-side triage flow with impact prioritization, category-specific troubleshooting checklists and transparent scope suggestions; no unverified AI diagnosis claims.",
+        "Developed an ASP.NET Core 10, EF Core and PostgreSQL backend foundation for service catalog, intake and orders, with Stripe integration code requiring production configuration.",
+        "Automated frontend build and deployment to Cloudflare Pages with GitHub Actions, plus .NET and PostgreSQL CI validation."
+      ],
+      "tech": [
+        "C#",
+        "ASP.NET Core 10",
+        "Angular 20",
+        "TypeScript",
+        "EF Core",
+        "PostgreSQL",
+        "Stripe",
+        "Cloudflare Pages",
+        "GitHub Actions"
+      ],
+      "note": "FixIQ currently runs rules-based triage in the browser. The production API, secure uploads, AI-assisted diagnostics, monitoring and end-to-end customer checkout are not yet live.",
+      "repository": "https://github.com/poker-kid-100717/northstar-software-studio",
+      "demo": null,
+      "professional": false
+    },
+    {
       "slug": "tcg-signal",
       "title": "TCG Signal",
       "eyebrow": "Public full-stack project",
