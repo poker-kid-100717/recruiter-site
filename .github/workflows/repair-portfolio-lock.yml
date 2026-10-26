@@ -1,0 +1,45 @@
+name: Repair portfolio dependency lockfile
+
+on:
+  push:
+    branches:
+      - feature/portfolio-northstar-fixiq
+    paths:
+      - '.github/workflows/repair-portfolio-lock.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/portfolio-northstar-fixiq
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.15.0'
+      - name: Apply nonbreaking audit fixes and update lockfile
+        run: |
+          npm ci
+          npm audit fix --no-fund
+      - name: Verify high severity vulnerabilities resolved
+        run: npm audit --audit-level=high
+      - name: Verify production build
+        run: npm run build
+      - name: Commit repaired dependency lockfile
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add frontend/package.json frontend/package-lock.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(security): update portfolio dependencies after audit"
+            git push origin HEAD:feature/portfolio-northstar-fixiq
+          fi
